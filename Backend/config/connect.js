@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoURL = "MONGO_URI=mongodb://localhost:27017/schedule-manager-users";
+const mongoURL = "";
 mongoose.connect(mongoURL);
 const db = mongoose.connection;
 db.on("connected", () => {

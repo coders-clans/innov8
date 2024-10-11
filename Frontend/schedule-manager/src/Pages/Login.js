@@ -24,7 +24,7 @@ const Login = () => {
 
         const token = response.data.token;
         localStorage.setItem('token', token);
-
+        localStorage.setItem('isLoggedIn', 'true');
       }
       console.log("No response")
       // Set the token in local storage or cookies  
