@@ -15,6 +15,11 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/', userRoutes);
 
+app.get('/form',(req,res)=>{
+    res.send("kesse ho , chai pilo");
+})
+
 const PORT = 7000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
+// commited 
