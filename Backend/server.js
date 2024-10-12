@@ -1,4 +1,4 @@
-const express=require("express");
+const express = require("express");
 require('dotenv').config();
 const {connection}=require("./connect");
 const {auth}=require("./middleware/userAuth");
@@ -19,7 +19,7 @@ connection(url).then(()=>{
     console.log("there is some issue in connecting database")
 })
 app.use(cors({
-    origin: 'http://localhost:3000', // Frontend URL
+    origin: 'http://localhost:3001', // Frontend URL
     credentials: true, // Allow cookies to be sent
 }));
 
