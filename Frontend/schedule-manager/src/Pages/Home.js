@@ -40,10 +40,13 @@ const Home = () => {
       <div>{renderContent()}
 
       </div>
-
+      Hello world
     </div>
   )
 };
+
+
+
 
 export default Home;
 /*
