@@ -7,9 +7,6 @@ import NavBar from '../Components/NavBar';
 // const userId = '67011cf9122020cfe0bf42b3';
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    return localStorage.getItem('isLoggedIn') === 'true';
-  });
 
   const renderContent = () => {
     switch (activeSection) {
@@ -36,18 +33,11 @@ const Home = () => {
   return (
 
     <div>
-      <h1>hellooo</h1>
-      <div>{renderContent()}
-
-      </div>
-      Hello world
+      <div>Hwll</div>
+      <div>{renderContent()}</div>
     </div>
   )
 };
-
-
-
-
 export default Home;
 /*
 Logo 
