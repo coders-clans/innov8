@@ -1,27 +1,37 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import  axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+function Login() {
 
-  const handleSignUp = () => {
-    navigate('/signup');
-  }
+    const navigate=useNavigate();
+    const [formData,setFormData]=useState({
+        email:'',
+        password:''
+    })
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:5000/login', {
-        email,
-        password
-      }, { withCredentials: true });
-      console.log(response); // Log the response object  
-      if (response && response.data) {
+    const submitHandler=(event)=>{
+        event.preventDefault();
 
+        axios.post("http://localhost:7001/user/login",{
+            email:formData.email,
+            password:formData.password
+        },{
+          withCredentials: true
+      }).then((response)=>{
+            navigate('/dashboard');
+            const id=response.data.isUser._id;
+            localStorage.setItem('user_id',id);
+            localStorage.setItem('email',formData.email);
+            localStorage.setItem("isLoggedIn","true");
+            localStorage.setItem("name",response.data.isUser.name);
+        }).catch((error)=>{
+            alert("The user is not signnedIn");
+            navigate('/');
+        })
+
+<<<<<<< HEAD
         const token = response.data.token;
         localStorage.setItem('token', token);
         localStorage.setItem('isLoggedIn', 'true');
@@ -34,57 +44,108 @@ const Login = () => {
       navigate('/');
     } catch (error) {
       setError(error.response.data.message);
+=======
+
+>>>>>>> 440e1138b2cb433ec9ed12f0780e4fc59f596c61
     }
 
-    // axios.post("http://localhost:5000/login", { email, password }, { withCredentials: true })
-    //   .then((res) => {
-    //     console.log("hello", " ", res);
+    const changeHandler=(event)=>{
+        const{name,value}=event.target;
 
-    //   }).catch((err) => {
-    //     console.log("error");
-    //   })
-  };
+        setFormData({
+            ...formData,
+            [name]:value
+        })
+    }
+
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-lg rounded-lg p-8 md:w-1/3 w-full">
-        <h2 className="text-2xl font-semibold text-center text-gray-700">Login</h2>
-        <form className="mt-4" onSubmit={handleLogin}>
-          <input
-            type="email"
-            placeholder="Type Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
-          />
+    <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-4">
+      {/* Left Text Section */}
+      <div className="lg:w-1/2 w-full lg:text-left text-center mb-8 lg:mb-0">
+        <h1 className="text-5xl font-extrabold text-white">
+          Welcome to Expense Tracker
+        </h1>
+        <h2 className="text-2xl text-gray-200 mt-4">
+          Manage your money effortlessly.
+        </h2>
+        <p className="text-lg text-gray-300 mt-4">
+          Sign in to keep track of your expenses and make better financial decisions.
+        </p>
+      </div>
 
-          {error && <div className="text-red-500">{error}</div>}
-
-          <button
-            type="submit"
-            className="w-full bg-teal-600 text-white py-2 rounded-md hover:bg-teal-700 transition duration-200"
-          >
-            Login
-          </button>
-          <p className="mt-4 text-center text-gray-600">Don't have an account? Sign-in here!</p>
-          <button
-            type="button"
-            onClick={handleSignUp}
-            className="mt-2 w-full  hover:underline focus:outline-none"
-          >
-            SignUp
-          </button>
+      {/* Right Form Section */}
+      <div className="lg:w-1/2 w-full max-w-md p-6 bg-white shadow-lg rounded-lg">
+        <h2 className="text-3xl font-semibold text-center mb-6 text-gray-800">
+          Login to Your Account
+        </h2>
+        <form className="space-y-4" onSubmit={submitHandler}>
+          <div className="relative">
+            <input
+              type="email"
+              name='email'
+              value={formData.email}
+              onChange={changeHandler}
+              placeholder="Enter your Email ID"
+              className="w-full p-4 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500"
+            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 absolute left-4 top-4 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M16 12H8m0 0l4-4m-4 4l4 4m-4-4h8"
+              />
+            </svg>
+          </div>
+          <div className="relative">
+            <input
+              type="password"
+              name='password'
+              value={formData.password}
+              onChange={changeHandler}
+              placeholder="Enter your Password"
+              className="w-full p-4 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500"
+            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 absolute left-4 top-4 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M16 12H8m0 0l4-4m-4 4l4 4m-4-4h8"
+              />
+            </svg>
+          </div>
+          <div className="text-center">
+            <button
+              type="submit"
+              className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition duration-300 w-full font-semibold"
+            >
+              Login
+            </button>
+          </div>
         </form>
+        <p className="text-center text-gray-600 mt-4">
+          Don't have an account?{" "}
+          <a href="/" className="text-purple-600 hover:underline">
+            Sign Up
+          </a>
+        </p>
       </div>
     </div>
   );
-};
+}
 
 export default Login;
