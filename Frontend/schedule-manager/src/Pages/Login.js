@@ -20,12 +20,13 @@ function Login() {
         },{
           withCredentials: true
       }).then((response)=>{
-            navigate('/');
             const id=response.data.isUser._id;
+            console.log(id);
             localStorage.setItem('user_id',id);
             localStorage.setItem('email',formData.email);
             localStorage.setItem("isLoggedIn","true");
             localStorage.setItem("name",response.data.isUser.name);
+            navigate('/');
         }).catch((error)=>{
             alert("The user is not signnedIn");
             navigate('/signup');
