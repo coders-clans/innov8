@@ -20,7 +20,7 @@ function Login() {
         },{
           withCredentials: true
       }).then((response)=>{
-            navigate('/dashboard');
+            navigate('/');
             const id=response.data.isUser._id;
             localStorage.setItem('user_id',id);
             localStorage.setItem('email',formData.email);
@@ -28,7 +28,7 @@ function Login() {
             localStorage.setItem("name",response.data.isUser.name);
         }).catch((error)=>{
             alert("The user is not signnedIn");
-            navigate('/');
+            navigate('/signup');
         })
 
 
