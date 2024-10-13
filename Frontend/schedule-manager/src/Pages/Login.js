@@ -1,18 +1,37 @@
 import React from 'react';
-import  axios from 'axios';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 function Login() {
 
-    const navigate=useNavigate();
-    const [formData,setFormData]=useState({
-        email:'',
-        password:''
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    axios.post("http://localhost:7001/user/login", {
+      email: formData.email,
+      password: formData.password
+    }, {
+      withCredentials: true
+    }).then((response) => {
+      navigate('/');
+      const id = response.data.isUser._id;
+      localStorage.setItem('user_id', id);
+      localStorage.setItem('email', formData.email);
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("name", response.data.isUser.name);
+    }).catch((error) => {
+      alert("The user is not signnedIn");
+      navigate('/');
     })
 
-    const submitHandler=(event)=>{
-        event.preventDefault();
+  }
 
         axios.post("http://localhost:7001/user/login",{
             email:formData.email,
@@ -32,17 +51,11 @@ function Login() {
             navigate('/signup');
         })
 
-
-    }
-
-    const changeHandler=(event)=>{
-        const{name,value}=event.target;
-
-        setFormData({
-            ...formData,
-            [name]:value
-        })
-    }
+    setFormData({
+      ...formData,
+      [name]: value
+    })
+  }
 
 
   return (
