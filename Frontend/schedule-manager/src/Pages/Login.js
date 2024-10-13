@@ -31,7 +31,22 @@ function Login() {
             navigate('/');
         })
 
+<<<<<<< HEAD
+        const token = response.data.token;
+        localStorage.setItem('token', token);
+        localStorage.setItem('isLoggedIn', 'true');
+      }
+      console.log("No response")
+      // Set the token in local storage or cookies  
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('email', email);
+      localStorage.setItem('userId', response.data._id);
+      navigate('/');
+    } catch (error) {
+      setError(error.response.data.message);
+=======
 
+>>>>>>> 440e1138b2cb433ec9ed12f0780e4fc59f596c61
     }
 
     const changeHandler=(event)=>{
