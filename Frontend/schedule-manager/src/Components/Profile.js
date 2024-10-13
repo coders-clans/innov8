@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function Profile() {
-  const [username, setName] = useState(null);
+  const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [profileImage, setProfileImage] = useState('');
   const [file, setFile] = useState(null);
@@ -10,12 +10,10 @@ function Profile() {
 
   const [isChange, setIsChange] = useState(false);
   const [newData, setNewData] = useState({
-    username: '',
+    name: '',
     email: ''
   });
   const [isEmailChange, setIsEmailChange] = useState(false);
-  const [imageFile, setImageFile] = useState(null);
-
   const id = localStorage.getItem('email');
   console.log(id);
   useEffect(() => {
@@ -24,16 +22,16 @@ function Profile() {
       return;
     }
 
-    axios.get(`http://localhost:5000/getUser/${id}`, { withCredentials: true })
+    axios.get(`http://localhost:7001/user/getUser/${id}`, { withCredentials: true })
       .then((response) => {
         const userData = response.data.response;
         console.log(userData);
         if (userData) {
-          setName(userData.username);
+          setName(userData.name);
           setEmail(userData.email);
           setProfileImage(userData.profileImage);
           setNewData({
-            username: userData.username,
+            name: userData.name,
             email: userData.email
           });
         }
@@ -47,9 +45,9 @@ function Profile() {
   }, [id]);
 
   const changeNameHandler = () => {
-    axios.patch(`http://localhost:5000/UpdateName/${id}`, { username: newData.username }, { withCredentials: true })
+    axios.patch(`http://localhost:7001/user/UpdateName/${id}`, { name: newData.name }, { withCredentials: true })
       .then(() => {
-        setName(newData.username);
+        setName(newData.name);
         setIsChange(false);
       })
       .catch(error => console.error("Error updating name:", error));
@@ -60,7 +58,7 @@ function Profile() {
   const changeEmailHandler = () => {
     let OTP = Math.floor(1000 + Math.random() * 9000);
     localStorage.setItem('otp', OTP);
-    axios.patch(`http://localhost:5000/user/EmailVerify/${newData.email}/${OTP}`, { withCredentials: true })
+    axios.patch(`http://localhost:7001/user/EmailVerify/${newData.email}/${OTP}`, { withCredentials: true })
       .then(() => {
         setIsChangeEmail(false);
         setIsEmailChange(true);
@@ -74,7 +72,24 @@ function Profile() {
     });
   };
 
+  const OTPHandler = (e) => {
+    e.preventDefault();
+    const otpValue = e.target[0].value;
+    const storedOtp = localStorage.getItem('otp');
+    if (otpValue === storedOtp) {
+      alert("OTP Verified Successfully!");
+      setIsEmailChange(false);
+      axios.patch(`http://localhost:7001/user/editEmail/${email}`, { email: newData.email }, { withCredentials: true }).then(() => {
+        console.log("Email updated successfully.");
+        setEmail(newData.email);
+      });
+    } else {
+      alert("Incorrect OTP. Try again.");
+    }
+  };
 
+
+  // image handlers
   const handleImageUpload = (event) => {
     setFile(event.target.files[0]);
 
@@ -92,42 +107,18 @@ function Profile() {
     event.preventDefault();
     const formData = new FormData();
     formData.append('profileImage', file);
-    formData.append('username', username);
+    formData.append('name', name);
     formData.append('email', email);
 
     try {
-      const response = axios.post(`http://localhost:5000/uploadImage/${email}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }, { withCredentials: true });
-      setProfileImage(response.data.user.profileImage); // Update state with uploaded image
-      alert(response.data.message);
+      const response = axios.post(`http://localhost:7001/upload/${id}`, formData, { withCredentials: true });
+      setProfileImage(response.data.user.profileImage);
+      console.log(response);
     }
     catch (error) {
       console.error("Error uploading image:", error);
     }
   };
-
-
-
-  const OTPHandler = (e) => {
-    e.preventDefault();
-    const otpValue = e.target[0].value;
-    const storedOtp = localStorage.getItem('otp');
-    if (otpValue === storedOtp) {
-      alert("OTP Verified Successfully!");
-      setIsEmailChange(false);
-      axios.patch(`http://localhost:5000/user/editEmail/${email}`, { email: newData.email }, { withCredentials: true }).then(() => {
-        console.log("Email updated successfully.");
-        setEmail(newData.email);
-      });
-    } else {
-      alert("Incorrect OTP. Try again.");
-    }
-  };
-
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center">
       <div className="bg-white shadow-2xl rounded-3xl p-10 max-w-lg w-full">
@@ -152,12 +143,12 @@ function Profile() {
               <input
                 className="border border-gray-300 rounded-xl p-3 w-full mt-1 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
                 type="text"
-                name="username"
-                value={newData.username}
+                name="name"
+                value={newData.name}
                 onChange={onChangeHandler}
               />
             ) : (
-              <p className="text-xl text-gray-600">{username ? username : 'Loading...'}</p>
+              <p className="text-xl text-gray-600">{name ? name : 'Loading...'}</p>
             )}
             <div className="flex justify-end mt-3">
               {isChange ? (
