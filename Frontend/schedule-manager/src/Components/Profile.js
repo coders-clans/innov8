@@ -5,13 +5,12 @@ function Profile() {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [profileImage, setProfileImage] = useState('');
-  const [file, setFile] = useState(null);
   const [isChangeEmail, setIsChangeEmail] = useState(false);
-
   const [isChange, setIsChange] = useState(false);
   const [newData, setNewData] = useState({
     name: '',
-    email: ''
+    email: '',
+    image: ''
   });
   const [isEmailChange, setIsEmailChange] = useState(false);
   const id = localStorage.getItem('email');
@@ -87,45 +86,13 @@ function Profile() {
       alert("Incorrect OTP. Try again.");
     }
   };
-
-
-  // image handlers
-  const handleImageUpload = (event) => {
-    setFile(event.target.files[0]);
-
-    // if (file) {
-    //   setImageFile(file);
-    //   const reader = new FileReader();
-    //   reader.onloadend = () => {
-    //     setProfileImage(reader.result);
-    //   };
-    //   reader.readAsDataURL(file);
-    // }
-  };
-
-  const uploadImageHandler = async (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append('profileImage', file);
-    formData.append('name', name);
-    formData.append('email', email);
-
-    try {
-      const response = axios.post(`http://localhost:7001/upload/${id}`, formData, { withCredentials: true });
-      setProfileImage(response.data.user.profileImage);
-      console.log(response);
-    }
-    catch (error) {
-      console.error("Error uploading image:", error);
-    }
-  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center">
       <div className="bg-white shadow-2xl rounded-3xl p-10 max-w-lg w-full">
         <div className="text-center mb-8">
           {profileImage ? (
             <img
-              src={profileImage}
+              src={newData.image}
               alt="Profile"
               className="w-28 h-28 rounded-full mx-auto object-cover border-4 border-gradient-to-r from-purple-500 to-pink-500"
             />
@@ -224,12 +191,12 @@ function Profile() {
 
           {/* Image Upload Section */}
           <div className="flex flex-col sm:flex-row justify-between mt-8">
-            <form onSubmit={uploadImageHandler}>
+            <form onSubmit={<div></div>}>
               <div className="w-full sm:w-auto">
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={handleImageUpload}
+                  onChange={<div></div>}
                   className="border border-gray-300 rounded-lg p-2 w-full mb-3"
                 />
                 <button

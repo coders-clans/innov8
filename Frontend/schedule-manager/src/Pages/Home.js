@@ -1,9 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Profile from '../Components/Profile';
 import Ask from '../Components/Ask'
 import NavBar from '../Components/NavBar';
+import EnterName from '../Components/EnterName';
+import Goals from '../Components/Goals';
+import Highlights from '../Components/Highlights';
 // const userId = '67011cf9122020cfe0bf42b3';
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
@@ -22,10 +24,18 @@ const Home = () => {
             <Ask />
           </div>
         )
+      case 'goals':
+        return (
+          <div>
+            <Goals />
+          </div>
+        )
       default:
         return (
           <div>
             <NavBar activeSection={activeSection} setActivesection={setActivesection} />
+            <EnterName activeSection={activeSection} setActivesection={setActivesection} />
+            <Highlights />
           </div>
         )
     }
