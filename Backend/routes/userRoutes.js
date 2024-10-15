@@ -11,10 +11,4 @@ userRouter.patch('/UpdateName/:email', editName);
 userRouter.get('/getUser/:email', getUser);
 userRouter.patch('/EmailVerify/:email/:otp', emailVerifiction);
 userRouter.patch('/editEmail/:email', editEmail);
-
 module.exports = userRouter;
-
-
-
-
-
