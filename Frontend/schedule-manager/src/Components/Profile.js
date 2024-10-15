@@ -129,6 +129,7 @@ function Profile() {
 
 
   return (
+
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center">
       <div className="bg-white shadow-2xl rounded-3xl p-10 max-w-lg w-full">
         <div className="text-center mb-8">
@@ -144,7 +145,7 @@ function Profile() {
           <h1 className="text-4xl font-bold text-gray-800 mt-4 mb-2">Profile</h1>
           <p className="text-lg text-gray-500">Manage your account details</p>
         </div>
-
+{/* <div></div> */}
         <div className="border-t border-gray-200 pt-4">
           <div className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-700 mb-2">Name:</h2>
