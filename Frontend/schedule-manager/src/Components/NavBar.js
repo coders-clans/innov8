@@ -109,7 +109,7 @@ function NavBar({ activeSection, setActivesection }) {
               onClick={() => handleCategoryClick('profile')}
               className=""
             >
-              <img className='h-8 w-8 rounded-full mr-3' src={defaultimg}></img>
+              <img className='h-8 w-8 rounded-full mr-3' src={defaultimg} alt='#'></img>
             </button>
             <div>uiewghoidjp</div>
             <button
