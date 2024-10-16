@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import defaultimg from './images/profile.png';
 
 function Profile() {
   const [name, setName] = useState(null);
@@ -89,46 +90,51 @@ function Profile() {
   return (
 
     // <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center">
-    <div className="bg-white shadow-2xl rounded-3xl p-10 max-w-lg w-full z-10">
+    <div className=" w-full max-w-md p-6 backdrop-blur-xl bg-[rgba(5,7,10,0.4)]
+      shadow-[rgba(9,11,17,0.7)_0px_4px_16px_0px,rgba(19,23,32,0.8)_0px_8px_16px_-5px] rounded-[calc(16px)]
+      border-solid border-[rgba(51,60,77,0.6)] relative min-h-[48px] shrink-0">
       <div className="text-center mb-8">
         {profileImage ? (
           <img
-            src={newData.image}
+            src={defaultimg}
             alt="Profile"
-            className="w-28 h-28 rounded-full mx-auto object-cover border-4 border-gradient-to-r from-purple-500 to-pink-500"
+            className="w-20 h-20 rounded-full mx-auto object-cover border-4 border-[hsla(220,20%,25%,0.6)]"
           />
         ) : (
-          <div className="w-28 h-28 rounded-full mx-auto bg-gray-200 animate-pulse"></div>
+          <div className="w-20 h-20 rounded-full mx-auto bg-gray-200 animate-pulse"></div>
         )}
-        <h1 className="text-4xl font-bold text-gray-800 mt-4 mb-2">Profile</h1>
-        <p className="text-lg text-gray-500">Manage your account details</p>
+        <h1 className="text-2xl font-bold text-white mt-4 mb-2">Profile</h1>
+        <p className="text-xl text-white ">Manage your account details</p>
       </div>
       {/* <div></div> */}
       <div className="border-t border-gray-200 pt-4">
         <div className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-2">Name:</h2>
+          <h2 className="font-semibold text-white  mb-2">Name:</h2>
+          <div className="flex items-center justify-between">
           {isChange ? (
             <input
-              className="border border-gray-300 rounded-xl p-3 w-full mt-1 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
+              className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
+              relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
+              duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
               type="text"
               name="name"
               value={newData.name}
               onChange={onChangeHandler}
             />
           ) : (
-            <p className="text-xl text-gray-600">{name ? name : 'Loading...'}</p>
+            <p className=" text-white ">{name ? name : 'Loading...'}</p>
           )}
-          <div className="flex justify-end mt-3">
+  
             {isChange ? (
               <button
-                className="px-6 py-2 bg-green-500 text-white font-semibold rounded-xl hover:bg-green-600 transition duration-200 ease-in-out shadow-md"
+                className="ml-4 px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition shadow-md"
                 onClick={changeNameHandler}
               >
                 Save
               </button>
             ) : (
               <button
-                className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-xl hover:bg-blue-600 transition duration-200 ease-in-out shadow-md"
+                className="ml-4 px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition shadow-md"
                 onClick={() => setIsChange(true)}
               >
                 Edit
@@ -139,18 +145,20 @@ function Profile() {
 
         {/* Email Section */}
         <div className="mb-8">
-          <h2 className="text-lg font-semibold text-gray-700 mb-2">Email:</h2>
-          <div className="flex items-center">
+          <h2 className="font-semibold text-white  mb-2">Email:</h2>
+          <div className="flex items-center justify-between">
             {isChangeEmail ? (
               <input
-                className="border border-gray-300 rounded-xl p-3 w-full text-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
+                className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
+              relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
+              duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
                 type="email"
                 name="email"
                 value={newData.email}
                 onChange={onChangeHandler}
               />
             ) : (
-              <p className="text-xl text-gray-600 flex-grow">{email || 'Loading...'}</p>
+              <p className="text-white  flex-grow">{email || 'Loading...'}</p>
             )}
             {isChangeEmail ? (
               <button
@@ -161,7 +169,7 @@ function Profile() {
               </button>
             ) : (
               <button
-                className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition shadow-md"
+                className="ml-4 px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition shadow-md"
                 onClick={() => setIsChangeEmail(true)}
               >
                 Edit
@@ -173,12 +181,12 @@ function Profile() {
         {/* OTP Verification */}
         {isEmailChange && (
           <div className="mb-6">
-            <h2 className="text-lg font-semibold text-gray-700 mb-2">Verify Email:</h2>
+            <h2 className="font-semibold text-white  mb-2">Verify Email:</h2>
             <form onSubmit={OTPHandler} className="flex space-x-4">
               <input
                 type="text"
                 placeholder="Enter OTP"
-                className="border border-gray-300 rounded-lg p-3 w-full text-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                className="ml-4 px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition shadow-md"
               />
               <button
                 type="submit"
@@ -191,7 +199,7 @@ function Profile() {
         )}
 
         {/* Image Upload Section */}
-        <div className="flex flex-col sm:flex-row justify-between mt-8">
+        {/* <div className="flex flex-col sm:flex-row justify-between mt-8">
           <form onSubmit={<div></div>}>
             <div className="w-full sm:w-auto">
               <input
@@ -208,7 +216,7 @@ function Profile() {
               </button>
             </div>
           </form>
-        </div>
+        </div> */}
       </div>
     </div>
     // </div>

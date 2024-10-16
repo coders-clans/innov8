@@ -82,6 +82,7 @@ function Login() {
               relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
               duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
             />
+
           </div>
           <div className="relative">
             <input
@@ -94,6 +95,7 @@ function Login() {
               relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
               duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid;"
             />
+
           </div>
           <div className="text-center">
             <button
