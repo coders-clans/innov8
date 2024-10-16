@@ -14,7 +14,9 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    profileImg: { type: String }
+    image: {
+        type: String
+    }
 
 })
 

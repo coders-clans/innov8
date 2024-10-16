@@ -8,9 +8,11 @@ const EnterName = ({ activeSection, setActivesection }) => {
     setActivesection(category);
   }
   return (
-    <div>
-      <input placeholder='Enter your name' />
-      <button onClick={() => handleCategoryClick('goals')}>Start now</button>
+    <div className=' flex m-5'>
+      <div className='mx-auto'>
+        <input placeholder='Enter your name' />
+        <button onClick={() => handleCategoryClick('goals')}>Start now</button>
+      </div>
     </div>
   )
 }

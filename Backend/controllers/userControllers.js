@@ -5,7 +5,6 @@ require('dotenv').config();
 const skey = process.env.secretKey;
 const nodemailer = require("nodemailer");
 
-
 const signUp = async (req, res) => {
     const { name, email, password } = req.body;
     if (!email || !password) {
@@ -210,6 +209,24 @@ const emailVerifiction = (req, res) => {
         }
     });
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = { signUp, login, signOut, editName, getUser, emailVerifiction, editEmail }
