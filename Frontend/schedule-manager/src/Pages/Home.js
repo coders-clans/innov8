@@ -8,6 +8,7 @@ import Ask from '../Components/Ask'
 import EnterName from '../Components/EnterName';
 import Goals from '../Components/Goals';
 import Highlights from '../Components/Highlights';
+
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -55,6 +56,14 @@ const Home = () => {
         )
       default:
         <div></div>
+        return (
+          <div className='bg-[radial-gradient(ellipse_at_top,#121861_0%,#10103a_20%,#000000_100%)] w-[100vw] h-[100vh]'>
+            <NavBar activeSection={activeSection} setActivesection={setActivesection} />
+            <EnterName activeSection={activeSection} setActivesection={setActivesection} />
+            <Highlights />
+            {/* <Faqs /> */}
+          </div>
+        )
     }
   }
   return (
