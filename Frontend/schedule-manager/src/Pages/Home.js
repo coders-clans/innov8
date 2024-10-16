@@ -9,6 +9,8 @@ import EnterName from '../Components/EnterName';
 import Goals from '../Components/Goals';
 import Highlights from '../Components/Highlights';
 
+import FAQ from "../Components/FAQ"
+
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -55,7 +57,16 @@ const Home = () => {
           </div>
         )
       default:
-        <div></div>
+
+        return (
+          <div>
+            {
+              isLoggedIn ? (<EnterName activeSection={activeSection} setActivesection={setActivesection} />) : (<div></div>)
+            }
+
+          </div>
+
+        )
 
     }
   }
@@ -182,7 +193,7 @@ const Home = () => {
       </div>
 
       <div className=''>
-        <EnterName activeSection={activeSection} setActivesection={setActivesection} />
+
       </div>
       <div className='mx-auto w-[500px] m-5 font-normal leading-normal
          text-[rgb(148,160,184)] text-center text-sm'>By clicking "Start now" you agree to our <span className='text-white underline font-bold'>Terms & Conditions.</span></div>
@@ -193,6 +204,9 @@ const Home = () => {
         <div>{renderContent()}</div>
         <div>
           <Highlights />
+        </div>
+        <div>
+          <FAQ />
         </div>
       </div>
     </div>
