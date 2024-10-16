@@ -5,6 +5,7 @@ const {auth}=require("./middleware/userAuth");
 const cookieParser=require("cookie-parser");
 const cors=require("cors");
 const opRouter=require("./routes/opRoutes");
+const aiRouter = require("./routes/aiRoutes");
 
 
 const userRouter=require("./routes/userRoutes");
@@ -28,6 +29,7 @@ app.use(cookieParser());
 
 app.use("/user",userRouter);
 app.use("/user/data",opRouter);
+app.use("/user/goal",aiRouter);
 
 app.get("/",auth,(req,res)=>{
     res.send("hello");
