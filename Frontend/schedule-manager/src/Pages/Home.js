@@ -56,21 +56,15 @@ const Home = () => {
         )
       default:
         <div></div>
-        return (
-          <div className='bg-[radial-gradient(ellipse_at_top,#121861_0%,#10103a_20%,#000000_100%)] w-[100vw] h-[100vh]'>
-            <NavBar activeSection={activeSection} setActivesection={setActivesection} />
-            <EnterName activeSection={activeSection} setActivesection={setActivesection} />
-            <Highlights />
-            {/* <Faqs /> */}
-          </div>
-        )
+
     }
   }
   return (
-    <div className='fixed w-full z-50 mt-10'>
+    <div className='bg-[radial-gradient(100%_80%_at_top,#00365d_0%,#080b16_30%)] w-[100vw] h-[100%]'>
+      <div className='fixed w-full z-50 mt-10'>
       <nav className="relative z-0 min-h-[48px] shrink-0 backdrop-blur-xl border bg-[rgba(5,7,10,0.4)] 
       shadow-[rgba(9,11,17,0.7)_0px_4px_16px_0px,rgba(19,23,32,0.8)_0px_8px_16px_-5px] px-3 py-2 rounded-[calc(16px)] 
-      border-solid border-[rgba(51,60,77,0.6)] w-[1300px] mx-auto">
+      border-solid border-[rgba(51,60,77,0.6)] w-[1200px] mx-auto">
 
         <div className="flex justify-between items-center">
           {/* Logo Section */}
@@ -143,7 +137,7 @@ const Home = () => {
                   Logout
                 </button>
                 {isClicked && (
-                  <div className="absolute top-12 right-0 w-[300px] bg-white text-black rounded-lg shadow-lg p-4">
+                  <div className="absolute top-12 right-0 w-[300px] rounded-lg shadow-lg bg-[rgba(5,7,10,0.7)]">
                     <Profile />
                   </div>
                 )}
@@ -175,17 +169,27 @@ const Home = () => {
           </div>
         </div>
       </nav>
-
+      </div>
+      
+      <div className='w-[100vw] h-[100vh] flex flex-col justify-center items-center'>
       <div className='flex flex-col '>
-        <h1 className='mx-auto'>RANDON HEading to go</h1>
-        <div>Positioning the Profile component: I used absolute positioning to make sure the Profile component appears next to the profile icon when clicked. This keeps it inline with the rest of the page layout</div>
+        <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)]
+         text-white mx-auto'>RANDON HEADING TO GO</h1>
+        <div className=' mx-auto w-[500px] m-5 font-normal leading-normal
+         text-[rgb(148,160,184)] text-center text-sm'>Positioning the Profile component: I used absolute positioning 
+         to make sure the Profile component appears next to the profile icon when clicked. This keeps it inline with the 
+         rest of the page layout</div>
       </div>
 
       <div className=''>
         <EnterName activeSection={activeSection} setActivesection={setActivesection} />
       </div>
+      <div className='mx-auto w-[500px] m-5 font-normal leading-normal
+         text-[rgb(148,160,184)] text-center text-sm'>By clicking "Start now" you agree to our <span className='text-white underline font-bold'>Terms & Conditions.</span></div>
+      </div>
+      
       {/* Scrollable content wrapper */}
-      <div className="overflow-y-auto h-[calc(100vh-48px-40px)] mt-4">
+      <div className="overflow-y-auto h-[calc(100vh-48px-40px)]">
         <div>{renderContent()}</div>
         <div>
           <Highlights />

@@ -79,7 +79,7 @@ function Login() {
               relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
               duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
             />
-            <svg
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 absolute left-4 top-4 text-gray-400"
               fill="none"
@@ -92,7 +92,7 @@ function Login() {
                 strokeWidth="2"
                 d="M16 12H8m0 0l4-4m-4 4l4 4m-4-4h8"
               />
-            </svg>
+            </svg> */}
           </div>
           <div className="relative">
             <input
@@ -105,7 +105,7 @@ function Login() {
               relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
               duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid;"
             />
-            <svg
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 absolute left-4 top-4 text-gray-400"
               fill="none"
@@ -118,7 +118,7 @@ function Login() {
                 strokeWidth="2"
                 d="M16 12H8m0 0l4-4m-4 4l4 4m-4-4h8"
               />
-            </svg>
+            </svg> */}
           </div>
           <div className="text-center"> 
             <button
