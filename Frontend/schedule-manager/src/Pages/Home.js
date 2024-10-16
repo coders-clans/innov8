@@ -10,6 +10,7 @@ import Goals from '../Components/Goals';
 import Highlights from '../Components/Highlights';
 import Faqs from '../Components/FAQ';
 
+
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
