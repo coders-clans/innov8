@@ -9,7 +9,7 @@ const imageRouter = require('./controllers/image')
 const userRouter = require("./routes/userRoutes");
 const portNo = process.env.portNo;
 const url = process.env.dbUrl;
-
+// const path = require('path');
 const app = express();
 
 connection(url).then(() => {
@@ -21,7 +21,7 @@ app.use(cors({
     origin: 'http://localhost:3000', // Frontend URL
     credentials: true, // Allow cookies to be sent
 }));
-
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(cookieParser());
 
