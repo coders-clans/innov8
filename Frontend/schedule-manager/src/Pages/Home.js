@@ -6,7 +6,7 @@ import NavBar from '../Components/NavBar';
 import EnterName from '../Components/EnterName';
 import Goals from '../Components/Goals';
 import Highlights from '../Components/Highlights';
-import Faqs from '../Components/FAQ';
+// import Faqs from '../Components/FAQ';
 // const userId = '67011cf9122020cfe0bf42b3';
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
@@ -37,7 +37,7 @@ const Home = () => {
             <NavBar activeSection={activeSection} setActivesection={setActivesection} />
             <EnterName activeSection={activeSection} setActivesection={setActivesection} />
             <Highlights />
-            <Faqs />
+            {/* <Faqs /> */}
           </div>
         )
     }
