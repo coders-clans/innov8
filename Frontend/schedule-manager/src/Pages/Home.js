@@ -8,6 +8,7 @@ import Goals from '../Components/Goals';
 import Highlights from '../Components/Highlights';
 import Faqs from '../Components/FAQ';
 // const userId = '67011cf9122020cfe0bf42b3';
+
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
 
