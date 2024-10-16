@@ -52,7 +52,7 @@ function Login() {
       {/* Left Text Section */}
       <div className="lg:w-1/2 w-full lg:text-left text-center mb-8 lg:mb-0">
         <h1 className="text-5xl font-extrabold text-white">
-          Welcome to Expense Tracker
+          Welcome to Goal
         </h1>
         <h2 className="text-2xl text-gray-200 mt-4">
           Manage your money effortlessly.
@@ -95,7 +95,7 @@ function Login() {
               duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid;"
             />
           </div>
-          <div className="text-center"> 
+          <div className="text-center">
             <button
               type="submit"
               className="inline-flex items-center justify-center relative cursor-pointer select-none align-middle appearance-none 
@@ -105,15 +105,9 @@ function Login() {
             </button>
           </div>
         </form>
-
-        <p className="text-center text-gray-600 mt-4">
-          Don't have an account?{' '}
-          <a href="/signup" className="text-purple-600 hover:underline">
-=======
         <p className="text-center text-white mt-4">
           Don't have an account?{" "}
-          <a href="/" className="text-white underline">
-
+          <a href="/signup" className="text-white underline">
             Sign Up
           </a>
           {/* B8AC94 for underline*/}

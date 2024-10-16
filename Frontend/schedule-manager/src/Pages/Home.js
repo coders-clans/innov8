@@ -8,8 +8,8 @@ import Ask from '../Components/Ask'
 import EnterName from '../Components/EnterName';
 import Goals from '../Components/Goals';
 import Highlights from '../Components/Highlights';
-import Faqs from '../Components/FAQ';
 
+import FAQ from "../Components/FAQ"
 
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
@@ -57,15 +57,16 @@ const Home = () => {
           </div>
         )
       default:
-        <div></div>
         return (
-          <div className='bg-[radial-gradient(ellipse_at_top,#121861_0%,#10103a_20%,#000000_100%)] w-[100vw] h-[100vh]'>
-            <NavBar activeSection={activeSection} setActivesection={setActivesection} />
-            <EnterName activeSection={activeSection} setActivesection={setActivesection} />
-            <Highlights />
-            <Faqs />
+          <div>
+            {
+              isLoggedIn ? (<EnterName activeSection={activeSection} setActivesection={setActivesection} />) : (<div></div>)
+            }
+
           </div>
+
         )
+
     }
   }
   return (
@@ -184,13 +185,16 @@ const Home = () => {
       </div>
 
       <div className=''>
-        <EnterName activeSection={activeSection} setActivesection={setActivesection} />
+
       </div>
       {/* Scrollable content wrapper */}
       <div className="overflow-y-auto h-[calc(100vh-48px-40px)] mt-4">
         <div>{renderContent()}</div>
         <div>
           <Highlights />
+        </div>
+        <div>
+          <FAQ />
         </div>
       </div>
     </div>
