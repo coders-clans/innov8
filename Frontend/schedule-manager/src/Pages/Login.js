@@ -1,47 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 
 function Login() {
-
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
-    password: ''
-  })
+    password: '',
+  });
+
+  const changeHandler = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
   const submitHandler = (event) => {
     event.preventDefault();
 
-    axios.post("http://localhost:7001/user/login", {
-      email: formData.email,
-      password: formData.password
-    }, {
-      withCredentials: true
-    }).then((response) => {
-      navigate('/');
-      const id = response.data.isUser._id;
-      localStorage.setItem('user_id', id);
-      localStorage.setItem('email', formData.email);
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("name", response.data.isUser.name);
-    }).catch((error) => {
-      alert("The user is not signnedIn");
-      navigate('/');
-    })
-
-  }
-
-  const changeHandler = (event) => {
-    const { name, value } = event.target;
-
-    setFormData({
-      ...formData,
-      [name]: value
-    })
-  }
-
+    axios
+      .post(
+        'http://localhost:7001/user/login',
+        {
+          email: formData.email,
+          password: formData.password,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((response) => {
+        const id = response.data.isUser._id;
+        console.log(id);
+        localStorage.setItem('user_id', id);
+        localStorage.setItem('email', formData.email);
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('name', response.data.isUser.name);
+        navigate('/');
+      })
+      .catch((error) => {
+        alert('The user is not signed in');
+        navigate('/signup');
+      });
+  };
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center 
@@ -71,7 +74,7 @@ function Login() {
           <div className="relative">
             <input
               type="email"
-              name='email'
+              name="email"
               value={formData.email}
               onChange={changeHandler}
               placeholder="Enter your Email ID"
@@ -79,25 +82,11 @@ function Login() {
               relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
               duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
             />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 absolute left-4 top-4 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M16 12H8m0 0l4-4m-4 4l4 4m-4-4h8"
-              />
-            </svg>
           </div>
           <div className="relative">
             <input
               type="password"
-              name='password'
+              name="password"
               value={formData.password}
               onChange={changeHandler}
               placeholder="Enter your Password"
@@ -105,20 +94,6 @@ function Login() {
               relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
               duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid;"
             />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 absolute left-4 top-4 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M16 12H8m0 0l4-4m-4 4l4 4m-4-4h8"
-              />
-            </svg>
           </div>
           <div className="text-center"> 
             <button
@@ -130,9 +105,15 @@ function Login() {
             </button>
           </div>
         </form>
+
+        <p className="text-center text-gray-600 mt-4">
+          Don't have an account?{' '}
+          <a href="/signup" className="text-purple-600 hover:underline">
+=======
         <p className="text-center text-white mt-4">
           Don't have an account?{" "}
           <a href="/" className="text-white underline">
+
             Sign Up
           </a>
           {/* B8AC94 for underline*/}

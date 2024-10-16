@@ -16,6 +16,7 @@ const signUp = async (req, res) => {
     const isUser = await userModle.findOne({ email });
     if (isUser) {
         console.log(isUser);
+        console.log(isUser);
         return res.status(400).json({
             success: false,
             message: "email already exist"
