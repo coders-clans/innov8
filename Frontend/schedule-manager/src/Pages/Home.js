@@ -54,7 +54,16 @@ const Home = () => {
           </div>
         )
       default:
-        <div></div>
+        return (
+          <div>
+            {
+              isLoggedIn ? (<EnterName activeSection={activeSection} setActivesection={setActivesection} />) : (<div></div>)
+            }
+
+          </div>
+
+        )
+
     }
   }
   return (
@@ -173,7 +182,7 @@ const Home = () => {
       </div>
 
       <div className=''>
-        <EnterName activeSection={activeSection} setActivesection={setActivesection} />
+
       </div>
       {/* Scrollable content wrapper */}
       <div className="overflow-y-auto h-[calc(100vh-48px-40px)] mt-4">
