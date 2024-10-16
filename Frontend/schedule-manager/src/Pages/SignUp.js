@@ -42,9 +42,11 @@ function SignUp() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
-            <div className="bg-white shadow-2xl p-8 rounded-lg w-full max-w-md md:max-w-lg lg:max-w-xl mx-4">
-                <h2 className="text-4xl font-bold mb-6 text-center text-gray-800">Create Your Account</h2>
+        <div className="flex justify-center items-center min-h-screen bg-[radial-gradient(circle,#00365d_0%,#080b16_58%)]">
+            <div className="lg:w-1/2 w-full max-w-md p-6 backdrop-blur-xl bg-[rgba(5,7,10,0.4)] 
+      shadow-[rgba(9,11,17,0.7)_0px_4px_16px_0px,rgba(19,23,32,0.8)_0px_8px_16px_-5px] rounded-[calc(16px)]
+      border-solid border-[rgba(51,60,77,0.6)] relative min-h-[48px] shrink-0">
+                <h2 className="text-4xl font-bold mb-6 text-center text-white">Create Your Account</h2>
                 <form className="space-y-6" onSubmit={submitHandler}>
                     <div>
                         <input 
@@ -53,7 +55,9 @@ function SignUp() {
                             value={formData.name}
                             onChange={ChangeHandler}
                             placeholder="Enter your Name" 
-                            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200 ease-in-out"
+                            className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
+                            relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
+                            duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
                         />
                     </div>
                     <div>
@@ -63,7 +67,9 @@ function SignUp() {
                             value={formData.email}
                             onChange={ChangeHandler}
                             placeholder="Enter your Email ID" 
-                            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200 ease-in-out"
+                            className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
+                            relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
+                            duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
                         />
                     </div>
                     <div>
@@ -73,20 +79,23 @@ function SignUp() {
                             value={formData.password}
                             onChange={ChangeHandler}
                             placeholder="Enter your Password" 
-                            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200 ease-in-out"
+                            className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
+                            relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
+                            duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
                         />
                     </div>
                     <div className="text-center">
                         <button 
                             type="submit" 
-                            className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition duration-300 w-full transform hover:scale-105"
+                            className="inline-flex items-center justify-center relative cursor-pointer select-none align-middle appearance-none 
+                            box-border font-medium text-sm leading-[1.75] min-w-[64px] w-full normal-case h-10 px-4 py-1.5 bg-white rounded-lg "
                         >
                             Sign Up
                         </button>
                     </div>
                 </form>
-                <p className="text-center text-gray-500 mt-6">
-                    Already have an account? <a href="/login" className="text-purple-600 hover:underline">Log In</a>
+                <p className="text-center text-white mt-6">
+                    Already have an account? <a href="/login" className="text-white underline">Log In</a>
                 </p>
             </div>
         </div>
