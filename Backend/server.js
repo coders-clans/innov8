@@ -5,14 +5,19 @@ const { auth } = require("./middleware/userAuth");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const opRouter = require("./routes/opRoutes");
-const imageRouter = require('./controllers/image')
+const aiRouter = require("./routes/aiRoutes");
+
+
 const userRouter = require("./routes/userRoutes");
 const portNo = process.env.portNo;
 const url = process.env.dbUrl;
-// const path = require('path');
+
 const app = express();
 
+const imageRouter = require('./controllers/image');
+
 connection(url).then(() => {
+
     console.log("database connected successfully")
 }).catch((error) => {
     console.log("there is some issue in connecting database")
@@ -27,11 +32,11 @@ app.use(cookieParser());
 
 app.use("/user", userRouter);
 app.use("/user/data", opRouter);
-app.use('/', imageRouter);
+app.use("/user/goal", aiRouter);
+
 app.get("/", auth, (req, res) => {
     res.send("hello");
 })
-
 app.listen(portNo, () => {
     console.log("server started on port no ", portNo);
 })
