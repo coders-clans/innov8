@@ -47,7 +47,8 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-4">
+    <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center 
+    bg-[radial-gradient(circle,#00365d_0%,#080b16_58%)] p-4">
       {/* Left Text Section */}
       <div className="lg:w-1/2 w-full lg:text-left text-center mb-8 lg:mb-0">
         <h1 className="text-5xl font-extrabold text-white">
@@ -61,9 +62,12 @@ function Login() {
         </p>
       </div>
 
+
       {/* Right Form Section */}
-      <div className="lg:w-1/2 w-full max-w-md p-6 bg-white shadow-lg rounded-lg">
-        <h2 className="text-3xl font-semibold text-center mb-6 text-gray-800">
+      <div className="lg:w-1/2 w-full max-w-md p-6 backdrop-blur-xl bg-[rgba(5,7,10,0.4)] 
+      shadow-[rgba(9,11,17,0.7)_0px_4px_16px_0px,rgba(19,23,32,0.8)_0px_8px_16px_-5px] rounded-[calc(16px)]
+      border-solid border-[rgba(51,60,77,0.6)] relative min-h-[48px] shrink-0">
+        <h2 className="text-3xl font-semibold text-center mb-6 text-white">
           Login to Your Account
         </h2>
         <form className="space-y-4" onSubmit={submitHandler}>
@@ -74,7 +78,9 @@ function Login() {
               value={formData.email}
               onChange={changeHandler}
               placeholder="Enter your Email ID"
-              className="w-full p-4 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500"
+              className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
+              relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
+              duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
             />
           </div>
           <div className="relative">
@@ -84,23 +90,33 @@ function Login() {
               value={formData.password}
               onChange={changeHandler}
               placeholder="Enter your Password"
-              className="w-full p-4 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500"
+              className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
+              relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
+              duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid;"
             />
           </div>
-          <div className="text-center">
+          <div className="text-center"> 
             <button
               type="submit"
-              className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition duration-300 w-full font-semibold"
+              className="inline-flex items-center justify-center relative cursor-pointer select-none align-middle appearance-none 
+              box-border font-medium text-sm leading-[1.75] min-w-[64px] w-full normal-case h-10 px-4 py-1.5 bg-white rounded-lg "
             >
               Login
             </button>
           </div>
         </form>
+
         <p className="text-center text-gray-600 mt-4">
           Don't have an account?{' '}
           <a href="/signup" className="text-purple-600 hover:underline">
+=======
+        <p className="text-center text-white mt-4">
+          Don't have an account?{" "}
+          <a href="/" className="text-white underline">
+
             Sign Up
           </a>
+          {/* B8AC94 for underline*/}
         </p>
       </div>
     </div>

@@ -3,9 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
 const skey = process.env.secretKey;
-const nodemailer=require("nodemailer");
-
-
+const nodemailer = require("nodemailer");
 
 const signUp = async (req, res) => {
     const { name, email, password } = req.body;
@@ -118,59 +116,51 @@ const signOut = async (req, res) => {
 
 const editName = async (req, res) => {
     try {
-        const { name } = req.body;
-        console.log(name)
-        const {email} = req.params;
+        const { email } = req.params;
         console.log(email);
-        const response = await userModle.findOneAndUpdate({ email }, { name }, { new: true });
+        const response = await User.findOne({ email });
         console.log(response);
-
         return res.json({
             success: true,
-            message: "Name Updated Successfully"
+            message: "success",
+            response: response
         })
-    }catch(error){
-        return res.json({
-            success: false,
-            message: "There is some problem in updating Name"
-        });
     }
-
+    catch (error) {
+        return res.json({
+            message: "error occured"
+        })
+    }
 }
 const editEmail = async (req, res) => {
     try {
-        const email=req.body;
-        const {emailId} = req.params;
-        console.log(email);
-        const response = await userModle.findOneAndUpdate({ email:emailId}, {email}, { new: true });
-        console.log(response);
-
-        return res.json({
-            success: true,
-            message: "email and password Updated Successfully"
-        })
-    }catch(error){
-        return res.json({
-            success: false,
-            message: "There is some problem in updating email"
-        });
+        const email = req.params.email;
+        const updatedData = req.body;
+        const user = await userModle.findOneAndUpdate({ email: email }, updatedData, { new: true });
+        if (user) {
+            res.json({ message: 'User updated successfully', response: user });
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating user', error });
     }
 
 }
 
 const getUser = async (req, res) => {
     try {
-        const {email} = req.params;
+        const { email } = req.params;
         console.log(email);
-        const response = await userModle.findOne({email});
+        const response = await userModle.findOne({ email });
         console.log(response);
 
         return res.json({
             success: true,
             message: "Successful",
-            response:response
+            response: response
         })
-    }catch(error){
+    } catch (error) {
         return res.json({
             success: false,
             message: "There is some problem in getting the user"
@@ -179,49 +169,65 @@ const getUser = async (req, res) => {
 
 }
 
-const emailVerifiction=(req, res) => {
-    const { email,otp } = req.params;
-    
-  
+const emailVerifiction = (req, res) => {
+    const { email, otp } = req.params;
+
+
     // Configure the email transporter
     const transporter = nodemailer.createTransport({
         host: process.env.STMP_HOST,
         port: process.env.STMP_PORT,
         secure: false, // true for port 465, false for other ports
         auth: {
-          user: process.env.STMP_USER,
-          pass: process.env.UserPassword,
+            user: process.env.STMP_USER,
+            pass: process.env.UserPassword,
         },
     });
-  
+
     // Compose the email message
     const mailOptions = {
-      from: process.env.STMP_USER, 
-      to: email,
-      subject: 'Confirmation Email',
-      text: 'Testing mail', 
-      html: `<p>Thank you for registering! Please click the following link to confirm your email address here is your otp:<br/> <b>${otp}</b></p>` 
+        from: process.env.STMP_USER,
+        to: email,
+        subject: 'Confirmation Email',
+        text: 'Testing mail',
+        html: `<p>Thank you for registering! Please click the following link to confirm your email address here is your otp:<br/> <b>${otp}</b></p>`
     };
-  
+
     // Send the email
     transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error('Error sending email:', error);
-        res.status(500).json({
-            success:true,
-            message:"error is there"
-        });   
-      } else {
-        console.log('Email sent:', info.response);
-        return res.json({
-            success:true,
-            message:"confirmation mail sent successfully"
-        })
-      }
+        if (error) {
+            console.error('Error sending email:', error);
+            res.status(500).json({
+                success: true,
+                message: "error is there"
+            });
+        } else {
+            console.log('Email sent:', info.response);
+            return res.json({
+                success: true,
+                message: "confirmation mail sent successfully"
+            })
+        }
     });
-  };
+};
 
 
 
 
-module.exports = { signUp, login, signOut,editName,getUser ,emailVerifiction,editEmail}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports = { signUp, login, signOut, editName, getUser, emailVerifiction, editEmail }

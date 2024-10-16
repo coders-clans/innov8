@@ -15,15 +15,20 @@ const url=process.env.dbUrl;
 const app=express();
 
 connection(url).then(()=>{
+=======
+const imageRouter = require('./controllers/image');
+
+connection(url).then(() => {
+
     console.log("database connected successfully")
-}).catch((error)=>{
+}).catch((error) => {
     console.log("there is some issue in connecting database")
 })
 app.use(cors({
     origin: 'http://localhost:3001', // Frontend URL
     credentials: true, // Allow cookies to be sent
 }));
-
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -31,10 +36,9 @@ app.use("/user",userRouter);
 app.use("/user/data",opRouter);
 app.use("/user/goal",aiRouter);
 
-app.get("/",auth,(req,res)=>{
+  app.get("/",auth,(req,res)=>{
     res.send("hello");
 })
-
-app.listen(portNo,()=>{
-    console.log("server started on port no ",portNo);
+app.listen(portNo, () => {
+    console.log("server started on port no ", portNo);
 })
