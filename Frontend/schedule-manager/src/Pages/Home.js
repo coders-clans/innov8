@@ -8,7 +8,9 @@ import Ask from '../Components/Ask'
 import EnterName from '../Components/EnterName';
 import Goals from '../Components/Goals';
 import Highlights from '../Components/Highlights';
+
 import FAQ from "../Components/FAQ"
+
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
