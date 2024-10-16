@@ -111,7 +111,6 @@ function NavBar({ activeSection, setActivesection }) {
             >
               <img className='h-8 w-8 rounded-full mr-3' src={defaultimg} alt='#'></img>
             </button>
-            <div>uiewghoidjp</div>
             <button
                   onClick={handleLogout}
                   className="text-white hover:text-red-500 transition-all duration-300"
