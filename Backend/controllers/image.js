@@ -1,23 +1,45 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
-
+const mongoose = require('mongoose')
 const router = express.Router();
 
+
+const Images = require("../models/image");
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'public/images')
+  destination: function (req, file, cb) {
+    cb(null, "../src/images/");
   },
-  filename: (req, file, cb) => {
-    cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now();
+    cb(null, uniqueSuffix + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+router.post("/upload-image", upload.single("image"), async (req, res) => {
+  console.log(req.body);
+  const imageName = req.file.filename;
+
+  try {
+    await Images.create({ image: imageName });
+    res.json({ status: "ok" });
+  } catch (error) {
+    res.json({ status: error });
   }
-})
+});
 
-const upload = multer({ storage })
+router.get("/get-image", async (req, res) => {
+  try {
+    Images.find({}).then((data) => {
+      res.send({ status: "ok", data: data });
+    });
+  } catch (error) {
+    res.json({ status: error });
+  }
+});
 
-router.post('/upload', upload.single('file'), (req, res) => {
-  console.log(req.file);
-})
 
 
 module.exports = router;

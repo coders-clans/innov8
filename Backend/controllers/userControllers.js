@@ -5,7 +5,6 @@ require('dotenv').config();
 const skey = process.env.secretKey;
 const nodemailer = require("nodemailer");
 
-
 const signUp = async (req, res) => {
     const { name, email, password } = req.body;
     if (!email || !password) {
@@ -16,6 +15,7 @@ const signUp = async (req, res) => {
     }
     const isUser = await userModle.findOne({ email });
     if (isUser) {
+        console.log(isUser);
         console.log(isUser);
         return res.status(400).json({
             success: false,
@@ -210,6 +210,24 @@ const emailVerifiction = (req, res) => {
         }
     });
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = { signUp, login, signOut, editName, getUser, emailVerifiction, editEmail }
