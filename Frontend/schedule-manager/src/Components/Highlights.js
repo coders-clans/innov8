@@ -35,7 +35,7 @@ const items = [
 
 export default function Highlights() {
   return (
-    <div id="highlights" className="bg-black text-white py-8 sm:py-16">
+    <div id="highlights" className="bg-[#080b16] text-white py-8 sm:py-16">
       <div className="container mx-auto flex flex-col items-center gap-6 sm:gap-12">
         <div className="w-full sm:w-4/5 md:w-3/5 text-center sm:text-left">
           <h2 className="text-3xl font-bold mb-4 flex justify-center items-center">Highlights</h2>
@@ -45,7 +45,7 @@ export default function Highlights() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {items.map((item, index) => (
-            <div key={index} className="bg-customBlue p-6 rounded-lg border border-gray-700 flex flex-col items-start">
+            <div key={index} className="bg-customBlue p-6 rounded-lg border border-gray-700 flex flex-col items-start w-[400px]">
               {/* <div className="mb-4">{item.icon}</div> */}
               <h3 className="text-lg font-medium mb-2">{item.title}</h3>
               <p className="text-gray-400 text-sm">{item.description}</p>
