@@ -47,6 +47,7 @@ const Home = () => {
   const handleHelp = () => {
     navigate('/help');
   };
+  //ahfjb
   const renderContent = () => {
     switch (activeSection) {
       case 'ask':
