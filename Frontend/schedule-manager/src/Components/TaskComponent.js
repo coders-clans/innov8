@@ -1,17 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
-const TaskManager = ({ userId, goalId }) => {
+// import { useNavigate } from 'react-router-dom';
+import { TiTickOutline } from "react-icons/ti";
+const TaskManager = () => {
+  const id = localStorage.getItem('user_id');
+  console.log(id);
+  // const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
   const [day, setDay] = useState(1);
   const [nextDayAvailable, setNextDayAvailable] = useState(false);
 
   // Fetch tasks for a specific day
+  // const fetchGoal = async () => {
+  //   try {
+
+  //     console.log(goalId);
+  //   }
+  //   catch (error) {
+  //     console.log("Id not found", error);
+  //   }
+  // }
   const fetchTasks = async (day) => {
+    // console.log(userId);
+
     try {
-      const response = await axios.get(`http://localhost/7001/user/goal/${goalId}/day/${day}`);
-      setTasks(response.data.tasks);
-      setNextDayAvailable(false); // Reset when new day's tasks are fetched
+      const resData = await axios.get(`http://localhost:7001/user/goal/${id}`, { withCredentials: true });
+      console.log(resData);
+      const goalId = resData.data._id;
+
+      console.log(goalId);
+      if (goalId) {
+
+        const response = await axios.get(`http://localhost:7001/user/goal/${goalId}/day/${day}`, { withCredentials: true });
+        console.log(response);
+        setTasks(response.data.tasks);
+        setNextDayAvailable(false);
+      }
+      else {
+        console.log("Goal Id not found");
+      }
+
     } catch (error) {
       console.error("Failed to fetch tasks:", error);
     }
@@ -50,7 +78,7 @@ const TaskManager = ({ userId, goalId }) => {
 
   return (
     <div>
-      <h1>Tasks for Day {day}</h1>
+      <h1 className="text-3xl font-bold mb-4 flex justify-center items-center"> Tasks for Day {day}</h1>
       {tasks.length === 0 ? (
         <p>No tasks available for this day.</p>
       ) : (
@@ -61,7 +89,7 @@ const TaskManager = ({ userId, goalId }) => {
                 {task.task} - {task.time} hours
               </span>
               {!task.completed && (
-                <button onClick={() => markTaskAsCompleted(task._id)}>Mark as Done</button>
+                <button onClick={() => markTaskAsCompleted(task._id)}><TiTickOutline /></button>
               )}
             </li>
           ))}
