@@ -8,7 +8,7 @@ const EnterName = ({ activeSection, setActivesection }) => {
     setActivesection(category);
   }
   return (
-    <div className=' flex m-5'>
+    <div className='flex justify-start'>
       <div className='mx-auto'>
         <button onClick={() => handleCategoryClick('goals')}
           className='inline-flex items-center justify-center relative cursor-pointer select-none align-middle 
