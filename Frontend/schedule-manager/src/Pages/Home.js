@@ -8,11 +8,9 @@ import Ask from '../Components/Ask'
 import EnterName from '../Components/EnterName';
 import Goals from '../Components/Goals';
 import Highlights from '../Components/Highlights';
-
-
-import FAQ from "../Components/FAQ"
-import Footer from '../Components/Footer';
 import Testimonials from '../Components/Testimols';
+import Footer from "../Components/Footer"
+import FAQ from "../Components/FAQ"
 
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
@@ -74,7 +72,7 @@ const Home = () => {
               isLoggedIn ? (<EnterName activeSection={activeSection} setActivesection={setActivesection} />) : (<div></div>)
             }
 
-          <div className='mx-auto w-[500px] m-5 font-normal leading-normal
+            <div className='mx-auto w-[500px] m-5 font-normal leading-normal
          text-[rgb(148,160,184)] text-center text-sm pb-14'>By clicking "Start now" you agree to our <span className='text-white underline font-bold'>Terms & Conditions.</span></div>
 
           </div>
@@ -94,12 +92,12 @@ const Home = () => {
             {/* Logo Section */}
             <div className='flex justify-between items-center'>
               <a href='#home'>
-              <div className="select-none flex shrink-0 h-[21px] w-[100px] transition-[fill] duration-200 ease-in-out mr-4 items-center">
-                <img src={img} alt="Logo" className="h-8 w-8 rounded-full mr-3" />
-                <span className="text-white text-1xl font-bold">MyApp</span>
-              </div>
+                <div className="select-none flex shrink-0 h-[21px] w-[100px] transition-[fill] duration-200 ease-in-out mr-4 items-center">
+                  <img src={img} alt="Logo" className="h-8 w-8 rounded-full mr-3" />
+                  <span className="text-white text-1xl font-bold">MyApp</span>
+                </div>
               </a>
-              
+
 
               <div className="hidden md:flex space-x-4">
                 {/* after login */}
@@ -124,17 +122,17 @@ const Home = () => {
                       Ask
                     </button>
                     <a href='#highlights'>
-                    <button
-                      onClick={() => handleCategoryClick('ask')}
-                      className="inline-flex items-center justify-center relative cursor-pointer select-none  
+                      <button
+                        onClick={() => handleCategoryClick('ask')}
+                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
-                    >
-                      Highlights
-                    </button>
+                      >
+                        Highlights
+                      </button>
                     </a>
-                    
+
 
                     <button
                       onClick={() => handleCategoryClick('ask')}
@@ -146,17 +144,25 @@ const Home = () => {
                       Comments
                     </button>
                     <a href='#faqs'>
-                    <button
-                      onClick={() => handleCategoryClick('ask')}
-                      className="inline-flex items-center justify-center relative cursor-pointer select-none  
+                      <button
+                        onClick={() => handleCategoryClick('ask')}
+                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
-                    >
-                      Faqs
-                    </button>
+                      >
+                        Faqs
+                      </button>
+                      <button
+                        onClick={() => handleCategoryClick('ask')}
+                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
+                  box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
+                  h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
+                  transition-all duration-300"
+                      >
+                        Today's Tasks
+                      </button>
                     </a>
-                    
                   </>
                 ) : (
                   // before login
@@ -206,6 +212,16 @@ const Home = () => {
                     >
                       <a href='#faqs'>Faqs</a>
                     </button>
+                    <button
+                      onClick={() => handleCategoryClick('ask')}
+                      className="inline-flex items-center justify-center relative cursor-pointer select-none  
+                  box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
+                  h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
+                  transition-all duration-300"
+                    >
+                      Today's Tasks
+                    </button>
+
                   </>
                 )}
               </div>
@@ -255,41 +271,42 @@ const Home = () => {
               )}
             </div>
           </div>
+
         </nav>
-      </div>
-      
+      </div >
+
       <div className='w-[100vw] h-[60vh] flex flex-col justify-end items-center' id="home">
-          <div className='flex flex-col '>
-            <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)]
+        <div className='flex flex-col '>
+          <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)]
           text-white mx-auto'>RANDON HEADING TO GO</h1>
           <div className=' mx-auto w-[500px] m-5 font-normal leading-normal
-          text-[rgb(148,160,184)] text-center text-sm'>Positioning the Profile component: I used absolute positioning 
-          to make sure the Profile component appears next to the profile icon when clicked. This keeps it inline with the 
-          rest of the page layout</div>
+          text-[rgb(148,160,184)] text-center text-sm'>Positioning the Profile component: I used absolute positioning
+            to make sure the Profile component appears next to the profile icon when clicked. This keeps it inline with the
+            rest of the page layout</div>
+        </div>
+
+
       </div>
 
-      
-          </div>
-      
       {/* Scrollable content wrapper */}
       <div className="">
         <div>{renderContent()}</div>
-        <div id="highlights">
+        <div>
           <Highlights />
         </div>
         <div id='faqs'>
-          <FAQ  />
+          <FAQ />
         </div>
         <div>
-          <Testimonials/>
+          <Testimonials />
         </div>
         <div>
-          <Footer/>
+          <Footer />
         </div>
       </div>
 
-      
-    </div>
+
+    </div >
 
   )
 };
