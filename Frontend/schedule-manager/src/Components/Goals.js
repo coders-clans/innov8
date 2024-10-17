@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+import { useNavigate } from 'react-router-dom';
+// import Spinner from './Spinner';
+
 const Goals = () => {
+  const navigate = useNavigate();
   const [aiResponse, setAiResponse] = useState(null); // AI response
   const [isLoading, setIsLoading] = useState(false);  // Loading state
   const [isSatisfied, setIsSatisfied] = useState(false);  // User satisfaction
@@ -71,6 +75,10 @@ const Goals = () => {
       } else {
         alert('Failed to save Goal Path. Please try again.');
       }
+      console.log(res);
+      // const goalId = res.
+      // localStorage.setItem('goalId',)
+      navigate('/taskManager')
     } catch (error) {
       console.error('Error saving goal path:', error);
       alert('There was an issue saving your goal path.');
@@ -97,98 +105,101 @@ const Goals = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="form-container max-w-md mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
-        <h2 className="form-heading text-2xl font-bold text-gray-800 mb-6">
-          Enter the following details to proceed ..
-        </h2>
+      {isLoading ? (null) :
+        (<div className="form-container max-w-md mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
+          <h2 className="form-heading text-2xl font-bold text-gray-800 mb-6">
+            Enter the following details to proceed ..
+          </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-gray-700 font-semibold mb-1">Your Goal</label>
-            <input
-              name='goal'
-              type="text"
-              value={formData.goal}
-              onChange={handleChange}
-              required
-              className="form-input w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="block text-gray-700 font-semibold mb-1">Number of days to achieve your goal</label>
-            <input
-              name='totalDays'
-              type="number"
-              value={formData.totalDays}
-              onChange={handleChange}
-              required
-              className="form-input w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="block text-gray-700 font-semibold mb-1">Free hours per day</label>
-            <input
-              name='freeHoursPerDay'
-              type="number"
-              value={formData.freeHoursPerDay}
-              onChange={handleChange}
-              required
-              className="form-input w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-teal-500 text-white py-2 rounded-lg hover:bg-teal-600 transition duration-200"
-            disabled={isLoading}
-          >
-            {isLoading ? 'Generating Plan...' : 'Submit'}
-          </button>
-        </form>
-
-        {/* AI Response */}
-        {aiResponse && (
-          <div className="mt-6 p-4 bg-gray-100 border border-gray-300 rounded-lg">
-            <h3 className="text-lg font-bold text-gray-800 mb-4">Generated Plan:</h3>
-            <div className="space-y-4">
-              {aiResponse.map((day, index) => (
-                <div key={index} className="p-4 bg-white rounded-lg shadow-md">
-                  <h4 className="font-semibold text-teal-600 mb-2">Day {day.day}: {day.title}</h4>
-                  <p className="text-gray-700">{day.description}</p>
-                  <ul className="list-disc list-inside mt-2">
-                    {day.tasks.map((task, idx) => (
-                      <li key={idx} className="text-gray-600">
-                        {task.task} - <span className="font-semibold">{task.time} hours</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-gray-700 font-semibold mb-1">Your Goal</label>
+              <input
+                name='goal'
+                type="text"
+                value={formData.goal}
+                onChange={handleChange}
+                required
+                className="form-input w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+              />
             </div>
 
-            {/* Satisfaction and Regeneration buttons */}
-            <div className="mt-6 flex space-x-4">
-              <button
-                onClick={handleSatisfied}
-                className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition duration-200"
-                disabled={isSatisfied}
-              >
-                {isSatisfied ? 'You are happy with this!' : 'Am I happy with this?'}
-              </button>
-
-              <button
-                onClick={handleRegenerate}
-                className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition duration-200"
-                disabled={isRegenerating || isLoading}
-              >
-                {isRegenerating ? 'Regenerating...' : 'Regenerate Response'}
-              </button>
+            <div className="form-group">
+              <label className="block text-gray-700 font-semibold mb-1">Number of days to achieve your goal</label>
+              <input
+                name='totalDays'
+                type="number"
+                value={formData.totalDays}
+                onChange={handleChange}
+                required
+                className="form-input w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+              />
             </div>
-          </div>
-        )}
-      </div>
+
+            <div className="form-group">
+              <label className="block text-gray-700 font-semibold mb-1">Free hours per day</label>
+              <input
+                name='freeHoursPerDay'
+                type="number"
+                value={formData.freeHoursPerDay}
+                onChange={handleChange}
+                required
+                className="form-input w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-teal-500 text-white py-2 rounded-lg hover:bg-teal-600 transition duration-200"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Generating Plan...' : 'Submit'}
+            </button>
+          </form>
+
+          {/* AI Response */}
+          {aiResponse && (
+            <div className="mt-6 p-4 bg-gray-100 border border-gray-300 rounded-lg">
+              <h3 className="text-lg font-bold text-gray-800 mb-4">Generated Plan:</h3>
+              <div className="space-y-4">
+                {aiResponse.map((day, index) => (
+                  <div key={index} className="p-4 bg-white rounded-lg shadow-md">
+                    <h4 className="font-semibold text-teal-600 mb-2">Day {day.day}: {day.title}</h4>
+                    <p className="text-gray-700">{day.description}</p>
+                    <ul className="list-disc list-inside mt-2">
+                      {day.tasks.map((task, idx) => (
+                        <li key={idx} className="text-gray-600">
+                          {task.task} - <span className="font-semibold">{task.time} hours</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
+              {/* Satisfaction and Regeneration buttons */}
+              <div className="mt-6 flex space-x-4">
+                <button
+                  onClick={handleSatisfied}
+                  className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition duration-200"
+                  disabled={isSatisfied}
+                >
+                  {isSatisfied ? 'You are happy with this!' : 'Am I happy with this?'}
+                </button>
+
+                <button
+                  onClick={handleRegenerate}
+                  className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition duration-200"
+                  disabled={isRegenerating || isLoading}
+                >
+                  {isRegenerating ? 'Regenerating...' : 'Regenerate Response'}
+                </button>
+              </div>
+            </div>
+          )}
+        </div>)
+      }
+
     </div>
   );
 };

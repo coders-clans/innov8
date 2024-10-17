@@ -1,4 +1,5 @@
 const { createGoalPath } = require('../controllers/goalPathService');
+
 const GoalPath = require('../models/goal');
 const DayPlan = require('../models/dayTask');
 
@@ -25,11 +26,6 @@ async function addNewGoal(req, res) {
         });
     }
 }
-
-
-
-
-
 const getTasksByDay = async (req, res) => {
     const { goalId, day } = req.params;
 
@@ -76,7 +72,13 @@ const getTasksByDay = async (req, res) => {
     }
 };
 
+const fetchGoal = async (req, res) => {
+    const { userId } = req.params;
+    const response = await GoalPath.findOne({ userId });
+    console.log(response);
+    res.status(200).json(response);
+
+}
 
 
-
-module.exports = { addNewGoal ,getTasksByDay};
+module.exports = { addNewGoal, getTasksByDay, fetchGoal };

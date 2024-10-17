@@ -1,10 +1,19 @@
 import React from 'react';
 import { FaTasks, FaCrown, FaChartLine, FaClock, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { RxCross1 } from "react-icons/rx";
+import { useNavigate } from 'react-router-dom';
 // import schedule from './image/schedule-img.avif';
 
 const Help = () => {
+  const navigate = useNavigate();
+  function handleBack (){
+    navigate('/');
+  }
   return (
     <div className="bg-[radial-gradient(100%_80%_at_top,#00365d_0%,#080b16_30%)] py-12">
+      <button onClick={handleBack}>
+      <RxCross1 />
+        </button>
       <div className="max-w-7xl mx-auto shadow-lg rounded-3xl p-10 md:p-16 
       relative min-h-[48px] shrink-0 ">
         <header className="text-center mb-12">
@@ -18,7 +27,7 @@ const Help = () => {
           <h2 className="text-4xl font-semibold text-white mb-6">About Us</h2>
           <p className="text-gray-200 mb-4 leading-relaxed">
             Our schedule manager is your companion in building productive habits and reaching your personal or professional goals.
-            We help you break down your big goals into *daily actionable tasks*. Whether you aim to learn a new skill, stay fit, or
+            We help you break down your big goals into daily actionable tasks. Whether you aim to learn a new skill, stay fit, or
             complete a project, we offer tools to keep you on track every step of the way.
           </p>
           {/* <img
@@ -27,7 +36,7 @@ const Help = () => {
             className="w-full h-72 object-cover rounded-lg shadow-md mb-8"
           /> */}
           <p className="text-gray-200 leading-relaxed">
-            With *streak tracking, motivational **leaderboards, and a **real-time dashboard*, you’ll stay committed and organized.
+            With streak tracking, motivational **leaderboards, and a **real-time dashboard, you’ll stay committed and organized.
             Get reminders, measure progress, and make every day count.
           </p>
         </section>

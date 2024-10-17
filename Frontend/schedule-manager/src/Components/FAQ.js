@@ -42,7 +42,7 @@ export default function Faqs() {
   };
 
   return (
-    <div id="#" className="bg-black text-white py-8 sm:py-16">
+    <div id="#" className="bg-[#080b16] text-white py-8 sm:py-16">
       <div className="container mx-auto flex flex-col items-center gap-6 sm:gap-12">
         <div className="w-full sm:w-4/5 md:w-3/5 text-center sm:text-left">
           <h2 className="text-3xl font-bold mb-1 flex justify-center items-center">
@@ -50,11 +50,11 @@ export default function Faqs() {
           </h2>
         </div>
 
-        <div className="  border-gray-700 ">
+        <div className="  border-gray-700 max-w-[900px]">
           {questions.map((item, index) => (
             <div
               key={index}
-              className="bg-customBlue p-6 rounded-md border border-gray-700"
+              className="bg-customBlue p-6 rounded-md border border-gray-700 "
             >
               {/* Question and Icon Section */}
               {/* {noo change} */}
