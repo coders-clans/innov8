@@ -132,7 +132,7 @@ function Profile({isLoggedin,setIsLoggedIn}) {
               onChange={onChangeHandler}
             />
           ) : (
-            <p className=" text-white ">{name ? name : 'Loading...'}</p>
+            <p className=" text-white flex-grow">{name ? name : 'Loading...'}</p>
           )}
   
             {isChange ? (
@@ -144,7 +144,7 @@ function Profile({isLoggedin,setIsLoggedIn}) {
               </button>
             ) : (
               <button
-                className="ml-4 px-4 py-2 text-white  rounded-xl transition shadow-md"
+                className="ml-4 px-4 py-2 text-white  rounded-xl transition shadow-md translate-x-3"
                 onClick={() => setIsChange(true)}
               >
               <CiEdit fontSize="1.45rem" />

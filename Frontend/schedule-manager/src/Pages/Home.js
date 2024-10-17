@@ -9,6 +9,9 @@ import EnterName from '../Components/EnterName';
 import Goals from '../Components/Goals';
 import Highlights from '../Components/Highlights';
 import Testimonials from '../Components/Testimols';
+import TaskCompletionGraph from '../Components/Graph';
+import TaskCompletionADVGraph from '../Components/GraphAdvance';
+import TaskCalendar from '../Components/Calender';
 import Footer from "../Components/Footer"
 import FAQ from "../Components/FAQ"
 
@@ -81,6 +84,8 @@ const Home = () => {
 
     }
   }
+
+
   return (
     <div className='bg-[radial-gradient(100%_40%_at_top,#00365d_0%,#080b16_30%)] w-[100%] h-[100%]'>
       <div className='fixed w-full z-50 mt-10'>
@@ -99,7 +104,7 @@ const Home = () => {
               </a>
 
 
-              <div className="hidden md:flex space-x-4">
+              <div className="hidden custom:flex space-x-4">
                 {/* after login */}
                 {isLoggedIn ? (
                   <>
@@ -197,7 +202,9 @@ const Home = () => {
                     >
                       Highlights
                     </button>
-                    </a>
+                    </a >
+
+                    <a href='#Testimonials'>
                     <button
                       // onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
@@ -207,6 +214,8 @@ const Home = () => {
                     >
                       Comments
                     </button>
+                    </a>
+                    
                     <a href='#faqs'>
                     <button
                       // onClick={() => handleCategoryClick('ask')}
@@ -295,18 +304,29 @@ const Home = () => {
       {/* Scrollable content wrapper */}
       <div className="">
         <div>{renderContent()}</div>
-        <div>
+        {
+          isLoggedIn ? (<div className='grid md:grid-cols-2 mx-auto grid-cols-1'>
+            <div><TaskCompletionGraph/></div>
+        <div><TaskCompletionADVGraph/></div>
+        </div>
+          ):(null)
+        }
+        
+
+        <div id="highlights">
           <Highlights />
         </div>
         <div id='Testimonials'>
           <Testimonials/>
         </div>
+
         <div id='faqs'>
           <FAQ />
         </div>
         <div>
           <Footer />
         </div>
+
       </div>
 
 
