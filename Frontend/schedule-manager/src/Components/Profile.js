@@ -196,7 +196,9 @@ function Profile({isLoggedin,setIsLoggedIn}) {
               <input
                 type="text"
                 placeholder="Enter OTP"
-                className="ml-4 px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition shadow-md"
+                className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
+              relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
+              duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
               />
               <button
                 type="submit"

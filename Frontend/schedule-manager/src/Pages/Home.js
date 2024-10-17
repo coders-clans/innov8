@@ -121,7 +121,7 @@ const Home = () => {
                     >
                       Ask
                     </button>
-                    <a href='#highlights'>
+                    <a href='#highlights' >
                     <button
                       // onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
@@ -284,11 +284,11 @@ const Home = () => {
       <div className='w-[100vw] h-[60vh] flex flex-col justify-end items-center' id="home">
           <div className='flex flex-col '>
             <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)] 
-          text-white mx-auto text-center'>milestones Master <span className='text-blue-500'>Platform</span> </h1>
+          text-white mx-auto text-center'>Milestones Master <span className='text-blue-500'>Platform</span> </h1>
           <div className=' mx-auto max-w-[500px] m-5 font-normal leading-normal
-          text-[rgb(148,160,184)] text-center text-sm'>Positioning the Profile component: I used absolute positioning 
-          to make sure the Profile component appears next to the profile icon when clicked. This keeps it inline with the 
-          rest of the page layout</div>
+          text-[rgb(148,160,184)] text-center text-sm'>Our platform provides a personalized goal tracking system which helps 
+          you to reach your goals with ease and organised manner . </div>
+
       </div>
       </div>
 
@@ -303,9 +303,6 @@ const Home = () => {
         </div>
         <div id='faqs'>
           <FAQ />
-        </div>
-        <div>
-          <Testimonials />
         </div>
         <div>
           <Footer />

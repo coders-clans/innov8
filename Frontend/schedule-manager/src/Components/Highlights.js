@@ -39,7 +39,7 @@ export default function Highlights() {
       <div className="container mx-auto flex flex-col items-center gap-6 sm:gap-12">
         <div className="w-full sm:w-4/5 md:w-3/5 text-center sm:text-left">
           <h2 className="text-3xl font-bold mb-4 flex justify-center items-center">Highlights</h2>
-          <p className="text-gray-400">
+          <p className="text-gray-400 text-center">
             Explore why our product stands out: adaptability, durability, user-friendly design, and innovation. Enjoy reliable customer support and precision in every detail.
           </p>
         </div>
