@@ -37,14 +37,6 @@ const testimonialsData = [
     rating: 4.5,
   },
   {
-    name: "Nidhi Kapoor",
-    role: "Entrepreneur, Startup Founder",
-    feedback:
-      "I love the simplicity and effectiveness of this tool. Managing tasks daily has become much easier, and streaks keep me going. I highly recommend it!",
-    image: "https://i.pravatar.cc/150?img=21",
-    rating: 5,
-  },
-  {
     name: "Vikram Singh",
     role: "Fitness Coach, Jaipur",
     feedback:
@@ -52,6 +44,15 @@ const testimonialsData = [
     image: "https://i.pravatar.cc/150?img=11",
     rating: 4,
   },
+  {
+    name: "Nidhi Kapoor",
+    role: "Entrepreneur, Startup Founder",
+    feedback:
+      "I love the simplicity and effectiveness of this tool. Managing tasks daily has become much easier, and streaks keep me going. I highly recommend it!",
+    image: "https://i.pravatar.cc/150?img=21",
+    rating: 5,
+  },
+  
 ];
 
 const Testimonials = () => {
