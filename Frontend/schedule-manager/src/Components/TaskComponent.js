@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { TiTickOutline, TiTimesOutline } from "react-icons/ti";
 
-const TaskManager = () => {
+const TaskManager = ({ tasks, setTasks, setCompletedTasks, setPendingTasks, pendingTasks }) => {
   const id = localStorage.getItem('user_id');
-  const [tasks, setTasks] = useState([]);
   const [day, setDay] = useState(1);
   const [nextDayAvailable, setNextDayAvailable] = useState(false);
 
@@ -33,7 +32,8 @@ const TaskManager = () => {
       await axios.patch(`http://localhost:7001/user/goal/updateTaskStatus/${goalPathId}/${taskId}`, { completed });
 
       // Update local tasks state to reflect changes
-      setTasks(tasks.map(task => task._id === taskId ? { ...task, completed } : task));
+      const updatedTasks = tasks.map(task => task._id === taskId ? { ...task, completed } : task);
+      setTasks(updatedTasks);
     } catch (error) {
       console.error(`Failed to ${completed ? 'mark as completed' : 'undo completion'}:`, error);
     }
@@ -41,9 +41,16 @@ const TaskManager = () => {
 
   const moveToNextDay = () => {
     setDay(day + 1);
+    const uncompletedTasks = tasks.filter(task => !task.completed);
+    setPendingTasks([...pendingTasks, ...uncompletedTasks]);
     setNextDayAvailable(false);
     fetchTasks(day + 1);
   };
+
+  // Update completedTasks count whenever tasks change
+  useEffect(() => {
+    setCompletedTasks(tasks.filter(task => task.completed).length);
+  }, [tasks, setCompletedTasks]);
 
   useEffect(() => {
     const timer = setTimeout(() => {

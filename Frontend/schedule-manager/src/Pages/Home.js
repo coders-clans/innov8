@@ -15,6 +15,7 @@ import TaskCalendar from '../Components/Calender';
 import Footer from "../Components/Footer"
 import FAQ from "../Components/FAQ"
 import TaskManager from '../Components/TaskComponent';
+import DonutChart from '../Components/TaskCompeletionTracker';
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -23,6 +24,9 @@ const Home = () => {
   const [isClicked, setisClicked] = useState(false);
   const [isAsk, setisAsk] = useState(false);
   const navigate = useNavigate();
+  const [tasks, setTasks] = useState([]);
+  const [pendingTasks, setPendingTasks] = useState([]);
+  const [completedTasks,setCompletedTasks]=useState(0);
   const handleSignIn = () => {
     navigate('/signup');
   };
@@ -70,7 +74,7 @@ const Home = () => {
       case 'task':
         return (
           <div>
-            <TaskManager />
+            <TaskManager tasks={tasks} setTasks={setTasks} setCompletedTasks={setCompletedTasks} setPendingTasks={setPendingTasks} pendingTasks={pendingTasks} />
           </div>
         )
       default:
@@ -339,6 +343,7 @@ const Home = () => {
           isLoggedIn ? (<div className='grid md:grid-cols-2 mx-auto grid-cols-1'>
             <div><TaskCompletionGraph/></div>
         <div><TaskCompletionADVGraph/></div>
+        <DonutChart tasksCompleted={completedTasks} totalTasks={tasks.length} />
         </div>
           ):(null)
         }
