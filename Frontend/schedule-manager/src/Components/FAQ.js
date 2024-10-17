@@ -57,6 +57,7 @@ export default function Faqs() {
               className="bg-customBlue p-6 rounded-md border border-gray-700"
             >
               {/* Question and Icon Section */}
+              {/* {noo change} */}
               <button
                 onClick={() => toggleFAQ(index)}
                 className="w-full flex justify-between items-center text-lg font-medium focus:outline-none"
