@@ -78,7 +78,7 @@ const Goals = () => {
       console.log(res);
       // const goalId = res.
       // localStorage.setItem('goalId',)
-      navigate('/taskManager')
+      // navigate('/taskManager')
     } catch (error) {
       console.error('Error saving goal path:', error);
       alert('There was an issue saving your goal path.');
