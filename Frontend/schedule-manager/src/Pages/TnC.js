@@ -1,8 +1,17 @@
 import React from 'react'
-
+import { RxCross1 } from "react-icons/rx";
+import { useNavigate } from 'react-router-dom';
 const TnC = () => {
+  const navigate = useNavigate();
+  function handleBack (){
+    navigate('/');
+  }
   return (
     <div>
+      <button onClick={handleBack}>
+      <RxCross1 />
+        </button>
+
       <div class="max-w-2xl mx-auto p-8 bg-white shadow-lg mt-10 rounded-lg">
 
         <h1 class="text-4xl font-bold text-center text-gray-900 mb-6">Terms and Conditions</h1>

@@ -23,7 +23,7 @@ connection(url).then(() => {
     console.log("there is some issue in connecting database")
 })
 app.use(cors({
-    origin: 'http://localhost:3000', // Frontend URL
+    origin: 'http://localhost:3001', // Frontend URL
     credentials: true, // Allow cookies to be sent
 }));
 // app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
