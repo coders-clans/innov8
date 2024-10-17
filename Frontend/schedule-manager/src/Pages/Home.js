@@ -142,6 +142,8 @@ const Home = () => {
                       Faqs
                     </button>
                     {/*  */}
+                    {/*  */}
+                    <div></div>
                     <button
                       onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
