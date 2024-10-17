@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+
+import { useNavigate } from 'react-router-dom';
 import Spinner from './Spinner';
 
 const Goals = () => {
+  const navigate = useNavigate();
   const [aiResponse, setAiResponse] = useState(null); // AI response
   const [isLoading, setIsLoading] = useState(false);  // Loading state
   const [isSatisfied, setIsSatisfied] = useState(false);  // User satisfaction
@@ -72,6 +75,10 @@ const Goals = () => {
       } else {
         alert('Failed to save Goal Path. Please try again.');
       }
+      console.log(res);
+      // const goalId = res.
+      // localStorage.setItem('goalId',)
+      navigate('/taskManager')
     } catch (error) {
       console.error('Error saving goal path:', error);
       alert('There was an issue saving your goal path.');
