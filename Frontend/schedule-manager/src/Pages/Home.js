@@ -90,10 +90,13 @@ const Home = () => {
           <div className="flex justify-between items-center">
             {/* Logo Section */}
             <div className='flex justify-between items-center'>
-              <div className="select-none inline-flex shrink-0 h-[21px] w-[100px] transition-[fill] duration-200 ease-in-out mr-4 items-center">
+              <a href='#home'>
+              <div className="select-none flex shrink-0 h-[21px] w-[100px] transition-[fill] duration-200 ease-in-out mr-4 items-center">
                 <img src={img} alt="Logo" className="h-8 w-8 rounded-full mr-3" />
                 <span className="text-white text-1xl font-bold">MyApp</span>
               </div>
+              </a>
+              
 
               <div className="hidden md:flex space-x-4">
                 {/* after login */}
@@ -117,6 +120,7 @@ const Home = () => {
                     >
                       Ask
                     </button>
+                    <a href='#highlights'>
                     <button
                       onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
@@ -126,6 +130,9 @@ const Home = () => {
                     >
                       Highlights
                     </button>
+                    </a>
+                    
+
                     <button
                       onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
@@ -135,6 +142,7 @@ const Home = () => {
                     >
                       Comments
                     </button>
+                    <a href='#faqs'>
                     <button
                       onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
@@ -144,6 +152,8 @@ const Home = () => {
                     >
                       Faqs
                     </button>
+                    </a>
+                    
                   </>
                 ) : (
                   // before login
@@ -245,15 +255,15 @@ const Home = () => {
         </nav>
       </div>
       
-      <div className='w-[100vw] h-[60vh] flex flex-col justify-end items-center'>
-                <div className='flex flex-col '>
-                  <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)]
-                  text-white mx-auto'>RANDON HEADING TO GO</h1>
-                  <div className=' mx-auto w-[500px] m-5 font-normal leading-normal
-                  text-[rgb(148,160,184)] text-center text-sm'>Positioning the Profile component: I used absolute positioning 
-                  to make sure the Profile component appears next to the profile icon when clicked. This keeps it inline with the 
-                  rest of the page layout</div>
-                </div>
+      <div className='w-[100vw] h-[60vh] flex flex-col justify-end items-center' id="home">
+          <div className='flex flex-col '>
+            <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)]
+          text-white mx-auto'>RANDON HEADING TO GO</h1>
+          <div className=' mx-auto w-[500px] m-5 font-normal leading-normal
+          text-[rgb(148,160,184)] text-center text-sm'>Positioning the Profile component: I used absolute positioning 
+          to make sure the Profile component appears next to the profile icon when clicked. This keeps it inline with the 
+          rest of the page layout</div>
+      </div>
 
       
           </div>
@@ -264,8 +274,8 @@ const Home = () => {
         <div id="highlights">
           <Highlights />
         </div>
-        <div >
-          <FAQ id='faqs' />
+        <div id='faqs'>
+          <FAQ  />
         </div>
       </div>
 
