@@ -9,7 +9,10 @@ import EnterName from '../Components/EnterName';
 import Goals from '../Components/Goals';
 import Highlights from '../Components/Highlights';
 
+
 import FAQ from "../Components/FAQ"
+import Footer from '../Components/Footer';
+import Testimonials from '../Components/Testimols';
 
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
@@ -207,6 +210,12 @@ const Home = () => {
         </div>
         <div>
           <FAQ />
+        </div>
+        <div>
+          <Testimonials/>
+        </div>
+        <div>
+          <Footer/>
         </div>
       </div>
     </div>
