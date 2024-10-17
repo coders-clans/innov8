@@ -14,13 +14,14 @@ import TaskCompletionADVGraph from '../Components/GraphAdvance';
 import TaskCalendar from '../Components/Calender';
 import Footer from "../Components/Footer"
 import FAQ from "../Components/FAQ"
-
+import TaskManager from '../Components/TaskComponent';
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     return localStorage.getItem('isLoggedIn') === 'true';
   });
   const [isClicked, setisClicked] = useState(false);
+  const [isAsk, setisAsk] = useState(false);
   const navigate = useNavigate();
   const handleSignIn = () => {
     navigate('/signup');
@@ -51,7 +52,7 @@ const Home = () => {
   const handleHelp = () => {
     navigate('/help');
   };
-  //ahfjb
+
   const renderContent = () => {
     switch (activeSection) {
       case 'ask':
@@ -66,22 +67,34 @@ const Home = () => {
             <Goals />
           </div>
         )
+      case 'task':
+        return (
+          <div>
+            <TaskManager />
+          </div>
+        )
       default:
 
         return (
           <div>
 
             {
-              isLoggedIn ? (<EnterName activeSection={activeSection} setActivesection={setActivesection} />) : (<div></div>)
+              isLoggedIn ? (<div>
+                <EnterName activeSection={activeSection} setActivesection={setActivesection} />
+                <div className='mx-auto max-w-[500px] m-5 font-normal leading-normal text-[rgb(148,160,184)] text-center text-sm pb-14 cursor-pointer'>By clicking "Start now" you agree to our <span className='text-white underline font-bold cursor - pointer' onClick={handleTnC}>Terms & Conditions.</span></div>
+              </div>
+
+
+              ) : (<div></div>)
             }
 
-     
           </div>
 
         )
 
     }
   }
+  
   return (
     <div className='bg-[radial-gradient(100%_40%_at_top,#00365d_0%,#080b16_30%)] w-[100%] h-[100%]'>
       <div className='fixed w-full z-50 mt-10'>
@@ -100,7 +113,7 @@ const Home = () => {
               </a>
 
 
-              <div className="hidden md:flex space-x-4">
+              <div className="hidden custom:flex space-x-4">
                 {/* after login */}
                 {isLoggedIn ? (
                   <>
@@ -113,19 +126,29 @@ const Home = () => {
                     >
                       About
                     </button>
-                    <button
-                      onClick={() => handleCategoryClick('ask')}
-                      className="inline-flex items-center justify-center relative cursor-pointer select-none  
-                  box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
-                  h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
-                  transition-all duration-300"
-                    >
-                      Ask
-                    </button>
+                    <div className="flex space-x-4">
+                      <button onClick={() => { setisAsk(!isAsk) }}
+                      className="inline-flex items-center justify-center relative cursor-pointer 
+                      select -none box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] 
+                      text-[0.8125rem] h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 transition-all duration-300">
+                        Ask
+                      </button>
+                      {/* <button
+                    onClick={handleLogout}
+                    className="text-white hover:text-red-500 transition-all duration-300"
+                  >
+                    Logout
+                  </button> */}
+                      {isAsk && (
+                        <div className="">
+                          <Ask /*isLoggedin={isLoggedIn} setIsLoggedIn={setIsLoggedIn}*/ />
+                        </div>
+                      )}
+                    </div>
                     <a href='#highlights'>
-                    <button
-                      // onClick={() => handleCategoryClick('ask')}
-                      className="inline-flex items-center justify-center relative cursor-pointer select-none  
+                      <button
+                        // onClick={() => handleCategoryClick('ask')}
+                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
@@ -133,39 +156,40 @@ const Home = () => {
                         Highlights
                       </button>
                     </a>
-                    
+                    {/* //jhcbadvbadvbavbadbv */}
                     <a href='#Testimonials'>
-                    <button
-                      // onClick={() => handleCategoryClick('ask')}
-                      className="inline-flex items-center justify-center relative cursor-pointer select-none  
+                      <button
+                        // onClick={() => handleCategoryClick('ask')}
+                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
-                    >
-                      Comments
-                    </button>
+                      >
+                        Comments
+                      </button>
                     </a>
-                    
+
                     <a href='#faqs'>
-                    <button
-                      // onClick={() => handleCategoryClick('ask')}
-                      className="inline-flex items-center justify-center relative cursor-pointer select-none  
+                      <button
+                        // onClick={() => handleCategoryClick('ask')}
+                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
                       >
                         Faqs
                       </button>
-                      <button
-                        onClick={() => handleCategoryClick('ask')}
-                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
+
+                    </a>
+                    <button
+                      onClick={() => handleCategoryClick('task')}
+                      className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
-                      >
-                        Today's Tasks
-                      </button>
-                    </a>
+                    >
+                      Today's Tasks
+                    </button>
                   </>
                 ) : (
                   // before login
@@ -179,26 +203,38 @@ const Home = () => {
                     >
                       About
                     </button>
-                    <button
-                      onClick={() => handleCategoryClick('ask')}
-                      className="inline-flex items-center justify-center relative cursor-pointer select-none  
+                    <div className="flex space-x-4">
+                      <button onClick={() => { setisAsk(!isAsk) }} className="inline-flex items-center justify-center relative cursor-pointer select-none
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
-                  transition-all duration-300"
-                    >
-                      Ask
-                    </button>
+                  transition-all duration-300 ">
+                        Ask
+                      </button>
+                      {/* <button
+                    onClick={handleLogout}
+                    className="text-white hover:text-red-500 transition-all duration-300"
+                  >
+                    Logout
+                  </button> */}
+                      {isAsk && (
+                        <div className="absolute top-12 right-0 w-[300px] rounded-lg shadow-lg bg-[rgba(5,7,10,0.7)]">
+                          <Ask /*isLoggedin={isLoggedIn} setIsLoggedIn={setIsLoggedIn}*/ />
+                        </div>
+                      )}
+                    </div>
                     <a href='#highlights'>
-                    <button
-                      // onClick={() => handleCategoryClick('ask')}
-                      className="inline-flex items-center justify-center relative cursor-pointer select-none  
+                      <button
+                        // onClick={() => handleCategoryClick('ask')}
+                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
                     >
                       Highlights
                     </button>
-                    </a>
+                    </a >
+
+                    <a href='#Testimonials'>
                     <button
                       // onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
@@ -207,20 +243,23 @@ const Home = () => {
                   transition-all duration-300"
                     >
                       Comments
+                      {/* <a href='#testimols'>Highlights</a> */}
                     </button>
+                    </a>
+                    
                     <a href='#faqs'>
-                    <button
-                      // onClick={() => handleCategoryClick('ask')}
-                      className="inline-flex items-center justify-center relative cursor-pointer select-none  
+                      <button
+                        // onClick={() => handleCategoryClick('ask')}
+                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
-                    >
-                      Faqs
-                    </button>
+                      >
+                        Faqs
+                      </button>
                     </a>
                     <button
-                      onClick={() => handleCategoryClick('ask')}
+                      onClick={() => handleCategoryClick('task')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
@@ -228,7 +267,6 @@ const Home = () => {
                     >
                       Today's Tasks
                     </button>
-
                   </>
                 )}
               </div>
@@ -248,7 +286,7 @@ const Home = () => {
                   </button> */}
                   {isClicked && (
                     <div className="absolute top-12 right-0 w-[300px] rounded-lg shadow-lg bg-[rgba(5,7,10,0.7)]">
-                      <Profile isLoggedin={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+                      <Profile isLoggedin={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
                     </div>
                   )}
                 </div>
@@ -285,39 +323,47 @@ const Home = () => {
       <div className='w-[100vw] h-[60vh] flex flex-col justify-end items-center' id="home">
           <div className='flex flex-col '>
             <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)] 
-          text-white mx-auto text-center'>milestones Master <span className='text-blue-500'>Platform</span> </h1>
+          text-white mx-auto text-center'>Milestones Master <span className='text-blue-500'>Platform</span> </h1>
           <div className=' mx-auto max-w-[500px] m-5 font-normal leading-normal
-          text-[rgb(148,160,184)] text-center text-sm'>Positioning the Profile component: I used absolute positioning 
-          to make sure the Profile component appears next to the profile icon when clicked. This keeps it inline with the 
-          rest of the page layout</div>
-          <div className='mx-auto w-[500px] m-5 font-normal leading-normal
-         text-[rgb(148,160,184)] text-center text-sm pb-14 cursor-pointer' onClick={handleTnC}>By clicking "Start now" you agree to our <span className='text-white underline font-bold'>Terms & Conditions.</span></div>
+          text-[rgb(148,160,184)] text-center text-sm'>This platform provides personalized goal tracking by generating AI responses and tracks your progress towards the goal and helps you achieve your Milestone in a particular deadline . </div>
+
       </div>
       </div>
 
       {/* Scrollable content wrapper */}
-      <div className="">
+      < div className="" >
         <div>{renderContent()}</div>
-        <div>
+        {
+          isLoggedIn ? (<div className='grid md:grid-cols-2 mx-auto grid-cols-1'>
+            <div><TaskCompletionGraph/></div>
+        <div><TaskCompletionADVGraph/></div>
+        </div>
+          ):(null)
+        }
+        
+
+        <div id="highlights">
           <Highlights />
         </div>
         <div id='Testimonials'>
-          <Testimonials/>
+          <Testimonials />
         </div>
+
         <div id='faqs'>
           <FAQ />
         </div>
-        <div>
-          <TaskCompletionGraph/>
-        </div>               
-        <div>
+        {/* <div>
+          <TaskCompletionGraph />
+        </div> */}
+
+        {/* <div>
           <Testimonials />
-        </div>
+        </div> */}
         <div>
           <Footer />
         </div>
 
-      </div>
+      </div >
 
 
     </div >

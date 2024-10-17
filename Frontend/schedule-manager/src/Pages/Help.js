@@ -1,10 +1,19 @@
 import React from 'react';
 import { FaTasks, FaCrown, FaChartLine, FaClock, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { RxCross1 } from "react-icons/rx";
+import { useNavigate } from 'react-router-dom';
 // import schedule from './image/schedule-img.avif';
 
 const Help = () => {
+  const navigate = useNavigate();
+  function handleBack (){
+    navigate('/');
+  }
   return (
     <div className="bg-[radial-gradient(100%_80%_at_top,#00365d_0%,#080b16_30%)] py-12">
+      <button onClick={handleBack} className='bg-white'>
+      <RxCross1 />
+        </button>
       <div className="max-w-7xl mx-auto shadow-lg rounded-3xl p-10 md:p-16 
       relative min-h-[48px] shrink-0 ">
         <header className="text-center mb-12">

@@ -1,7 +1,7 @@
 const { createGoalPath } = require('../controllers/goalPathService');
-
 const GoalPath = require('../models/goal');
 const DayPlan = require('../models/dayTask');
+const taskPlan = require('../models/task');
 
 async function addNewGoal(req, res) {
     const userId = req.body.userId; // Retrieve from request
@@ -26,15 +26,15 @@ async function addNewGoal(req, res) {
         });
     }
 }
+
 const getTasksByDay = async (req, res) => {
     const { goalId, day } = req.params;
 
     try {
-        // Find the GoalPath by ID and populate the dailyPlan and tasks
         const goalPath = await GoalPath.findById(goalId)
             .populate({
                 path: 'dailyPlan',
-                match: { day: Number(day) }, // Match the day in the dailyPlan array
+                match: { day: Number(day) },
                 populate: {
                     path: 'tasks',
                     model: 'Task'
@@ -48,7 +48,6 @@ const getTasksByDay = async (req, res) => {
             });
         }
 
-        // Extract the day plan for the specific day
         const dayPlan = goalPath.dailyPlan.find(plan => plan.day === Number(day));
 
         if (!dayPlan) {
@@ -57,7 +56,6 @@ const getTasksByDay = async (req, res) => {
                 message: `No tasks found for Day ${day}.`
             });
         }
-
         res.status(200).json({
             success: true,
             message: `Tasks for Day ${day} retrieved successfully.`,
@@ -77,8 +75,71 @@ const fetchGoal = async (req, res) => {
     const response = await GoalPath.findOne({ userId });
     console.log(response);
     res.status(200).json(response);
+}
 
+// async function updatetaskStatus(req, res) {
+//     const { goalPathId, dayPlanId, taskId } = req.params;
+//     const { completed } = req.body; // Pass completed as true/false from frontend
+//     console.log(goalPathId, dayPlanId, taskId)
+
+//     try {
+//         const goalPath = await GoalPath.findById(goalPathId);
+//         console.log(goalPath);
+
+//         if (!goalPath) {
+//             return res.status(404).json({ success: false, message: 'Goal Path not found.' });
+//         }
+
+//         const dayPlan = goalPath.dailyPlan.id(dayPlanId);
+
+//         if (!dayPlan) {
+//             return res.status(404).json({ success: false, message: 'Day Plan not found.' });
+//         }
+
+//         const task = dayPlan.tasks.id(taskId);
+
+//         if (!task) {
+//             return res.status(404).json({ success: false, message: 'Task not found.' });
+//         }
+
+//         task.completed = completed;
+//         task.completedAt = completed ? new Date() : null; // Reset completedAt when undoing
+
+//         await goalPath.save();
+
+//         res.status(200).json({ success: true, message: `Task ${completed ? 'marked as completed' : 'marked as incomplete'}.`, task });
+//     } catch (error) {
+//         res.status(500).json({ success: false, message: 'Server error.', error: error.message });
+//     }
+// }
+
+async function updatetaskStatus(req, res) {
+    const { goalPathId, taskId } = req.params;
+    const { completed } = req.body; // Pass completed as true/false from frontend
+
+    try {
+        const task = await taskPlan.findByIdAndUpdate(taskId, { completed: !completed });
+
+        if (!task) {
+            return res.status(404).json({ success: false, message: 'Task not found.' });
+        }
+        res.status(200).json({ success: true, message: `Task marked as completed.`, task });
+    } catch (error) {
+        console.error("Error updating task status:", error);
+        res.status(500).json({ success: false, message: 'Server error.', error: error.message });
+    }
 }
 
 
-module.exports = { addNewGoal, getTasksByDay, fetchGoal };
+
+
+const getDayId = async (req, res) => {
+    const { goalId, day } = req.body;
+    console.log(goalId, day);
+    return res.status(200).json({
+        success: true,
+        message: "testing"
+    })
+}
+
+module.exports = { addNewGoal, getTasksByDay, fetchGoal, updatetaskStatus, getDayId };

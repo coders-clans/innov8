@@ -89,7 +89,7 @@ const Testimonials = () => {
         <Slider {...settings}>
           {testimonialsData.map((testimonial, index) => (
             <div key={index} className="p-4">
-              <div className="bg-customBlue p-6 rounded-lg shadow-md flex flex-col items-center text-center">
+              <div className="bg-customBlue p-6 rounded-lg shadow-md flex flex-col items-center text-center h-[400px]">
                 <img
                   src={testimonial.image}
                   alt={testimonial.name}
