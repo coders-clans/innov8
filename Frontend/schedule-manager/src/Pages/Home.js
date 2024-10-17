@@ -9,6 +9,9 @@ import EnterName from '../Components/EnterName';
 import Goals from '../Components/Goals';
 import Highlights from '../Components/Highlights';
 import Testimonials from '../Components/Testimols';
+import TaskCompletionGraph from '../Components/Graph';
+import TaskCompletionADVGraph from '../Components/GraphAdvance';
+import TaskCalendar from '../Components/Calender';
 import Footer from "../Components/Footer"
 import FAQ from "../Components/FAQ"
 
@@ -305,11 +308,16 @@ const Home = () => {
           <FAQ />
         </div>
         <div>
+          <TaskCompletionGraph/>
+        </div>
+               
+        <div>
           <Testimonials />
         </div>
         <div>
           <Footer />
         </div>
+
       </div>
 
 
