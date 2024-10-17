@@ -1,28 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
 import { TiTickOutline } from "react-icons/ti";
+import { TiTimesOutline } from "react-icons/ti"; // Import the undo icon
+
 const TaskManager = () => {
   const id = localStorage.getItem('user_id');
   console.log(id);
-  // const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
   const [day, setDay] = useState(1);
   const [nextDayAvailable, setNextDayAvailable] = useState(false);
 
   // Fetch tasks for a specific day
-  // const fetchGoal = async () => {
-  //   try {
-
-  //     console.log(goalId);
-  //   }
-  //   catch (error) {
-  //     console.log("Id not found", error);
-  //   }
-  // }
   const fetchTasks = async (day) => {
-    // console.log(userId);
-
     try {
       const resData = await axios.get(`http://localhost:7001/user/goal/${id}`, { withCredentials: true });
       console.log(resData);
@@ -30,16 +19,13 @@ const TaskManager = () => {
 
       console.log(goalId);
       if (goalId) {
-
         const response = await axios.get(`http://localhost:7001/user/goal/${goalId}/day/${day}`, { withCredentials: true });
         console.log(response);
         setTasks(response.data.tasks);
         setNextDayAvailable(false);
-      }
-      else {
+      } else {
         console.log("Goal Id not found");
       }
-
     } catch (error) {
       console.error("Failed to fetch tasks:", error);
     }
@@ -48,10 +34,20 @@ const TaskManager = () => {
   // Mark a task as completed
   const markTaskAsCompleted = async (taskId) => {
     try {
-      await axios.put(`/api/tasks/${taskId}`, { completed: true });
+      await axios.patch(``, { completed: true });
       setTasks(tasks.map(task => task._id === taskId ? { ...task, completed: true } : task));
     } catch (error) {
       console.error("Failed to mark task as completed:", error);
+    }
+  };
+
+  // Undo task completion
+  const undoTaskCompletion = async (taskId) => {
+    try {
+      await axios.put(`http://localhost:7001/api/tasks/${taskId}`, { completed: false });
+      setTasks(tasks.map(task => task._id === taskId ? { ...task, completed: false } : task));
+    } catch (error) {
+      console.error("Failed to undo task completion:", error);
     }
   };
 
@@ -84,12 +80,18 @@ const TaskManager = () => {
       ) : (
         <ul>
           {tasks.map(task => (
-            <li key={task._id}>
+            <li key={task._id} className="flex items-center gap-2">
               <span style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
                 {task.task} - {task.time} hours
               </span>
-              {!task.completed && (
-                <button onClick={() => markTaskAsCompleted(task._id)}><TiTickOutline /></button>
+              {task.completed ? (
+                <button onClick={() => undoTaskCompletion(task._id)}>
+                  <TiTimesOutline />
+                </button>
+              ) : (
+                <button onClick={() => markTaskAsCompleted(task._id)}>
+                  <TiTickOutline />
+                </button>
               )}
             </li>
           ))}

@@ -11,7 +11,7 @@ import Highlights from '../Components/Highlights';
 import Testimonials from '../Components/Testimols';
 import Footer from "../Components/Footer"
 import FAQ from "../Components/FAQ"
-
+import TaskManager from '../Components/TaskComponent';
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -48,7 +48,7 @@ const Home = () => {
   const handleHelp = () => {
     navigate('/help');
   };
-  //ahfjb
+
   const renderContent = () => {
     switch (activeSection) {
       case 'ask':
@@ -63,6 +63,12 @@ const Home = () => {
             <Goals />
           </div>
         )
+      case 'task':
+        return (
+          <div>
+            <TaskManager />
+          </div>
+        )
       default:
 
         return (
@@ -73,7 +79,7 @@ const Home = () => {
             }
 
             <div className='mx-auto w-[500px] m-5 font-normal leading-normal
-         text-[rgb(148,160,184)] text-center text-sm pb-14'>By clicking "Start now" you agree to our <span className='text-white underline font-bold'>Terms & Conditions.</span></div>
+         text-[rgb(148,160,184)] text-center text-sm pb-14 cursor-pointer' onClick={handleTnC}>By clicking "Start now" you agree to our <span className='text-white underline font-bold'>Terms & Conditions.</span></div>
 
           </div>
 
@@ -123,7 +129,7 @@ const Home = () => {
                     </button>
                     <a href='#highlights'>
                       <button
-                        onClick={() => handleCategoryClick('ask')}
+                        // onClick={() => handleCategoryClick('ask')}
                         className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
@@ -153,16 +159,17 @@ const Home = () => {
                       >
                         Faqs
                       </button>
-                      <button
-                        onClick={() => handleCategoryClick('ask')}
-                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
+
+                    </a>
+                    <button
+                      onClick={() => handleCategoryClick('task')}
+                      className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
-                      >
-                        Today's Tasks
-                      </button>
-                    </a>
+                    >
+                      Today's Tasks
+                    </button>
                   </>
                 ) : (
                   // before login
@@ -186,7 +193,7 @@ const Home = () => {
                       Ask
                     </button>
                     <button
-                      onClick={() => handleCategoryClick('ask')}
+                      // onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
@@ -202,6 +209,7 @@ const Home = () => {
                   transition-all duration-300"
                     >
                       Comments
+                      <a href='#testimols'>Highlights</a>
                     </button>
                     <button
                       onClick={() => handleCategoryClick('ask')}
@@ -213,7 +221,7 @@ const Home = () => {
                       <a href='#faqs'>Faqs</a>
                     </button>
                     <button
-                      onClick={() => handleCategoryClick('ask')}
+                      onClick={() => handleCategoryClick('task')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
@@ -221,7 +229,6 @@ const Home = () => {
                     >
                       Today's Tasks
                     </button>
-
                   </>
                 )}
               </div>
@@ -278,14 +285,10 @@ const Home = () => {
       <div className='w-[100vw] h-[60vh] flex flex-col justify-end items-center' id="home">
         <div className='flex flex-col '>
           <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)]
-          text-white mx-auto'>RANDON HEADING TO GO</h1>
+          text-white mx-auto'>Milestone Master Platform</h1>
           <div className=' mx-auto w-[500px] m-5 font-normal leading-normal
-          text-[rgb(148,160,184)] text-center text-sm'>Positioning the Profile component: I used absolute positioning
-            to make sure the Profile component appears next to the profile icon when clicked. This keeps it inline with the
-            rest of the page layout</div>
+          text-[rgb(148,160,184)] text-center text-sm'>Our platform provides a personalized goal tracking system which helps you to reach your goals with ease and organised manner . </div>
         </div>
-
-
       </div>
 
       {/* Scrollable content wrapper */}

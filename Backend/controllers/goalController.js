@@ -81,4 +81,49 @@ const fetchGoal = async (req, res) => {
 }
 
 
-module.exports = { addNewGoal, getTasksByDay, fetchGoal };
+
+
+
+async function updatetaskStatus(req, res) {
+    const { goalPathId, dayPlanId, taskId } = req.params;
+
+    try {
+        // Find the goal path by ID
+        const goalPath = await GoalPath.findById(goalPathId);
+
+        // Check if the goal path exists
+        if (!goalPath) {
+            return res.status(404).json({ success: false, message: 'Goal Path not found.' });
+        }
+
+        // Find the specific day plan
+        const dayPlan = goalPath.dailyPlan.id(dayPlanId);
+
+        // Check if the day plan exists
+        if (!dayPlan) {
+            return res.status(404).json({ success: false, message: 'Day Plan not found.' });
+        }
+
+        // Find the specific task
+        const task = dayPlan.tasks.id(taskId);
+
+        // Check if the task exists
+        if (!task) {
+            return res.status(404).json({ success: false, message: 'Task not found.' });
+        }
+
+        // Update the task completion status
+        task.completed = true; // or toggle based on your requirement
+        task.completedAt = new Date(); // Set the completion time
+
+        // Save the updated goal path
+        await goalPath.save();
+
+        res.status(200).json({ success: true, message: 'Task marked as completed.', task });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Server error.', error: error.message });
+    }
+}
+
+
+module.exports = { addNewGoal, getTasksByDay, fetchGoal, updatetaskStatus };
