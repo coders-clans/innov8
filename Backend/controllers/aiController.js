@@ -58,4 +58,40 @@ const getGoalPath = async (req, res) => {
     }
 };
 
-module.exports = { getGoalPath };
+
+const getBotData = async (req, res) => {
+    const { question } = req.body;
+    const prompt = `${question} return the response in the proper string format of string, do not use any kind of backticksor slash or dash.`;
+
+    try {
+        // Make sure to use the appropriate structure for the request body as required by the API
+        const response = await axios.post(
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyB4FBqXTGcaP_5R2EtWZkLmuF6HdChk43A",
+            {
+                // Structure may vary depending on the API's requirements
+                "contents": [{ "parts": [{ "text": prompt }] }]
+            }
+        );
+
+        // Logging the entire response data for debugging
+        const ans=response.data.candidates[0].content.parts[0].text;
+
+        // Sending the response back to the client
+        return res.status(200).json({
+            success: true,
+            message: "Response generated successfully",
+            response: ans // Adjust this to send only the relevant part of the response
+        });
+
+    } catch (error) {
+        // Error handling
+        console.error("Error generating response:", error.message);
+        return res.status(500).json({
+            success: false,
+            message: "Failed to generate response",
+            error: error.message
+        });
+    }
+}
+
+module.exports = { getGoalPath ,getBotData};
