@@ -13,6 +13,9 @@ import Highlights from '../Components/Highlights';
 import FAQ from "../Components/FAQ"
 import Footer from '../Components/Footer';
 import Testimonials from '../Components/Testimols';
+import TaskCompletionGraph from '../Components/Graph';
+import TaskCompletionADVGraph from '../Components/GraphAdvance';
+import TaskCalendar from '../Components/Calender';
 
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
@@ -284,8 +287,13 @@ const Home = () => {
           <Testimonials/>
         </div>
         <div>
+          <TaskCompletionGraph/>
+        </div>
+               
+        <div>
           <Footer/>
         </div>
+
       </div>
 
       
