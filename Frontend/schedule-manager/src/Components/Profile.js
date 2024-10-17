@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import defaultimg from './images/profile.png';
+import editimg from './images/edit.png'
+import {CiEdit} from "react-icons/ci"
 
 function Profile({isLoggedin,setIsLoggedIn}) {
   const [name, setName] = useState(null);
@@ -91,6 +93,10 @@ function Profile({isLoggedin,setIsLoggedIn}) {
     setIsLoggedIn(false);
     localStorage.removeItem('isLoggedIn');
   }
+
+
+
+
   return (
 
     // <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center">
@@ -138,10 +144,10 @@ function Profile({isLoggedin,setIsLoggedIn}) {
               </button>
             ) : (
               <button
-                className="ml-4 px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition shadow-md"
+                className="ml-4 px-4 py-2 text-white  rounded-xl transition shadow-md"
                 onClick={() => setIsChange(true)}
               >
-                Edit
+              <CiEdit fontSize="1.45rem" />
               </button>
             )}
           </div>
@@ -173,10 +179,10 @@ function Profile({isLoggedin,setIsLoggedIn}) {
               </button>
             ) : (
               <button
-                className="ml-4 px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition shadow-md"
+                className="ml-4 px-4 py-2 text-white  rounded-xl transition shadow-md"
                 onClick={() => setIsChangeEmail(true)}
               >
-                Edit
+              <CiEdit fontSize="1.45rem" />
               </button>
             )}
           </div>
@@ -223,7 +229,10 @@ function Profile({isLoggedin,setIsLoggedIn}) {
         </div> */}
           
       </div>
-    <div><button onClick={handleLogout} className='className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition shadow-md"'>Logout </button></div>
+    <div className='flex justify-center'>
+      <button onClick={handleLogout} className='inline-flex items-center justify-center relative cursor-pointer select-none align-middle appearance-none 
+              box-border font-medium text-sm leading-[1.75] min-w-[64px] w-full normal-case h-10 px-4 py-1.5 bg-white rounded-lg hover:bg-red-500 hover:text-white transition duration-300'>Logout </button>
+     </div>
     </div>
     // </div>
 

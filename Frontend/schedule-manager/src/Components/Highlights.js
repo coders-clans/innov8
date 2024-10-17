@@ -45,7 +45,7 @@ export default function Highlights() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {items.map((item, index) => (
-            <div key={index} className="bg-customBlue p-6 rounded-lg border border-gray-700 flex flex-col items-start w-[400px]">
+            <div key={index} className="bg-customBlue p-6 rounded-lg border border-gray-700 flex flex-col items-start max-w-[400px]">
               {/* <div className="mb-4">{item.icon}</div> */}
               <h3 className="text-lg font-medium mb-2">{item.title}</h3>
               <p className="text-gray-400 text-sm">{item.description}</p>

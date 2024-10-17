@@ -74,7 +74,7 @@ const Home = () => {
               isLoggedIn ? (<EnterName activeSection={activeSection} setActivesection={setActivesection} />) : (<div></div>)
             }
 
-          <div className='mx-auto w-[500px] m-5 font-normal leading-normal
+          <div className='mx-auto max-w-[500px] m-5 font-normal leading-normal
          text-[rgb(148,160,184)] text-center text-sm pb-14'>By clicking "Start now" you agree to our <span className='text-white underline font-bold'>Terms & Conditions.</span></div>
 
           </div>
@@ -84,11 +84,11 @@ const Home = () => {
     }
   }
   return (
-    <div className='bg-[radial-gradient(100%_80%_at_top,#00365d_0%,#080b16_30%)] w-[100vw] h-[100%]'>
+    <div className='bg-[radial-gradient(100%_80%_at_top,#00365d_0%,#080b16_30%)] w-[100%] h-[100%]'>
       <div className='fixed w-full z-50 mt-10'>
-        <nav className="relative z-0 min-h-[48px] shrink-0 backdrop-blur-xl border bg-[rgba(5,7,10,0.4)] 
+        <nav className="relative z-0 min-h-[48px] backdrop-blur-xl border bg-[rgba(5,7,10,0.4)] 
       shadow-[rgba(9,11,17,0.7)_0px_4px_16px_0px,rgba(19,23,32,0.8)_0px_8px_16px_-5px] px-3 py-2 rounded-[calc(16px)] 
-      border-solid border-[rgba(51,60,77,0.6)] w-[1200px] mx-auto">
+      border-solid border-[rgba(51,60,77,0.6)] mx-12 ">
 
           <div className="flex justify-between items-center">
             {/* Logo Section */}
@@ -181,6 +181,7 @@ const Home = () => {
                     >
                       Ask
                     </button>
+                    <a href='#highlights'>
                     <button
                       // onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
@@ -188,8 +189,9 @@ const Home = () => {
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
                     >
-                      <a href='#highlights'>Highlights</a>
+                      Highlights
                     </button>
+                    </a>
                     <button
                       // onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
@@ -199,6 +201,7 @@ const Home = () => {
                     >
                       Comments
                     </button>
+                    <a href='#faqs'>
                     <button
                       // onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
@@ -206,8 +209,9 @@ const Home = () => {
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
                     >
-                      <a href='#faqs'>Faqs</a>
+                      Faqs
                     </button>
+                    </a>
                   </>
                 )}
               </div>
@@ -262,9 +266,9 @@ const Home = () => {
       
       <div className='w-[100vw] h-[60vh] flex flex-col justify-end items-center' id="home">
           <div className='flex flex-col '>
-            <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)]
-          text-white mx-auto'>RANDON HEADING TO GO</h1>
-          <div className=' mx-auto w-[500px] m-5 font-normal leading-normal
+            <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)] 
+          text-white mx-auto text-center'>RANDON HEADING TO GO</h1>
+          <div className=' mx-auto max-w-[500px] m-5 font-normal leading-normal
           text-[rgb(148,160,184)] text-center text-sm'>Positioning the Profile component: I used absolute positioning 
           to make sure the Profile component appears next to the profile icon when clicked. This keeps it inline with the 
           rest of the page layout</div>

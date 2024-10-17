@@ -89,17 +89,17 @@ const Testimonials = () => {
         <Slider {...settings}>
           {testimonialsData.map((testimonial, index) => (
             <div key={index} className="p-4">
-              <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center">
+              <div className="bg-customBlue p-6 rounded-lg shadow-md flex flex-col items-center text-center">
                 <img
                   src={testimonial.image}
                   alt={testimonial.name}
                   className="w-20 h-20 rounded-full mb-4"
                 />
-                <h3 className="text-xl font-semibold text-gray-800">
+                <h3 className="text-xl font-semibold text-white">
                   {testimonial.name}
                 </h3>
                 <p className="text-sm text-teal-600">{testimonial.role}</p>
-                <p className="mt-4 text-gray-600 leading-relaxed">
+                <p className="mt-4 text-gray-200 leading-relaxed">
                   "{testimonial.feedback}"
                 </p>
                 <div className="flex mt-4">
