@@ -3,24 +3,34 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa'; // Chevron icons
 
 const questions = [
   {
-    question: "How do I contact customer support if I have a question or issue?",
+    question: "What is a Schedule Manager and Goal Tracker Website for?",
     answer:
-      "You can reach our customer support via email at support@example.com or call us at +1-800-123-4567.",
+      "A schedule manager and goal tracker website is a tool that helps users plan, organize, and track their daily tasks and long-term goals. It allows users to create schedules, set deadlines, allocate time for specific tasks, and track their progress towards achieving their goals.",
   },
   {
-    question: "Can I return the product if it doesn't meet my expectations?",
+    question: "How does the AI-generated goal plan work?",
     answer:
-      "Yes, we offer a 30-day return policy. Please ensure the product is in original condition.",
+      "Our platform uses AI to generate a personalized action plan based on your goals, available time, and deadlines. When you submit a goal along with the time you can dedicate each day, the AI creates a step-by-step schedule to help you achieve that goal within the set timeframe.",
   },
   {
-    question: "What makes your product stand out from others in the market?",
+    question: "Can I edit the AI-generated schedule?",
     answer:
-      "Our product is built with premium materials, offering durability and innovative features.",
+      "Yes, after the AI generates a schedule for you, you can customize it to better fit your preferences. You can adjust the tasks, change the time allocation, or even add additional steps as per your needs.",
   },
   {
-    question: "Is there a warranty on the product, and what does it cover?",
+    question: "What happens if I’m not happy with the AI-generated plan?",
     answer:
-      "Yes, our product comes with a 1-year warranty covering manufacturing defects.",
+      "If you're not satisfied with the AI-generated schedule, you have the option to regenerate a new plan. This allows you to explore different versions of the plan and select the one that suits you best..",
+  },
+  {
+    question: "Can I track multiple goals at the same time?",
+    answer:
+      "Yes, our platform supports multi-goal tracking. You can create, monitor, and work towards several goals simultaneously. Each goal will have its own dedicated schedule and progress tracker.",
+  },
+  {
+    question: "How can I track my progress?",
+    answer:
+      "Our platform offers a progress tracking feature that visually represents your goal completion. You can mark tasks as completed, and the platform will update your progress in real-time, showing you how close you are to achieving your goal.",
   },
 ];
 
@@ -64,9 +74,8 @@ export default function Faqs() {
 
               {/* Answer Section with Transition */}
               <div
-                className={`transition-all duration-300 overflow-hidden ${
-                  openIndex === index ? 'max-h-60 mt-4' : 'max-h-0'
-                }`}
+                className={`transition-all duration-300 overflow-hidden ${openIndex === index ? 'max-h-60 mt-4' : 'max-h-0'
+                  }`}
                 style={{ overflow: 'hidden' }}
               >
                 <p className="text-customBlue-400 text-sm">{item.answer}</p>
