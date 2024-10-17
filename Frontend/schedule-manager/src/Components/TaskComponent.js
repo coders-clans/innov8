@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { TiTickOutline } from "react-icons/ti";
-import { TiTimesOutline } from "react-icons/ti"; // Import the undo icon
+import { TiTickOutline, TiTimesOutline } from "react-icons/ti";
 
 const TaskManager = () => {
   const id = localStorage.getItem('user_id');
-  console.log(id);
   const [tasks, setTasks] = useState([]);
   const [day, setDay] = useState(1);
   const [nextDayAvailable, setNextDayAvailable] = useState(false);
 
-  // Fetch tasks for a specific day
   const fetchTasks = async (day) => {
     try {
       const resData = await axios.get(`http://localhost:7001/user/goal/${id}`, { withCredentials: true });
-      console.log(resData);
       const goalId = resData.data._id;
+      localStorage.setItem("goalId", goalId);
 
-      console.log(goalId);
       if (goalId) {
         const response = await axios.get(`http://localhost:7001/user/goal/${goalId}/day/${day}`, { withCredentials: true });
-        console.log(response);
         setTasks(response.data.tasks);
         setNextDayAvailable(false);
       } else {
@@ -31,79 +26,63 @@ const TaskManager = () => {
     }
   };
 
-  // Mark a task as completed
-  const markTaskAsCompleted = async (taskId) => {
+  const toggleTaskCompletion = async (goalPathId, taskId, completed) => {
     try {
-      await axios.patch(``, { completed: true });
-      setTasks(tasks.map(task => task._id === taskId ? { ...task, completed: true } : task));
+      // Update task completion status directly using goalPathId and taskId
+      console.log(goalPathId, ",", taskId);
+      await axios.patch(`http://localhost:7001/user/goal/updateTaskStatus/${goalPathId}/${taskId}`, { completed });
+
+      // Update local tasks state to reflect changes
+      setTasks(tasks.map(task => task._id === taskId ? { ...task, completed } : task));
     } catch (error) {
-      console.error("Failed to mark task as completed:", error);
+      console.error(`Failed to ${completed ? 'mark as completed' : 'undo completion'}:`, error);
     }
   };
 
-  // Undo task completion
-  const undoTaskCompletion = async (taskId) => {
-    try {
-      await axios.put(`http://localhost:7001/api/tasks/${taskId}`, { completed: false });
-      setTasks(tasks.map(task => task._id === taskId ? { ...task, completed: false } : task));
-    } catch (error) {
-      console.error("Failed to undo task completion:", error);
-    }
-  };
-
-  // Move to the next day's tasks
   const moveToNextDay = () => {
     setDay(day + 1);
     setNextDayAvailable(false);
     fetchTasks(day + 1);
   };
 
-  // Automatically show the next day's tasks after 24 hours
   useEffect(() => {
     const timer = setTimeout(() => {
       setNextDayAvailable(true);
-    }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
+    }, 24 * 60 * 60 * 1000);
 
-    return () => clearTimeout(timer); // Clean up the timer on component unmount
+    return () => clearTimeout(timer);
   }, [day]);
 
-  // Fetch tasks when the component mounts or the day changes
   useEffect(() => {
     fetchTasks(day);
   }, [day]);
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-4 flex justify-center items-center"> Tasks for Day {day}</h1>
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <h1 className="text-3xl font-bold mb-6 text-center">Tasks for Day {day}</h1>
       {tasks.length === 0 ? (
-        <p>No tasks available for this day.</p>
+        <p className="text-center text-gray-500">No tasks available for this day.</p>
       ) : (
-        <ul>
+        <ul className="space-y-4">
           {tasks.map(task => (
-            <li key={task._id} className="flex items-center gap-2">
-              <span style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
+            <li key={task._id} className="flex items-center justify-between p-4 bg-white rounded shadow">
+              <span style={{ textDecoration: task.completed ? 'line-through' : 'none' }} className="text-lg">
                 {task.task} - {task.time} hours
               </span>
-              {task.completed ? (
-                <button onClick={() => undoTaskCompletion(task._id)}>
-                  <TiTimesOutline />
-                </button>
-              ) : (
-                <button onClick={() => markTaskAsCompleted(task._id)}>
-                  <TiTickOutline />
-                </button>
-              )}
+              <button onClick={() => toggleTaskCompletion(localStorage.getItem("goalId"), task._id, !task.completed)} className="text-2xl">
+                {task.completed ? <TiTimesOutline className="text-red-500" /> : <TiTickOutline className="text-green-500" />}
+              </button>
             </li>
           ))}
         </ul>
       )}
       {nextDayAvailable ? (
-        <div>
-          <p>You can start the next day's tasks now.</p>
-          <button onClick={moveToNextDay}>Go to Next Day</button>
+        <div className="mt-6 text-center">
+          <p className="text-lg text-green-600">You can start the next day's tasks now.</p>
+          <button onClick={moveToNextDay} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Go to Next Day</button>
         </div>
       ) : (
-        <p>Next day's tasks will be available in 24 hours.</p>
+        <p className="mt-6 text-center text-gray-600">Next day's tasks will be available in 24 hours.</p>
       )}
     </div>
   );

@@ -78,8 +78,6 @@ const Home = () => {
               isLoggedIn ? (<EnterName activeSection={activeSection} setActivesection={setActivesection} />) : (<div></div>)
             }
 
-            <div className='mx-auto w-[500px] m-5 font-normal leading-normal
-         text-[rgb(148,160,184)] text-center text-sm pb-14 cursor-pointer' onClick={handleTnC}>By clicking "Start now" you agree to our <span className='text-white underline font-bold'>Terms & Conditions.</span></div>
 
           </div>
 
@@ -287,7 +285,10 @@ const Home = () => {
           <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)]
           text-white mx-auto'>Milestone Master Platform</h1>
           <div className=' mx-auto w-[500px] m-5 font-normal leading-normal
-          text-[rgb(148,160,184)] text-center text-sm'>Our platform provides a personalized goal tracking system which helps you to reach your goals with ease and organised manner . </div>
+          text-[rgb(148,160,184)] text-center text-sm'>This platform provides personalized goal tracking by generating AI responses and tracks your progress towards the goal and helps you achieve your Milestone in a particulalr deadline . </div>
+          <div className='mx-auto w-[500px] m-5 font-normal leading-normal
+         text-[rgb(148,160,184)] text-center text-sm pb-14 cursor-pointer' onClick={handleTnC}>By clicking "Start now" you agree to our <span className='text-white underline font-bold'>Terms & Conditions.</span></div>
+
         </div>
       </div>
 
