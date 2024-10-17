@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Spinner from './Spinner';
 
 const Goals = () => {
   const [aiResponse, setAiResponse] = useState(null); // AI response
@@ -97,7 +98,8 @@ const Goals = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="form-container max-w-md mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
+      {isLoading? (<Spinner/>) : 
+      (<div className="form-container max-w-md mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
         <h2 className="form-heading text-2xl font-bold text-gray-800 mb-6">
           Enter the following details to proceed ..
         </h2>
@@ -188,7 +190,9 @@ const Goals = () => {
             </div>
           </div>
         )}
-      </div>
+      </div>)
+      }
+      
     </div>
   );
 };
