@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
-const TaskManager = ({ userId }) => {
-  const navigate = useNavigate();
+// import { useNavigate } from 'react-router-dom';
+import { TiTickOutline } from "react-icons/ti";
+const TaskManager = () => {
+  const id = localStorage.getItem('user_id');
+  console.log(id);
+  // const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
   const [day, setDay] = useState(1);
   const [nextDayAvailable, setNextDayAvailable] = useState(false);
@@ -19,11 +21,17 @@ const TaskManager = ({ userId }) => {
   //   }
   // }
   const fetchTasks = async (day) => {
+    // console.log(userId);
+
     try {
-      const resData = await axios.get(`http://localhost/7001/user/goal/${userId}`)
-      const goalId = resData._id;
+      const resData = await axios.get(`http://localhost:7001/user/goal/${id}`, { withCredentials: true });
+      console.log(resData);
+      const goalId = resData.data._id;
+
+      console.log(goalId);
       if (goalId) {
-        const response = await axios.get(`http://localhost/7001/user/goal/${goalId}/day/${day}`);
+
+        const response = await axios.get(`http://localhost:7001/user/goal/${goalId}/day/${day}`, { withCredentials: true });
         console.log(response);
         setTasks(response.data.tasks);
         setNextDayAvailable(false);
@@ -70,7 +78,7 @@ const TaskManager = ({ userId }) => {
 
   return (
     <div>
-      <h1>Tasks for Day {day}</h1>
+      <h1 className="text-3xl font-bold mb-4 flex justify-center items-center"> Tasks for Day {day}</h1>
       {tasks.length === 0 ? (
         <p>No tasks available for this day.</p>
       ) : (
@@ -81,7 +89,7 @@ const TaskManager = ({ userId }) => {
                 {task.task} - {task.time} hours
               </span>
               {!task.completed && (
-                <button onClick={() => markTaskAsCompleted(task._id)}>Mark as Done</button>
+                <button onClick={() => markTaskAsCompleted(task._id)}><TiTickOutline /></button>
               )}
             </li>
           ))}

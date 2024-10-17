@@ -8,8 +8,9 @@ import Ask from '../Components/Ask'
 import EnterName from '../Components/EnterName';
 import Goals from '../Components/Goals';
 import Highlights from '../Components/Highlights';
-
+import { FaTasks } from "react-icons/fa";
 import FAQ from "../Components/FAQ"
+import TaskManager from '../Components/TaskComponent';
 
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
@@ -140,6 +141,16 @@ const Home = () => {
                     >
                       Faqs
                     </button>
+                    <button
+                      onClick={() => handleCategoryClick('ask')}
+                      className="inline-flex items-center justify-center relative cursor-pointer select-none  
+                  box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
+                  h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
+                  transition-all duration-300"
+                    >
+                      Today's Tasks
+                    </button>
+
                   </>
                 ) : (
                   // before login
@@ -189,6 +200,16 @@ const Home = () => {
                     >
                       Faqs
                     </button>
+                    <button
+                      onClick={() => handleCategoryClick('ask')}
+                      className="inline-flex items-center justify-center relative cursor-pointer select-none  
+                  box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
+                  h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
+                  transition-all duration-300"
+                    >
+                      Today's Tasks
+                    </button>
+
                   </>
                 )}
               </div>
@@ -256,6 +277,7 @@ const Home = () => {
       {/* Scrollable content wrapper */}
       <div className="overflow-y-auto h-[calc(100vh-48px-40px)]">
         <div>{renderContent()}</div>
+
         <div>
           <Highlights />
         </div>
