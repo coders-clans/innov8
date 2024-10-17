@@ -29,8 +29,6 @@ async function addNewGoal(req, res) {
         });
     }
 }
-async function getDaybyDay(req, res) {
-    const { goalId, day } = req.params;
 
 
 
