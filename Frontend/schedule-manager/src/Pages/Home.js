@@ -112,7 +112,7 @@ const Home = () => {
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
                     >
-                      Help
+                      About
                     </button>
                     <button
                       onClick={() => handleCategoryClick('ask')}
@@ -125,7 +125,7 @@ const Home = () => {
                     </button>
                     <a href='#highlights'>
                     <button
-                      onClick={() => handleCategoryClick('ask')}
+                      // onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
@@ -135,9 +135,9 @@ const Home = () => {
                     </button>
                     </a>
                     
-
+                    <a href='#Testimonials'>
                     <button
-                      onClick={() => handleCategoryClick('ask')}
+                      // onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
@@ -145,9 +145,11 @@ const Home = () => {
                     >
                       Comments
                     </button>
+                    </a>
+                    
                     <a href='#faqs'>
                     <button
-                      onClick={() => handleCategoryClick('ask')}
+                      // onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
@@ -180,7 +182,7 @@ const Home = () => {
                       Ask
                     </button>
                     <button
-                      onClick={() => handleCategoryClick('ask')}
+                      // onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
@@ -189,7 +191,7 @@ const Home = () => {
                       <a href='#highlights'>Highlights</a>
                     </button>
                     <button
-                      onClick={() => handleCategoryClick('ask')}
+                      // onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
@@ -198,7 +200,7 @@ const Home = () => {
                       Comments
                     </button>
                     <button
-                      onClick={() => handleCategoryClick('ask')}
+                      // onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
@@ -217,15 +219,15 @@ const Home = () => {
                   <button onClick={() => { setisClicked(!isClicked) }} className="relative">
                     <img className='h-8 w-8 rounded-full mr-3 cursor-pointer' src={defaultimg} alt='#'></img>
                   </button>
-                  <button
+                  {/* <button
                     onClick={handleLogout}
                     className="text-white hover:text-red-500 transition-all duration-300"
                   >
                     Logout
-                  </button>
+                  </button> */}
                   {isClicked && (
                     <div className="absolute top-12 right-0 w-[300px] rounded-lg shadow-lg bg-[rgba(5,7,10,0.7)]">
-                      <Profile />
+                      <Profile isLoggedin={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
                     </div>
                   )}
                 </div>
@@ -277,11 +279,11 @@ const Home = () => {
         <div id="highlights">
           <Highlights />
         </div>
+        <div id='Testimonials'>
+          <Testimonials/>
+        </div>
         <div id='faqs'>
           <FAQ  />
-        </div>
-        <div>
-          <Testimonials/>
         </div>
         <div>
           <Footer/>

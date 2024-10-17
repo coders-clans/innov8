@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import defaultimg from './images/profile.png';
 
-function Profile() {
+function Profile({isLoggedin,setIsLoggedIn}) {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [profileImage, setProfileImage] = useState('');
@@ -87,6 +87,10 @@ function Profile() {
       alert("Incorrect OTP. Try again.");
     }
   };
+  const handleLogout = ()=>{
+    setIsLoggedIn(false);
+    localStorage.removeItem('isLoggedIn');
+  }
   return (
 
     // <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center">
@@ -217,7 +221,9 @@ function Profile() {
             </div>
           </form>
         </div> */}
+          
       </div>
+    <div><button onClick={handleLogout} className='className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition shadow-md"'>Logout </button></div>
     </div>
     // </div>
 

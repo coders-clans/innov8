@@ -1,17 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const TaskManager = ({ userId, goalId }) => {
+const TaskManager = ({ userId }) => {
+  const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
   const [day, setDay] = useState(1);
   const [nextDayAvailable, setNextDayAvailable] = useState(false);
 
   // Fetch tasks for a specific day
+  // const fetchGoal = async () => {
+  //   try {
+
+  //     console.log(goalId);
+  //   }
+  //   catch (error) {
+  //     console.log("Id not found", error);
+  //   }
+  // }
   const fetchTasks = async (day) => {
     try {
-      const response = await axios.get(`http://localhost/7001/user/goal/${goalId}/day/${day}`);
-      setTasks(response.data.tasks);
-      setNextDayAvailable(false); // Reset when new day's tasks are fetched
+      const resData = await axios.get(`http://localhost/7001/user/goal/${userId}`)
+      const goalId = resData._id;
+      if (goalId) {
+        const response = await axios.get(`http://localhost/7001/user/goal/${goalId}/day/${day}`);
+        console.log(response);
+        setTasks(response.data.tasks);
+        setNextDayAvailable(false);
+      }
+      else {
+        console.log("Goal Id not found");
+      }
+
     } catch (error) {
       console.error("Failed to fetch tasks:", error);
     }
