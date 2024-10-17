@@ -50,7 +50,7 @@ export default function Faqs() {
           </h2>
         </div>
 
-        <div className="  border-gray-700 w-[900px]">
+        <div className="  border-gray-700 max-w-[900px]">
           {questions.map((item, index) => (
             <div
               key={index}
