@@ -75,9 +75,7 @@ const Home = () => {
               isLoggedIn ? (<EnterName activeSection={activeSection} setActivesection={setActivesection} />) : (<div></div>)
             }
 
-          <div className='mx-auto max-w-[500px] m-5 font-normal leading-normal
-         text-[rgb(148,160,184)] text-center text-sm pb-14'>By clicking "Start now" you agree to our <span className='text-white underline font-bold'>Terms & Conditions.</span></div>
-
+     
           </div>
 
         )
@@ -292,6 +290,8 @@ const Home = () => {
           text-[rgb(148,160,184)] text-center text-sm'>Positioning the Profile component: I used absolute positioning 
           to make sure the Profile component appears next to the profile icon when clicked. This keeps it inline with the 
           rest of the page layout</div>
+          <div className='mx-auto w-[500px] m-5 font-normal leading-normal
+         text-[rgb(148,160,184)] text-center text-sm pb-14 cursor-pointer' onClick={handleTnC}>By clicking "Start now" you agree to our <span className='text-white underline font-bold'>Terms & Conditions.</span></div>
       </div>
       </div>
 
@@ -309,8 +309,7 @@ const Home = () => {
         </div>
         <div>
           <TaskCompletionGraph/>
-        </div>
-               
+        </div>               
         <div>
           <Testimonials />
         </div>
