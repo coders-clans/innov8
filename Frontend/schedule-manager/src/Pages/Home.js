@@ -9,7 +9,10 @@ import EnterName from '../Components/EnterName';
 import Goals from '../Components/Goals';
 import Highlights from '../Components/Highlights';
 
+
 import FAQ from "../Components/FAQ"
+import Footer from '../Components/Footer';
+import Testimonials from '../Components/Testimols';
 
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
@@ -66,9 +69,13 @@ const Home = () => {
 
         return (
           <div>
+
             {
               isLoggedIn ? (<EnterName activeSection={activeSection} setActivesection={setActivesection} />) : (<div></div>)
             }
+
+          <div className='mx-auto w-[500px] m-5 font-normal leading-normal
+         text-[rgb(148,160,184)] text-center text-sm pb-14'>By clicking "Start now" you agree to our <span className='text-white underline font-bold'>Terms & Conditions.</span></div>
 
           </div>
 
@@ -86,10 +93,13 @@ const Home = () => {
           <div className="flex justify-between items-center">
             {/* Logo Section */}
             <div className='flex justify-between items-center'>
-              <div className="select-none inline-flex shrink-0 h-[21px] w-[100px] transition-[fill] duration-200 ease-in-out mr-4 items-center">
+              <a href='#home'>
+              <div className="select-none flex shrink-0 h-[21px] w-[100px] transition-[fill] duration-200 ease-in-out mr-4 items-center">
                 <img src={img} alt="Logo" className="h-8 w-8 rounded-full mr-3" />
                 <span className="text-white text-1xl font-bold">MyApp</span>
               </div>
+              </a>
+              
 
               <div className="hidden md:flex space-x-4">
                 {/* after login */}
@@ -113,6 +123,7 @@ const Home = () => {
                     >
                       Ask
                     </button>
+                    <a href='#highlights'>
                     <button
                       onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
@@ -122,6 +133,9 @@ const Home = () => {
                     >
                       Highlights
                     </button>
+                    </a>
+                    
+
                     <button
                       onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
@@ -131,6 +145,7 @@ const Home = () => {
                     >
                       Comments
                     </button>
+                    <a href='#faqs'>
                     <button
                       onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
@@ -140,6 +155,8 @@ const Home = () => {
                     >
                       Faqs
                     </button>
+                    </a>
+                    
                   </>
                 ) : (
                   // before login
@@ -169,7 +186,7 @@ const Home = () => {
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
                     >
-                      Highlights
+                      <a href='#highlights'>Highlights</a>
                     </button>
                     <button
                       onClick={() => handleCategoryClick('ask')}
@@ -187,7 +204,7 @@ const Home = () => {
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
                     >
-                      Faqs
+                      <a href='#faqs'>Faqs</a>
                     </button>
                   </>
                 )}
@@ -240,29 +257,38 @@ const Home = () => {
           </div>
         </nav>
       </div>
-
-      <div className='w-[100vw] h-[100vh] flex flex-col justify-center items-center'>
-        <div className='flex flex-col '>
-          <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)]
-         text-white mx-auto'>Milestone Master Platform </h1>
+      
+      <div className='w-[100vw] h-[60vh] flex flex-col justify-end items-center' id="home">
+          <div className='flex flex-col '>
+            <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)]
+          text-white mx-auto'>RANDON HEADING TO GO</h1>
           <div className=' mx-auto w-[500px] m-5 font-normal leading-normal
-         text-[rgb(148,160,184)] text-center text-sm'>This platform provides personalized goal tracking by generating AI responses and tracks your progress towards the goal and helps you achieve your Milestone in a particulalr deadline </div>
-        </div>
-
-        <div className='mx-auto w-[500px] m-5 font-normal leading-normal
-         text-[rgb(148,160,184)] text-center text-sm'>By clicking "Start now" you agree to our <button className='text-white underline font-bold' onClick={handleTnC}>Terms & Conditions.</button></div>
+          text-[rgb(148,160,184)] text-center text-sm'>Positioning the Profile component: I used absolute positioning 
+          to make sure the Profile component appears next to the profile icon when clicked. This keeps it inline with the 
+          rest of the page layout</div>
       </div>
 
+      
+          </div>
+      
       {/* Scrollable content wrapper */}
-      <div className="overflow-y-auto h-[calc(100vh-48px-40px)]">
+      <div className="">
         <div>{renderContent()}</div>
-        <div>
+        <div id="highlights">
           <Highlights />
         </div>
+        <div id='faqs'>
+          <FAQ  />
+        </div>
         <div>
-          <FAQ />
+          <Testimonials/>
+        </div>
+        <div>
+          <Footer/>
         </div>
       </div>
+
+      
     </div>
 
   )
