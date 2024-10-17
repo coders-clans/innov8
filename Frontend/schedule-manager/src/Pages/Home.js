@@ -81,7 +81,7 @@ const Home = () => {
             {
               isLoggedIn ? (<div>
                 <EnterName activeSection={activeSection} setActivesection={setActivesection} />
-                <div className='mx-auto w-[500px] m-5 font-normal leading-normal text-[rgb(148,160,184)] text-center text-sm pb-14 cursor-pointer'>By clicking "Start now" you agree to our <span className='text-white underline font-bold cursor - pointer' onClick={handleTnC}>Terms & Conditions.</span></div>
+                <div className='mx-auto max-w-[500px] m-5 font-normal leading-normal text-[rgb(148,160,184)] text-center text-sm pb-14 cursor-pointer'>By clicking "Start now" you agree to our <span className='text-white underline font-bold cursor - pointer' onClick={handleTnC}>Terms & Conditions.</span></div>
               </div>
 
 
@@ -95,6 +95,8 @@ const Home = () => {
 
     }
   }
+
+
   return (
     <div className='bg-[radial-gradient(100%_40%_at_top,#00365d_0%,#080b16_30%)] w-[100%] h-[100%]'>
       <div className='fixed w-full z-50 mt-10'>
@@ -113,7 +115,7 @@ const Home = () => {
               </a>
 
 
-              <div className="hidden md:flex space-x-4">
+              <div className="hidden custom:flex space-x-4">
                 {/* after login */}
                 {isLoggedIn ? (
                   <>
@@ -127,7 +129,10 @@ const Home = () => {
                       About
                     </button>
                     <div className="flex space-x-4">
-                      <button onClick={() => { setisAsk(!isAsk) }} className="inline-flex items-center justify-center relative cursor-pointer select -none box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem] h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 transition-all duration-300">
+                      <button onClick={() => { setisAsk(!isAsk) }}
+                      className="inline-flex items-center justify-center relative cursor-pointer 
+                      select -none box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] 
+                      text-[0.8125rem] h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 transition-all duration-300">
                         Ask
                       </button>
                       {/* <button
@@ -226,10 +231,12 @@ const Home = () => {
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
-                      >
-                        Highlights
-                      </button>
-                    </a>
+                    >
+                      Highlights
+                    </button>
+                    </a >
+
+                    <a href='#Testimonials'>
                     <button
                       // onClick={() => handleCategoryClick('ask')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
@@ -238,8 +245,10 @@ const Home = () => {
                   transition-all duration-300"
                     >
                       Comments
-                      <a href='#testimols'>Highlights</a>
+                      {/* <a href='#testimols'>Highlights</a> */}
                     </button>
+                    </a>
+                    
                     <a href='#faqs'>
                       <button
                         // onClick={() => handleCategoryClick('ask')}
@@ -314,35 +323,44 @@ const Home = () => {
       </div >
 
       <div className='w-[100vw] h-[60vh] flex flex-col justify-end items-center' id="home">
-        <div className='flex flex-col '>
-          <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)]
-          text-white mx-auto'>Milestone Master Platform</h1>
-          <div className=' mx-auto w-[500px] m-5 font-normal leading-normal
+          <div className='flex flex-col '>
+            <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)] 
+          text-white mx-auto text-center'>Milestones Master <span className='text-blue-500'>Platform</span> </h1>
+          <div className=' mx-auto max-w-[500px] m-5 font-normal leading-normal
           text-[rgb(148,160,184)] text-center text-sm'>This platform provides personalized goal tracking by generating AI responses and tracks your progress towards the goal and helps you achieve your Milestone in a particular deadline . </div>
 
-
-        </div>
-      </div >
+      </div>
+      </div>
 
       {/* Scrollable content wrapper */}
       < div className="" >
         <div>{renderContent()}</div>
-        <div>
+        {
+          isLoggedIn ? (<div className='grid md:grid-cols-2 mx-auto grid-cols-1'>
+            <div><TaskCompletionGraph/></div>
+        <div><TaskCompletionADVGraph/></div>
+        </div>
+          ):(null)
+        }
+        
+
+        <div id="highlights">
           <Highlights />
         </div>
         <div id='Testimonials'>
           <Testimonials />
         </div>
+
         <div id='faqs'>
           <FAQ />
         </div>
-        <div>
+        {/* <div>
           <TaskCompletionGraph />
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
           <Testimonials />
-        </div>
+        </div> */}
         <div>
           <Footer />
         </div>

@@ -11,7 +11,7 @@ const Help = () => {
   }
   return (
     <div className="bg-[radial-gradient(100%_80%_at_top,#00365d_0%,#080b16_30%)] py-12">
-      <button onClick={handleBack}>
+      <button onClick={handleBack} className='bg-white'>
       <RxCross1 />
         </button>
       <div className="max-w-7xl mx-auto shadow-lg rounded-3xl p-10 md:p-16 

@@ -37,7 +37,10 @@ const options = {
   };
   
   const TaskCompletionADVGraph = () => {
-    return <Line data={data} options={options} />;
+    return( <div className='max-w-[80%] h-[400px] mx-auto'>
+      <Line data={data} options={options} />
+    </div>
+    );
   };
   
 export default TaskCompletionADVGraph;

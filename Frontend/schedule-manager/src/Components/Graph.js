@@ -15,7 +15,8 @@ const data = [
 
 const TaskCompletionGraph = () => {
   return (
-    <ResponsiveContainer width="100%" height={400}>
+    <div className='max-w-[80%] h-[400px] mx-auto'>
+      <ResponsiveContainer >
       <LineChart data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="day" />
@@ -26,6 +27,8 @@ const TaskCompletionGraph = () => {
         <Line type="monotone" dataKey="tasksPending" stroke="#ff7300" />
       </LineChart>
     </ResponsiveContainer>
+    </div>
+    
   );
 };
 
