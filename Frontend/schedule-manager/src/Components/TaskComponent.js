@@ -58,14 +58,14 @@ const TaskManager = () => {
   }, [day]);
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6 text-center">Tasks for Day {day}</h1>
+    <div className="p-6 mt-20 max-w-[900px] mx-auto my-12 mb-20 ">
+      <h1 className="text-3xl font-bold mb-6 text-center text-white">Tasks for Day {day}</h1>
       {tasks.length === 0 ? (
-        <p className="text-center text-gray-500">No tasks available for this day.</p>
+        <p className="text-center text-white">No tasks available for this day.</p>
       ) : (
         <ul className="space-y-4">
           {tasks.map(task => (
-            <li key={task._id} className="flex items-center justify-between p-4 bg-white rounded shadow">
+            <li key={task._id} className="flex items-center justify-between p-4 bg-white rounded border shadow-lg hover:translate-y-[-20px] transition duration-500">
               <span style={{ textDecoration: task.completed ? 'line-through' : 'none' }} className="text-lg">
                 {task.task} - {task.time} hours
               </span>
@@ -82,7 +82,7 @@ const TaskManager = () => {
           <button onClick={moveToNextDay} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Go to Next Day</button>
         </div>
       ) : (
-        <p className="mt-6 text-center text-gray-600">Next day's tasks will be available in 24 hours.</p>
+        <p className="mt-6 text-center text-gray-200">Next day's tasks will be available in 24 hours.</p>
       )}
     </div>
   );

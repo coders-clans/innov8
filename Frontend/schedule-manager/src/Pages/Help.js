@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaTasks, FaCrown, FaChartLine, FaClock, FaEnvelope, FaPhone } from 'react-icons/fa';
-import { RxCross1 } from "react-icons/rx";
+import { IoClose } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 // import schedule from './image/schedule-img.avif';
 
@@ -11,9 +11,12 @@ const Help = () => {
   }
   return (
     <div className="bg-[radial-gradient(100%_80%_at_top,#00365d_0%,#080b16_30%)] py-12">
-      <button onClick={handleBack} className='bg-white'>
-      <RxCross1 />
+      <div className='flex justify-end'>
+      <button onClick={handleBack} className='text-white px-5 font-bold'>
+      <IoClose fontSize="1.725rem" fontWeight={700}  />
         </button>
+      </div>
+      
       <div className="max-w-7xl mx-auto shadow-lg rounded-3xl p-10 md:p-16 
       relative min-h-[48px] shrink-0 ">
         <header className="text-center mb-12">

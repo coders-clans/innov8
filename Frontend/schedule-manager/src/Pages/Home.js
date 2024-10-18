@@ -81,7 +81,7 @@ const Home = () => {
             {
               isLoggedIn ? (<div>
                 <EnterName activeSection={activeSection} setActivesection={setActivesection} />
-                <div className='mx-auto max-w-[500px] m-5 font-normal leading-normal text-[rgb(148,160,184)] text-center text-sm pb-14 cursor-pointer'>By clicking "Start now" you agree to our <span className='text-white underline font-bold cursor - pointer' onClick={handleTnC}>Terms & Conditions.</span></div>
+                <div className='mx-auto max-w-[500px] m-5 font-normal leading-normal text-[rgb(148,160,184)] text-center text-sm pb-40 cursor-pointer'>By clicking "Start now" you agree to our <span className='text-white underline font-bold cursor - pointer' onClick={handleTnC}>Terms & Conditions.</span></div>
               </div>
 
 
@@ -336,7 +336,7 @@ const Home = () => {
       < div className="" >
         <div>{renderContent()}</div>
         {
-          isLoggedIn ? (<div className='grid md:grid-cols-2 mx-auto grid-cols-1'>
+          isLoggedIn ? (<div className='grid md:grid-cols-2 mx-auto grid-cols-1 mb-6'>
             <div><TaskCompletionGraph/></div>
         <div><TaskCompletionADVGraph/></div>
         </div>

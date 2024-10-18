@@ -9,7 +9,7 @@ const EnterName = ({ activeSection, setActivesection }) => {
   }
   return (
     <div className='flex justify-start'>
-      <div className='mx-auto'>
+      <div className='mx-auto pt-4'>
         <button onClick={() => handleCategoryClick('goals')}
           className='inline-flex items-center justify-center relative cursor-pointer select-none align-middle 
           appearance-none box-border font-medium leading-[1.75] text-[1rem] normal-case h-9 text-[black] 
