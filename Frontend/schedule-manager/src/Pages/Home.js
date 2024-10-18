@@ -2,6 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import defaultimg from '../Components/images/profile.png';
+import { FaFire } from "react-icons/fa";
+import { IoNotifications } from "react-icons/io5";
 import img from './logo.jpg';
 import Profile from '../Components/Profile';
 import Ask from '../Components/Ask'
@@ -15,6 +17,10 @@ import TaskCalendar from '../Components/Calender';
 import Footer from "../Components/Footer"
 import FAQ from "../Components/FAQ"
 import TaskManager from '../Components/TaskComponent';
+import NotificationSystem from '../Components/Notifications';
+import Streaks from '../Components/Streaks';
+import StreakManager from '../Components/Streaks';
+import DonutChart from '../Components/TaskCompeletionTracker';
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -22,7 +28,12 @@ const Home = () => {
   });
   const [isClicked, setisClicked] = useState(false);
   const [isAsk, setisAsk] = useState(false);
+  const [isNoti, setisNoti] = useState(false);
+  const [isStreak, setIsStreak] = useState(false);
   const navigate = useNavigate();
+  const [tasks, setTasks] = useState([]);
+  const [pendingTasks, setPendingTasks] = useState([]);
+  const [completedTasks, setCompletedTasks] = useState(0);
   const handleSignIn = () => {
     navigate('/signup');
   };
@@ -44,15 +55,12 @@ const Home = () => {
     }
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    localStorage.removeItem('isLoggedIn');
-  };
-
+  const handleStreaks = () => {
+    setActivesection('streaks');
+  }
   const handleHelp = () => {
     navigate('/help');
   };
-
   const renderContent = () => {
     switch (activeSection) {
       case 'ask':
@@ -67,10 +75,16 @@ const Home = () => {
             <Goals />
           </div>
         )
+      case 'streaks':
+        return (
+          <div>
+            <Streaks />
+          </div>
+        )
       case 'task':
         return (
           <div>
-            <TaskManager />
+            <TaskManager tasks={tasks} setTasks={setTasks} setCompletedTasks={setCompletedTasks} setPendingTasks={setPendingTasks} pendingTasks={pendingTasks} />
           </div>
         )
       default:
@@ -128,7 +142,7 @@ const Home = () => {
                     </button>
                     <div className="flex space-x-4">
                       <button onClick={() => { setisAsk(!isAsk) }}
-                      className="inline-flex items-center justify-center relative cursor-pointer 
+                        className="inline-flex items-center justify-center relative cursor-pointer 
                       select -none box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] 
                       text-[0.8125rem] h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 transition-all duration-300">
                         Ask
@@ -204,7 +218,7 @@ const Home = () => {
                       About
                     </button>
                     <div className="flex space-x-4">
-                      <button onClick={() => { setisAsk(!isAsk) }} className="inline-flex items-center justify-center relative cursor-pointer select-none
+                      <button onClick={handleLogin} className="inline-flex items-center justify-center relative cursor-pointer select-none
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300 ">
@@ -229,24 +243,24 @@ const Home = () => {
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
-                    >
-                      Highlights
-                    </button>
+                      >
+                        Highlights
+                      </button>
                     </a >
 
                     <a href='#Testimonials'>
-                    <button
-                      // onClick={() => handleCategoryClick('ask')}
-                      className="inline-flex items-center justify-center relative cursor-pointer select-none  
+                      <button
+                        // onClick={() => handleCategoryClick('ask')}
+                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
-                    >
-                      Comments
-                      {/* <a href='#testimols'>Highlights</a> */}
-                    </button>
+                      >
+                        Comments
+                        {/* <a href='#testimols'>Highlights</a> */}
+                      </button>
                     </a>
-                    
+
                     <a href='#faqs'>
                       <button
                         // onClick={() => handleCategoryClick('ask')}
@@ -272,10 +286,41 @@ const Home = () => {
               </div>
             </div>
 
-            <div>
+            <div className='flex space-x-4 items-center'>
+
+              <button onClick={() => { setisNoti(!isNoti) }}>
+                <div>
+                  <IoNotifications />
+                </div>
+
+              </button>
+              {
+                isNoti && (
+                  <div>
+                    <NotificationSystem />
+                  </div>
+                )
+              }
+
+              <button onClick={() => { setIsStreak(!isStreak) }}>
+                <div>
+                  <FaFire />
+                </div>
+
+              </button>
+              {
+                isStreak && (
+                  <div>
+                    <StreakManager />
+                  </div>
+                )
+              }
+
               {isLoggedIn ? (
                 <div className="flex space-x-4">
+
                   <button onClick={() => { setisClicked(!isClicked) }} className="relative">
+
                     <img className='h-8 w-8 rounded-full mr-3 cursor-pointer' src={defaultimg} alt='#'></img>
                   </button>
                   {/* <button
@@ -321,13 +366,13 @@ const Home = () => {
       </div >
 
       <div className='w-[100vw] h-[60vh] flex flex-col justify-end items-center' id="home">
-          <div className='flex flex-col '>
-            <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)] 
+        <div className='flex flex-col '>
+          <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)] 
           text-white mx-auto text-center'>Milestones Master <span className='text-blue-500'>Platform</span> </h1>
           <div className=' mx-auto max-w-[500px] m-5 font-normal leading-normal
           text-[rgb(148,160,184)] text-center text-sm'>This platform provides personalized goal tracking by generating AI responses and tracks your progress towards the goal and helps you achieve your Milestone in a particular deadline . </div>
 
-      </div>
+        </div>
       </div>
 
       {/* Scrollable content wrapper */}
@@ -335,12 +380,12 @@ const Home = () => {
         <div>{renderContent()}</div>
         {
           isLoggedIn ? (<div className='grid md:grid-cols-2 mx-auto grid-cols-1'>
-            <div><TaskCompletionGraph/></div>
-        <div><TaskCompletionADVGraph/></div>
-        </div>
-          ):(null)
+            <div><TaskCompletionGraph /></div>
+            <div><TaskCompletionADVGraph /></div>
+            <DonutChart tasksCompleted={completedTasks} totalTasks={tasks.length} />
+          </div>
+          ) : (null)
         }
-        
 
         <div id="highlights">
           <Highlights />
@@ -362,10 +407,7 @@ const Home = () => {
         <div>
           <Footer />
         </div>
-
       </div >
-
-
     </div >
 
   )

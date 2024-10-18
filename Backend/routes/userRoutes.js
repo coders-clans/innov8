@@ -44,7 +44,7 @@ const { signUp, login, signOut, editName, getUser, emailVerifiction, editEmail }
 userRouter.post('/signUp', signUp);
 userRouter.post('/login', login);
 userRouter.post('/signout', signOut)
-userRouter.patch('/UpdateName/:email', editName);
+userRouter.put('/UpdateName/:user_id', editName);
 userRouter.get('/getUser/:email', getUser);
 userRouter.patch('/EmailVerify/:email/:otp', emailVerifiction);
 userRouter.patch('/editEmail/:email', editEmail);
