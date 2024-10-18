@@ -35,19 +35,21 @@ const Ask = () => {
   };
 
   return (
-    <div className='bg-white p-10 m-6 shadow-lg rounded-lg w-1/4'>
+    <div className=' p-10 m-6 shadow-lg rounded-lg w-1/4 h-[70vh] absolute top-14 left-0 translate-x-[-30px]'>
       <div>
-        <form onSubmit={OnAsk} className='flex items-center space-x-4'>
+        <form onSubmit={OnAsk} className='flex items-center space-x-4 font-normal text-sm leading-[1.4375em] box-border cursor-text w-full 
+              relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-white transition-[border] 
+              duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid'>
           <input
             type='text'
             value={inpQuestion}
             placeholder='Enter Your Question Here'
             onChange={onChangeHandler}
-            className='border rounded px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-300'
+            className='border:none px-4 py-2 w-full outline-none bg-transparent text-gray-800 '
           />
           <button
             type='submit'
-            className='p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600'
+            className='w-0 h-0 items-center text-blue-500 translate-x-[-30px] translate-y-[-10px] '
           >
             <IoMdSend size={24} />
           </button>

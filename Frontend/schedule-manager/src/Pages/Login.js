@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const navigate = useNavigate();
@@ -32,13 +34,19 @@ function Login() {
         }
       )
       .then((response) => {
+        
         const id = response.data.isUser._id;
         console.log(id);
         localStorage.setItem('user_id', id);
         localStorage.setItem('email', formData.email);
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('name', response.data.isUser.name);
+      //  toast.success('Login Successfull!',{
+      //   position : toast.POSITION.TOP_RIGHT,
+      //   autoClose : 3000
+      //  })
         navigate('/');
+        
       })
       .catch((error) => {
         alert('The user is not signed in');
@@ -52,13 +60,13 @@ function Login() {
       {/* Left Text Section */}
       <div className="lg:w-1/2 w-full lg:text-left text-center mb-8 lg:mb-0">
         <h1 className="text-5xl font-extrabold text-white">
-          Welcome to Goal
+          Welcome to Milestone Master Platform
         </h1>
         <h2 className="text-2xl text-gray-200 mt-4">
           Manage your money effortlessly.
         </h2>
         <p className="text-lg text-gray-300 mt-4">
-          Sign in to keep track of your expenses and make better financial decisions.
+          Sign in to keep track of your goals and journey towards acheiving your goals.
         </p>
       </div>
 
@@ -93,7 +101,7 @@ function Login() {
               placeholder="Enter your Password"
               className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
               relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
-              duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid;"
+              duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
             />
 
           </div>

@@ -34,6 +34,18 @@ const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [pendingTasks, setPendingTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+  const [isNotified, setIsNotified] = useState(false);
+
+  const changeHandler = () => {
+      setIsActive(!isActive);
+  }
+
+  const changeNotifaction = () => {
+    setIsNotified(!isNotified);
+}
+  
+
   const handleSignIn = () => {
     navigate('/signup');
   };
@@ -95,7 +107,7 @@ const Home = () => {
             {
               isLoggedIn ? (<div>
                 <EnterName activeSection={activeSection} setActivesection={setActivesection} />
-                <div className='mx-auto max-w-[500px] m-5 font-normal leading-normal text-[rgb(148,160,184)] text-center text-sm pb-14 cursor-pointer'>By clicking "Start now" you agree to our <span className='text-white underline font-bold cursor - pointer' onClick={handleTnC}>Terms & Conditions.</span></div>
+                <div className='mx-auto max-w-[500px] m-5 font-normal leading-normal text-[rgb(148,160,184)] text-center text-sm pb-40 cursor-pointer'>By clicking "Start now" you agree to our <span className='text-white underline font-bold cursor - pointer' onClick={handleTnC}>Terms & Conditions.</span></div>
               </div>
 
 
@@ -288,31 +300,31 @@ const Home = () => {
               </div>
             </div>
 
-            <div className='flex space-x-4 items-center'>
+            <div className='flex space-x-4 items-center justify-between'>
 
               <button onClick={() => { setisNoti(!isNoti) }}>
-                <div>
+                <div onClick={changeNotifaction} className={` cursor-pointer transition-colors duration-300 ${ isNotified ? 'text-yellow-400':' text-white '}`}>
                   <IoNotifications />
                 </div>
 
               </button>
               {
                 isNoti && (
-                  <div>
+                  <div >
                     <NotificationSystem />
                   </div>
                 )
               }
 
               <button onClick={() => { setIsStreak(!isStreak) }}>
-                <div>
+                <div onClick={changeHandler} className = {` cursor-pointer transition-colors duration-300 ${ isActive ? 'text-orange-700':' text-white '}`}>
                   <FaFire />
                 </div>
 
               </button>
               {
                 isStreak && (
-                  <div>
+                  <div className='flex items-center' >
                     <StreakManager />
                   </div>
                 )
@@ -381,9 +393,8 @@ const Home = () => {
       < div className="" >
         <div>{renderContent()}</div>
         {
-          isLoggedIn ? (<div className='grid md:grid-cols-2 mx-auto grid-cols-1'>
+          isLoggedIn ? (<div className='grid md:grid-cols-2 mx-auto grid-cols-1 mb-6'>
             <div><TaskCompletionGraph /></div>
-            <div><TaskCompletionADVGraph /></div>
             <DonutChart tasksCompleted={completedTasks} totalTasks={tasks.length} />
           </div>
           ) : (null)

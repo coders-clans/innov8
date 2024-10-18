@@ -56,7 +56,7 @@ const NotificationSystem = () => {
   }, []);
 
   return (
-    <div className="fixed top-4 left-4 z-50 space-y-2">
+    <div className="fixed top-4 pt-12   z-50 space-y-2">
       {visibleNotifications.map((notification) => (
         <Notification key={notification.id} message={notification.message} />
       ))}

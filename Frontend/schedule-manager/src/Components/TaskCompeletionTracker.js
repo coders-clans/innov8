@@ -39,7 +39,7 @@ const DonutChart = ({ tasksCompleted, totalTasks }) => {
 
       <p
         className="text-lg font-semibold"
-        style={{ color: '#1f2937' /* Dark gray */ }}
+        style={{ color: '#fff' /* Dark gray */ }}
       >
         {tasksCompleted}/{totalTasks} Tasks Completed
       </p>
