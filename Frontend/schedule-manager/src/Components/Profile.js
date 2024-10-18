@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import defaultimg from './images/profile.png';
 import editimg from './images/edit.png'
-import {CiEdit} from "react-icons/ci"
+import { CiEdit } from "react-icons/ci"
 
-function Profile({isLoggedin,setIsLoggedIn}) {
+function Profile({ isLoggedin, setIsLoggedIn }) {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [profileImage, setProfileImage] = useState('');
@@ -46,13 +46,20 @@ function Profile({isLoggedin,setIsLoggedIn}) {
       });
   }, [id]);
 
-  const changeNameHandler = () => {
-    axios.patch(`http://localhost:7001/user/UpdateName/${id}`, { name: newData.name }, { withCredentials: true })
-      .then(() => {
-        setName(newData.name);
-        setIsChange(false);
-      })
-      .catch(error => console.error("Error updating name:", error));
+  const userId = localStorage.getItem('user_id');
+  const changeNameHandler = async () => {
+
+    try {
+      const res = await axios.put(`http://localhost:7001/user/UpdateName/${userId}`, { name: newData.name }, { withCredentials: true });
+      console.log(res);
+      console.log(newData.name);
+      setName(newData.name);
+      setIsChange(false);
+    }
+
+    catch (error) {
+      console.error("Error updating name:", error)
+    };
   };
 
 
@@ -89,7 +96,7 @@ function Profile({isLoggedin,setIsLoggedIn}) {
       alert("Incorrect OTP. Try again.");
     }
   };
-  const handleLogout = ()=>{
+  const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.removeItem('isLoggedIn');
   }
@@ -121,20 +128,20 @@ function Profile({isLoggedin,setIsLoggedIn}) {
         <div className="mb-8">
           <h2 className="font-semibold text-white  mb-2">Name:</h2>
           <div className="flex items-center justify-between">
-          {isChange ? (
-            <input
-              className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
+            {isChange ? (
+              <input
+                className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
               relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
               duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
-              type="text"
-              name="name"
-              value={newData.name}
-              onChange={onChangeHandler}
-            />
-          ) : (
-            <p className=" text-white flex-grow">{name ? name : 'Loading...'}</p>
-          )}
-  
+                type="text"
+                name="name"
+                value={newData.name}
+                onChange={onChangeHandler}
+              />
+            ) : (
+              <p className=" text-white flex-grow">{name ? name : 'Loading...'}</p>
+            )}
+
             {isChange ? (
               <button
                 className="ml-4 px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition shadow-md"
@@ -147,7 +154,7 @@ function Profile({isLoggedin,setIsLoggedIn}) {
                 className="ml-4 px-4 py-2 text-white  rounded-xl transition shadow-md translate-x-3"
                 onClick={() => setIsChange(true)}
               >
-              <CiEdit fontSize="1.45rem" />
+                <CiEdit fontSize="1.45rem" />
               </button>
             )}
           </div>
@@ -182,7 +189,7 @@ function Profile({isLoggedin,setIsLoggedIn}) {
                 className="ml-4 px-4 py-2 text-white  rounded-xl transition shadow-md"
                 onClick={() => setIsChangeEmail(true)}
               >
-              <CiEdit fontSize="1.45rem" />
+                <CiEdit fontSize="1.45rem" />
               </button>
             )}
           </div>
@@ -229,12 +236,12 @@ function Profile({isLoggedin,setIsLoggedIn}) {
             </div>
           </form>
         </div> */}
-          
+
       </div>
-    <div className='flex justify-center'>
-      <button onClick={handleLogout} className='inline-flex items-center justify-center relative cursor-pointer select-none align-middle appearance-none 
+      <div className='flex justify-center'>
+        <button onClick={handleLogout} className='inline-flex items-center justify-center relative cursor-pointer select-none align-middle appearance-none 
               box-border font-medium text-sm leading-[1.75] min-w-[64px] w-full normal-case h-10 px-4 py-1.5 bg-white rounded-lg hover:bg-red-500 hover:text-white transition duration-300'>Logout </button>
-     </div>
+      </div>
     </div>
     // </div>
 
