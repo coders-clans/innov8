@@ -1,4 +1,5 @@
 const userModle = require("../models/user");
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
@@ -116,9 +117,18 @@ const signOut = async (req, res) => {
 
 const editName = async (req, res) => {
     try {
-        const { email } = req.params;
-        console.log(email);
-        const response = await User.findOne({ email });
+        const id = req.params.user_id;
+        const updatedData = req.body;
+
+        // console.log(email);
+        const response = await userModle.findByIdAndUpdate(
+            id,
+            updatedData,
+            {
+                new: true, //returns updated document
+                runValidators: true, // for validations in mongoose , it checks the schema in which what is required
+            }
+        );
         console.log(response);
         return res.json({
             success: true,
@@ -137,7 +147,9 @@ const editEmail = async (req, res) => {
         const email = req.params.email;
         const updatedData = req.body;
         const user = await userModle.findOneAndUpdate({ email: email }, updatedData, { new: true });
+
         if (user) {
+
             res.json({ message: 'User updated successfully', response: user });
         } else {
             res.status(404).json({ message: 'User not found' });
