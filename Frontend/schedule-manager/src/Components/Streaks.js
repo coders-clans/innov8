@@ -29,9 +29,8 @@ const StreakManager = () => {
   }, [res]);
 
   return (
-    <div className="p-4 bg-white shadow rounded text-center">
-      <h2 className="text-2xl font-bold">Your Streak</h2>
-      <p className="text-lg mt-2">Current Streak: {streak} {streak === 1 ? 'day' : 'days'}</p>
+    <div className="text-white  text-center">
+      <p className="text-lg ">{streak} {streak === 1 ? 'day' : 'days'}</p>
     </div>
   );
 };

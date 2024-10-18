@@ -3,6 +3,9 @@ import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom';
 import Spinner from './Spinner';
+import {  toast } from 'react-toastify';
+
+
 
 const Goals = () => {
   const navigate = useNavigate();
@@ -72,6 +75,7 @@ const Goals = () => {
       console.log(res);
       if (res.data.success) {
         alert('Goal Path saved successfully!');
+        toast.success("Data Saved Successfully");
       } else {
         alert('Failed to save Goal Path. Please try again.');
       }
@@ -104,7 +108,7 @@ const Goals = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 mb-10">
       {isLoading ? (<Spinner/>) :
         (<div className="form-container max-w-md mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
           <h2 className="form-heading text-2xl font-bold text-gray-800 mb-6">
