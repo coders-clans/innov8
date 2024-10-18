@@ -10,7 +10,7 @@ const Goals = () => {
   const [isLoading, setIsLoading] = useState(false);  // Loading state
   const [isSatisfied, setIsSatisfied] = useState(false);  // User satisfaction
   const [isRegenerating, setIsRegenerating] = useState(false);  // Regeneration state
-
+  const [isGenerated, setIsGenerated] = useState(false);
   const [formData, setFormData] = useState({
     // userId: '', // Hardcoded or retrieve from auth context
     goal: '',
@@ -33,6 +33,7 @@ const Goals = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setIsGenerated(true);
     setAiResponse(null); // Clear previous response
     setIsSatisfied(false); // Reset satisfaction
     setIsRegenerating(false); // Reset regeneration
@@ -40,6 +41,7 @@ const Goals = () => {
     try {
       const res = await axios.post('http://localhost:7001/user/goal/getPath', formData);
       setAiResponse(res.data.dailyPlan); // Set AI response
+
     } catch (error) {
       console.error('Error submitting form:', error);
       alert('Form submission failed. Please try again.');
@@ -104,8 +106,11 @@ const Goals = () => {
   };
 
   return (
+
+
     <div className="container mx-auto p-4">
-      {isLoading ? (<Spinner/>) :
+
+      {isLoading ? (<Spinner />) :
         (<div className="form-container max-w-md mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
           <h2 className="form-heading text-2xl font-bold text-gray-800 mb-6">
             Enter the following details to proceed ..
@@ -158,6 +163,9 @@ const Goals = () => {
           </form>
 
           {/* AI Response */}
+          {
+
+          }
           {aiResponse && (
             <div className="mt-6 p-4 bg-gray-100 border border-gray-300 rounded-lg">
               <h3 className="text-lg font-bold text-gray-800 mb-4">Generated Plan:</h3>
