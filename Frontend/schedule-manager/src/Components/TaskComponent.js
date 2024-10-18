@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { TiTickOutline, TiTimesOutline } from "react-icons/ti";
+import StreakManager from './Streaks';
 
 const TaskManager = ({ tasks, setTasks, setCompletedTasks, setPendingTasks, pendingTasks }) => {
   const id = localStorage.getItem('user_id');
   const [day, setDay] = useState(1);
   const [nextDayAvailable, setNextDayAvailable] = useState(false);
-
+  const [isTaskCompleted, setIsTaskCompleted] = useState(false);
   const fetchTasks = async (day) => {
     try {
       const resData = await axios.get(`http://localhost:7001/user/goal/${id}`, { withCredentials: true });
@@ -63,7 +64,7 @@ const TaskManager = ({ tasks, setTasks, setCompletedTasks, setPendingTasks, pend
   useEffect(() => {
     fetchTasks(day);
   }, [day]);
-
+  <StreakManager isTaskCompleted={isTaskCompleted} setIsTaskCompleted={setIsTaskCompleted} />
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <h1 className="text-3xl font-bold mb-6 text-center">Tasks for Day {day}</h1>
@@ -77,7 +78,13 @@ const TaskManager = ({ tasks, setTasks, setCompletedTasks, setPendingTasks, pend
                 {task.task} - {task.time} hours
               </span>
               <button onClick={() => toggleTaskCompletion(localStorage.getItem("goalId"), task._id, !task.completed)} className="text-2xl">
-                {task.completed ? <TiTimesOutline className="text-red-500" /> : <TiTickOutline className="text-green-500" />}
+                {task.completed ? (<div>
+                  {
+                    localStorage.setItem('isTaskCompleted', true)
+                  }
+                  <TiTimesOutline className="text-red-500" />
+                </div>)
+                  : <TiTickOutline className="text-green-500" />}
               </button>
             </li>
           ))}
