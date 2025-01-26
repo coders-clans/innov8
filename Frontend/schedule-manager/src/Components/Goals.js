@@ -76,7 +76,6 @@ const Goals = () => {
       const res = await axios.post('http://localhost:7001/user/goal/createPath', saveData);
       console.log(res);
       if (res.data.success) {
-        alert('Goal Path saved successfully!');
         toast.success("Data Saved Successfully");
       } else {
         alert('Failed to save Goal Path. Please try again.');
@@ -87,8 +86,7 @@ const Goals = () => {
       // navigate('/taskManager')
       
     } catch (error) {
-      console.error('Error saving goal path:', error);
-      alert('There was an issue saving your goal path.');
+      toast.error("There was an issue saving your goal path.");
     }
   };
 

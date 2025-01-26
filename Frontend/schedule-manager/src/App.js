@@ -4,6 +4,7 @@ import Home from './Pages/Home';
 import Help from './Pages/Help';
 // import Notification from './Components/Notifications';
 // import TaskManager from './Components/TaskComponent';
+import { ToastContainer, toast } from 'react-toastify';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TnC from './Pages/TnC';
 function App() {
@@ -20,6 +21,7 @@ function App() {
           {/* <Route path='/noti' element={<Notification />} /> */}
           {/* <Route path='/taskmanager' element={<TaskManager />} /> */}
         </Routes>
+        <ToastContainer/>
       </div>
     </Router>
   );
