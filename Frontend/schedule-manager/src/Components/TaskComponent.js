@@ -83,10 +83,10 @@ const TaskManager = ({ tasks, setTasks, setCompletedTasks, setPendingTasks, pend
           </button>
         </div>
       ) : (
-        <p className="mt-6 text-center text-gray-200">Complete all tasks to unlock the congratulations screen.</p>
+        <p className="mt-6 text-center text-gray-200">Complete all tasks to unlock the congratulations screen .</p>
       )}
     </div>
   );
-};
+}; 
 
 export default TaskManager;
