@@ -226,23 +226,79 @@ const emailVerifiction = (req, res) => {
     });
 };
 
+const updateCurrStat = async (req, res) => {
+    try {
+        const { user_id } = req.params; // Extract user ID from route parameters
+        const { currStat } = req.body; // Extract the new currStat value from the request body
+
+        if (!currStat && currStat !== 0) {
+            return res.status(400).json({
+                success: false,
+                message: "currStat is required",
+            });
+        }
+
+        // Find the user by ID and update the currStat field
+        const updatedUser = await userModle.findByIdAndUpdate(
+            user_id,
+            { currStat },
+            {
+                new: true, // Return the updated document
+                runValidators: true, // Validate the schema before updating
+            }
+        );
+
+        if (!updatedUser) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "User's currStat updated successfully",
+            response: updatedUser,
+        });
+    } catch (error) {
+        console.error("Error updating currStat:", error);
+        return res.status(500).json({
+            success: false,
+            message: "An error occurred while updating currStat",
+            error,
+        });
+    }
+};
+
+const getCurrStat = async (req, res) => {
+    try {
+        const { user_id } = req.params; // Extract user ID from route parameters
+
+        // Find the user by ID
+        const user = await userModle.findById(user_id, 'currStat'); // Only select the currStat field
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "User's currStat fetched successfully",
+            currStat: user.currStat,
+        });
+    } catch (error) {
+        console.error("Error fetching currStat:", error);
+        return res.status(500).json({
+            success: false,
+            message: "An error occurred while fetching currStat",
+            error,
+        });
+    }
+};
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports = { signUp, login, signOut, editName, getUser, emailVerifiction, editEmail }
+module.exports = { signUp, login, signOut, editName, getUser, emailVerifiction, editEmail,updateCurrStat ,getCurrStat}
