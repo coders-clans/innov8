@@ -17,7 +17,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          {/* <div>
             <h3 className="text-2xl font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li><a href="/" className="hover:underline text-gray-400">Home</a></li>
@@ -26,10 +26,10 @@ const Footer = () => {
               <li><a href="/streaks" className="hover:underline text-gray-400">Streaks</a></li>
               <li><a href="/help" className="hover:underline text-gray-400">Help & Support</a></li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Contact Section */}
-          <div>
+          <div className='right-0'>
             <h3 className="text-2xl font-bold mb-4">Contact Us</h3>
             <p className="text-gray-400">Email: <a href="mailto:info@schedulemanager.com" className="text-teal-500 hover:underline">info@schedulemanager.com</a></p>
             <p className="text-gray-400">Phone: <span className="text-teal-500">+91 9876543210</span></p>
@@ -46,7 +46,7 @@ const Footer = () => {
           <p className="text-gray-400">&copy; 2024 Schedule Manager. All Rights Reserved.</p>
 
           {/* Social Media Icons */}
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          {/* <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-white text-2xl">
               <FaFacebook />
             </a>
@@ -62,7 +62,7 @@ const Footer = () => {
             <a href="#" className="text-gray-400 hover:text-white text-2xl">
               <FaGithub />
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

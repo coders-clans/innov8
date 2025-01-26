@@ -12,12 +12,9 @@ import Goals from '../Components/Goals';
 import Highlights from '../Components/Highlights';
 import Testimonials from '../Components/Testimols';
 import TaskCompletionGraph from '../Components/Graph';
-import TaskCompletionADVGraph from '../Components/GraphAdvance';
-import TaskCalendar from '../Components/Calender';
 import Footer from "../Components/Footer"
 import FAQ from "../Components/FAQ"
 import TaskManager from '../Components/TaskComponent';
-import NotificationSystem from '../Components/Notifications';
 import Streaks from '../Components/Streaks';
 import StreakManager from '../Components/Streaks';
 import DonutChart from '../Components/TaskCompeletionTracker';
@@ -27,8 +24,6 @@ const Home = () => {
     return localStorage.getItem('isLoggedIn') === 'true';
   });
   const [isClicked, setisClicked] = useState(false);
-  const [isAsk, setisAsk] = useState(false);
-  const [isNoti, setisNoti] = useState(false);
   const [isStreak, setIsStreak] = useState(false);
   const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
@@ -40,12 +35,6 @@ const Home = () => {
   const changeHandler = () => {
       setIsActive(!isActive);
   }
-
-  const changeNotifaction = () => {
-    setIsNotified(!isNotified);
-}
-  
-
   const handleSignIn = () => {
     navigate('/signup');
   };
@@ -100,27 +89,16 @@ const Home = () => {
           </div>
         )
       default:
-
         return (
           <div>
-
             {
               isLoggedIn ? (<div>
                 <EnterName activeSection={activeSection} setActivesection={setActivesection} />
                 <div className='mx-auto max-w-[500px] m-5 font-normal leading-normal text-[rgb(148,160,184)] text-center text-sm pb-40 cursor-pointer'>By clicking "Start now" you agree to our <span className='text-white underline font-bold cursor - pointer' onClick={handleTnC}>Terms & Conditions.</span></div>
               </div>
-
-
               ) : (<div></div>)
             }
-
-
-          </div>
-
-        )
-
-    }
-  }
+          </div>) }}
 
 
   return (
@@ -154,25 +132,7 @@ const Home = () => {
                     >
                       About
                     </button>
-                    <div className="flex space-x-4">
-                      <button onClick={() => { setisAsk(!isAsk) }}
-                        className="inline-flex items-center justify-center relative cursor-pointer 
-                      select -none box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] 
-                      text-[0.8125rem] h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 transition-all duration-300">
-                        Ask
-                      </button>
-                      {/* <button
-                    onClick={handleLogout}
-                    className="text-white hover:text-red-500 transition-all duration-300"
-                  >
-                    Logout
-                  </button> */}
-                      {isAsk && (
-                        <div className="">
-                          <Ask /*isLoggedin={isLoggedIn} setIsLoggedIn={setIsLoggedIn}*/ />
-                        </div>
-                      )}
-                    </div>
+          
                     <a href='#highlights'>
                       <button
                         // onClick={() => handleCategoryClick('ask')}
@@ -231,25 +191,7 @@ const Home = () => {
                     >
                       About
                     </button>
-                    <div className="flex space-x-4">
-                      <button onClick={handleLogin} className="inline-flex items-center justify-center relative cursor-pointer select-none
-                  box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
-                  h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
-                  transition-all duration-300 ">
-                        Ask
-                      </button>
-                      {/* <button
-                    onClick={handleLogout}
-                    className="text-white hover:text-red-500 transition-all duration-300"
-                  >
-                    Logout
-                  </button> */}
-                      {isAsk && (
-                        <div className="absolute top-12 right-0 w-[300px] rounded-lg shadow-lg bg-[rgba(5,7,10,0.7)]">
-                          <Ask /*isLoggedin={isLoggedIn} setIsLoggedIn={setIsLoggedIn}*/ />
-                        </div>
-                      )}
-                    </div>
+                  
                     <a href='#highlights'>
                       <button
                         // onClick={() => handleCategoryClick('ask')}
@@ -301,21 +243,6 @@ const Home = () => {
             </div>
 
             <div className='flex space-x-4 items-center justify-between'>
-
-              <button onClick={() => { setisNoti(!isNoti) }}>
-                <div onClick={changeNotifaction} className={` cursor-pointer transition-colors duration-300 ${ isNotified ? 'text-yellow-400':' text-white '}`}>
-                  <IoNotifications />
-                </div>
-
-              </button>
-              {
-                isNoti && (
-                  <div >
-                    <NotificationSystem />
-                  </div>
-                )
-              }
-
               <button onClick={() => { setIsStreak(!isStreak) }}>
                 <div onClick={changeHandler} className = {` cursor-pointer transition-colors duration-300 ${ isActive ? 'text-orange-700':' text-white '}`}>
                   <FaFire />

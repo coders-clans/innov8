@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef,useEffect, useState } from 'react';
 import axios from 'axios';
 import defaultimg from './images/profile.png';
 import editimg from './images/edit.png'
@@ -72,7 +72,7 @@ function Profile({ isLoggedin, setIsLoggedIn }) {
         setIsChangeEmail(false);
         setIsEmailChange(true);
       })
-      .catch(error => console.error("Error updating email:", error));
+      .catch(error => (alert('Email Already exists')));
   };
   const onChangeHandler = (event) => {
     setNewData({
@@ -101,150 +101,140 @@ function Profile({ isLoggedin, setIsLoggedIn }) {
     localStorage.removeItem('isLoggedIn');
   }
 
-
-
-
-  return (
-
-    // <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center">
-    <div className=" w-full max-w-md p-6 backdrop-blur-xl bg-[rgba(5,7,10,0.4)]
-      shadow-[rgba(9,11,17,0.7)_0px_4px_16px_0px,rgba(19,23,32,0.8)_0px_8px_16px_-5px] rounded-[calc(16px)]
-      border-solid border-[rgba(51,60,77,0.6)] relative min-h-[48px] shrink-0">
-      <div className="text-center mb-8">
-        {profileImage ? (
-          <img
-            src={defaultimg}
-            alt="Profile"
-            className="w-20 h-20 rounded-full mx-auto object-cover border-4 border-[hsla(220,20%,25%,0.6)]"
-          />
-        ) : (
-          <div className="w-20 h-20 rounded-full mx-auto bg-gray-200 animate-pulse"></div>
-        )}
-        <h1 className="text-2xl font-bold text-white mt-4 mb-2">Profile</h1>
-        <p className="text-xl text-white ">Manage your account details</p>
-      </div>
-      {/* <div></div> */}
-      <div className="border-t border-gray-200 pt-4">
-        <div className="mb-8">
-          <h2 className="font-semibold text-white  mb-2">Name:</h2>
-          <div className="flex items-center justify-between">
-            {isChange ? (
-              <input
-                className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
-              relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
-              duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
-                type="text"
-                name="name"
-                value={newData.name}
-                onChange={onChangeHandler}
-              />
-            ) : (
-              <p className=" text-white flex-grow">{name ? name : 'Loading...'}</p>
-            )}
-
-            {isChange ? (
-              <button
-                className="ml-4 px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition shadow-md"
-                onClick={changeNameHandler}
-              >
-                Save
-              </button>
-            ) : (
-              <button
-                className="ml-4 px-4 py-2 text-white  rounded-xl transition shadow-md translate-x-3"
-                onClick={() => setIsChange(true)}
-              >
-                <CiEdit fontSize="1.45rem" />
-              </button>
-            )}
-          </div>
+    const [isOpen, setIsOpen] = useState(true); // State to control visibility
+    const profileRef = useRef(null); // Ref for the profile container
+  
+    // Close the profile when clicking outside
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (profileRef.current && !profileRef.current.contains(event.target)) {
+          setIsOpen(false); // Close the profile
+        }
+      };
+  
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, []);
+  
+    if (!isOpen) return null; // Don't render if the profile is closed
+  
+    return (
+      <div
+        ref={profileRef}
+        className="w-full max-w-md p-6 backdrop-blur-xl bg-[rgba(5,7,10,0.4)]
+        shadow-[rgba(9,11,17,0.7)_0px_4px_16px_0px,rgba(19,23,32,0.8)_0px_8px_16px_-5px] rounded-[calc(16px)]
+        border-solid border-[rgba(51,60,77,0.6)] relative min-h-[48px] shrink-0"
+      >
+        <div className="text-center mb-8">
+          <h1 className="text-2xl font-bold text-white mt-2 mb-2">Profile</h1>
         </div>
-
-        {/* Email Section */}
-        <div className="mb-8">
-          <h2 className="font-semibold text-white  mb-2">Email:</h2>
-          <div className="flex items-center justify-between">
-            {isChangeEmail ? (
-              <input
-                className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
-              relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
-              duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
-                type="email"
-                name="email"
-                value={newData.email}
-                onChange={onChangeHandler}
-              />
-            ) : (
-              <p className="text-white  flex-grow">{email || 'Loading...'}</p>
-            )}
-            {isChangeEmail ? (
-              <button
-                className="ml-4 px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition shadow-md"
-                onClick={changeEmailHandler}
-              >
-                Save
-              </button>
-            ) : (
-              <button
-                className="ml-4 px-4 py-2 text-white  rounded-xl transition shadow-md"
-                onClick={() => setIsChangeEmail(true)}
-              >
-                <CiEdit fontSize="1.45rem" />
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* OTP Verification */}
-        {isEmailChange && (
-          <div className="mb-6">
-            <h2 className="font-semibold text-white  mb-2">Verify Email:</h2>
-            <form onSubmit={OTPHandler} className="flex space-x-4">
-              <input
-                type="text"
-                placeholder="Enter OTP"
-                className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
-              relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
-              duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
-              />
-              <button
-                type="submit"
-                className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition shadow-md"
-              >
-                Verify
-              </button>
-            </form>
-          </div>
-        )}
-
-        {/* Image Upload Section */}
-        {/* <div className="flex flex-col sm:flex-row justify-between mt-8">
-          <form onSubmit={<div></div>}>
-            <div className="w-full sm:w-auto">
-              <input
-                type="file"
-                accept="image/*"
-                onChange={<div></div>}
-                className="border border-gray-300 rounded-lg p-2 w-full mb-3"
-              />
-              <button
-                type="submit"
-                className="px-6 py-2 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 transition shadow-lg w-full"
-              >
-                Upload Image
-              </button>
+        <div className="border-t border-gray-200 pt-4">
+          <div className="mb-8">
+            <h2 className="font-semibold text-white mb-2">Name:</h2>
+            <div className="flex items-center justify-between">
+              {isChange ? (
+                <input
+                  className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
+                relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
+                duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
+                  type="text"
+                  name="name"
+                  value={newData.name}
+                  onChange={onChangeHandler}
+                />
+              ) : (
+                <p className="text-white flex-grow">{name ? name : "Loading..."}</p>
+              )}
+  
+              {isChange ? (
+                <button
+                  className="ml-4 px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition shadow-md"
+                  onClick={changeNameHandler}
+                >
+                  Save
+                </button>
+              ) : (
+                <button
+                  className="ml-4 px-4 py-2 text-white rounded-xl transition shadow-md translate-x-3"
+                  onClick={() => setIsChange(true)}
+                >
+                  <CiEdit fontSize="1.45rem" />
+                </button>
+              )}
             </div>
-          </form>
-        </div> */}
-
+          </div>
+  
+          {/* Email Section */}
+          <div className="mb-8">
+            <h2 className="font-semibold text-white mb-2">Email:</h2>
+            <div className="flex items-center justify-between">
+              {isChangeEmail ? (
+                <input
+                  className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
+                relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
+                duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
+                  type="email"
+                  name="email"
+                  value={newData.email}
+                  onChange={onChangeHandler}
+                />
+              ) : (
+                <p className="text-white flex-grow">{email || "Loading..."}</p>
+              )}
+              {isChangeEmail ? (
+                <button
+                  className="ml-4 px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition shadow-md"
+                  onClick={changeEmailHandler}
+                >
+                  Save
+                </button>
+              ) : (
+                <button
+                  className="ml-4 px-4 py-2 text-white rounded-xl transition shadow-md"
+                  onClick={() => setIsChangeEmail(true)}
+                >
+                  <CiEdit fontSize="1.45rem" />
+                </button>
+              )}
+            </div>
+          </div>
+  
+          {/* OTP Verification */}
+          {isEmailChange && (
+            <div className="mb-6">
+              <h2 className="font-semibold text-white mb-2">Verify Email:</h2>
+              <form onSubmit={OTPHandler} className="flex space-x-4">
+                <input
+                  type="text"
+                  placeholder="Enter OTP"
+                  className="font-normal text-sm leading-[1.4375em] box-border cursor-text inline-flex items-center w-full 
+                relative text-white rounded-lg border border-[hsla(220,20%,25%,0.6)] bg-[#05080f] transition-[border] 
+                duration-[120ms] ease-[ease-in] h-10 px-3 py-2 border-solid"
+                />
+                <button
+                  type="submit"
+                  className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition shadow-md"
+                >
+                  Verify
+                </button>
+              </form>
+            </div>
+          )}
+        </div>
+        <div className="flex justify-center">
+          <button
+            onClick={handleLogout}
+            className="inline-flex items-center justify-center relative cursor-pointer select-none align-middle appearance-none 
+                box-border font-medium text-sm leading-[1.75] min-w-[64px] w-full normal-case h-10 px-4 py-1.5 bg-white rounded-lg hover:bg-red-500 hover:text-white transition duration-300"
+          >
+            Logout
+          </button>
+        </div>
       </div>
-      <div className='flex justify-center'>
-        <button onClick={handleLogout} className='inline-flex items-center justify-center relative cursor-pointer select-none align-middle appearance-none 
-              box-border font-medium text-sm leading-[1.75] min-w-[64px] w-full normal-case h-10 px-4 py-1.5 bg-white rounded-lg hover:bg-red-500 hover:text-white transition duration-300'>Logout </button>
-      </div>
-    </div>
-    // </div>
-
-  );
-}
-export default Profile;
+    );
+  };
+  
+  export default Profile;
+  
