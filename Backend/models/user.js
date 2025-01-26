@@ -16,6 +16,10 @@ const schema = new mongoose.Schema({
     },
     image: {
         type: String
+    },
+    currStat:{
+        type:Number,
+        default:0
     }
 
 })
