@@ -34,7 +34,7 @@ const DonutChart = ({ tasksCompleted, totalTasks }) => {
             textSize: '18px',
             strokeLinecap: 'round',
           })}
-        />
+        /> 
       </div>
 
       <p
