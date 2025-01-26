@@ -183,7 +183,10 @@ const getUser = async (req, res) => {
 
 const emailVerifiction = (req, res) => {
     const { email, otp } = req.params;
-
+    const exists = userModle.findOne({email:email});
+    if(exists){
+        return res.status(400).json({message:"Email Already Exists"})
+    }
 
     // Configure the email transporter
     const transporter = nodemailer.createTransport({

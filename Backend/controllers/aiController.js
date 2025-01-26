@@ -21,7 +21,7 @@ const getGoalPath = async (req, res) => {
 
     try {
         const response = await axios.post(
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyB4FBqXTGcaP_5R2EtWZkLmuF6HdChk43A",
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyA58ho_64s0kqAvoBztIexzcvZFsGR9x0A",
             {
                 "contents": [{ "parts": [{ "text": `${question}` }] }]
             }
