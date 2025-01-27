@@ -7,7 +7,7 @@ const cors = require("cors");
 const opRouter = require("./routes/opRoutes");
 const aiRouter = require("./routes/aiRoutes");
 
-
+const commentRouter = require('./routes/comment')
 const userRouter = require("./routes/userRoutes");
 const portNo = process.env.portNo;
 const url = process.env.dbUrl;
@@ -33,7 +33,7 @@ app.use(cookieParser());
 app.use("/user", userRouter);
 app.use("/user/data", opRouter);
 app.use("/user/goal", aiRouter);
-
+app.use("/comment",commentRouter)
 app.get("/", auth, (req, res) => {
     res.send("hello");
 })

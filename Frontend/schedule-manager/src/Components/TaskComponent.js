@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { TiTickOutline, TiTimesOutline } from "react-icons/ti";
 import { useNavigate } from "react-router-dom";
+import DonutChart from '../Components/TaskCompeletionTracker';
 
-const TaskManager = ({ tasks, setTasks, setCompletedTasks, setPendingTasks, pendingTasks }) => {
+const TaskManager = ({ tasks, setTasks,completedTasks, setCompletedTasks,setActivesection, setPendingTasks, pendingTasks }) => {
   const navigate = useNavigate();
   const id = localStorage.getItem("user_id");
   const [day, setDay] = useState(1);
@@ -110,12 +111,13 @@ const TaskManager = ({ tasks, setTasks, setCompletedTasks, setPendingTasks, pend
   };
 
   useEffect(() => {
+    fetchGoalDetails(); 
     const goalId = localStorage.getItem("goalId");
   if (!goalId) {
     console.log("No goalId found, skipping fetch.");
     return;
   }
-    fetchGoalDetails(); // Fetch total days in the goal
+    // Fetch total days in the goal
     
     fetchDay(); // Fetch the current day
   }, []);
@@ -140,7 +142,7 @@ const TaskManager = ({ tasks, setTasks, setCompletedTasks, setPendingTasks, pend
         <div className="text-center">
           <p className="text-2xl text-green-600">🎉 Congratulations! You've completed your entire goal! 🎉</p>
           <button
-            onClick={() => navigate("/")}
+            onClick={() => setActivesection('')}
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
           >
             Go to Home Page
@@ -175,6 +177,9 @@ const TaskManager = ({ tasks, setTasks, setCompletedTasks, setPendingTasks, pend
           </button>
         </div>
       )}
+       <div className="w-full lg:w-1/3 flex justify-center lg:justify-end">
+          <DonutChart tasksCompleted={completedTasks} totalTasks={tasks.length}/>
+        </div>
     </div>
   );
 };

@@ -3,14 +3,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import defaultimg from '../Components/images/profile.png';
 import { FaFire } from "react-icons/fa";
-import { IoNotifications } from "react-icons/io5";
 import img from './logo.jpg';
 import Profile from '../Components/Profile';
 import Ask from '../Components/Ask'
 import EnterName from '../Components/EnterName';
 import Goals from '../Components/Goals';
 import Highlights from '../Components/Highlights';
-import Testimonials from '../Components/Testimols';
 import TaskCompletionGraph from '../Components/Graph';
 import Footer from "../Components/Footer"
 import FAQ from "../Components/FAQ"
@@ -18,6 +16,8 @@ import TaskManager from '../Components/TaskComponent';
 import Streaks from '../Components/Streaks';
 import StreakManager from '../Components/Streaks';
 import DonutChart from '../Components/TaskCompeletionTracker';
+import CommentForm from '../Components/CommentForm';
+import Testimonials from '../Components/Comment'
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -73,7 +73,7 @@ const Home = () => {
       case 'goals':
         return (
           <div>
-            <Goals />
+            <Goals setActivesection={setActivesection}/>
           </div>
         )
       case 'streaks':
@@ -85,9 +85,16 @@ const Home = () => {
       case 'task':
         return (
           <div>
-            <TaskManager tasks={tasks} setTasks={setTasks} setCompletedTasks={setCompletedTasks} setPendingTasks={setPendingTasks} pendingTasks={pendingTasks} />
+            <TaskManager setActivesection={setActivesection} tasks={tasks} setTasks={setTasks} completedTasks={completedTasks} setCompletedTasks={setCompletedTasks} setPendingTasks={setPendingTasks} pendingTasks={pendingTasks} />
           </div>
         )
+
+      case 'commentForm' : 
+      return(
+        <div>
+          <CommentForm activeSection={activeSection} setActivesection={setActivesection}/>
+        </div>
+      )
       default:
         return (
           <div>
@@ -114,7 +121,7 @@ const Home = () => {
               <a href='#home'>
                 <div className="select-none flex shrink-0 h-[21px] w-[100px] transition-[fill] duration-200 ease-in-out mr-4 items-center">
                   <img src={img} alt="Logo" className="h-8 w-8 rounded-full mr-3" />
-                  <span className="text-white text-1xl font-bold">MyApp</span>
+                  <button className="text-white text-1xl font-bold" onClick={()=>{setActivesection('')}}>Home</button>
                 </div>
               </a>
 
@@ -133,42 +140,19 @@ const Home = () => {
                       About
                     </button>
           
-                    <a href='#highlights'>
-                      <button
-                        // onClick={() => handleCategoryClick('ask')}
+                   
+                  
+                    <button
+                        onClick={() => handleCategoryClick('commentForm')}
                         className="inline-flex items-center justify-center relative cursor-pointer select-none  
                   box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
                       >
-                        Highlights
+                        Add Comments
+                        {/* <a href='#testimols'>Highlights</a> */}
                       </button>
-                    </a>
-                    {/* //jhcbadvbadvbavbadbv */}
-                    <a href='#Testimonials'>
-                      <button
-                        // onClick={() => handleCategoryClick('ask')}
-                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
-                  box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
-                  h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
-                  transition-all duration-300"
-                      >
-                        Comments
-                      </button>
-                    </a>
-
-                    <a href='#faqs'>
-                      <button
-                        // onClick={() => handleCategoryClick('ask')}
-                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
-                  box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
-                  h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
-                  transition-all duration-300"
-                      >
-                        Faqs
-                      </button>
-
-                    </a>
+                   
                     <button
                       onClick={() => handleCategoryClick('task')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
@@ -192,42 +176,7 @@ const Home = () => {
                       About
                     </button>
                   
-                    <a href='#highlights'>
-                      <button
-                        // onClick={() => handleCategoryClick('ask')}
-                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
-                  box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
-                  h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
-                  transition-all duration-300"
-                      >
-                        Highlights
-                      </button>
-                    </a >
-
-                    <a href='#Testimonials'>
-                      <button
-                        // onClick={() => handleCategoryClick('ask')}
-                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
-                  box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
-                  h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
-                  transition-all duration-300"
-                      >
-                        Comments
-                        {/* <a href='#testimols'>Highlights</a> */}
-                      </button>
-                    </a>
-
-                    <a href='#faqs'>
-                      <button
-                        // onClick={() => handleCategoryClick('ask')}
-                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
-                  box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
-                  h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
-                  transition-all duration-300"
-                      >
-                        Faqs
-                      </button>
-                    </a>
+                   
                     <button
                       onClick={() => handleCategoryClick('task')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
@@ -243,19 +192,6 @@ const Home = () => {
             </div>
 
             <div className='flex space-x-4 items-center justify-between'>
-              <button onClick={() => { setIsStreak(!isStreak) }}>
-                <div onClick={changeHandler} className = {` cursor-pointer transition-colors duration-300 ${ isActive ? 'text-orange-700':' text-white '}`}>
-                  <FaFire />
-                </div>
-
-              </button>
-              {
-                isStreak && (
-                  <div className='flex items-center' >
-                    <StreakManager />
-                  </div>
-                )
-              }
 
               {isLoggedIn ? (
                 <div className="flex space-x-4">
@@ -319,14 +255,6 @@ const Home = () => {
       {/* Scrollable content wrapper */}
       < div className="" >
         <div>{renderContent()}</div>
-        {
-          isLoggedIn ? (<div className='grid md:grid-cols-2 mx-auto grid-cols-1 mb-6'>
-            <div><TaskCompletionGraph /></div>
-            <DonutChart tasksCompleted={completedTasks} totalTasks={tasks.length} />
-          </div>
-          ) : (null)
-        }
-
         <div id="highlights">
           <Highlights />
         </div>
@@ -337,13 +265,6 @@ const Home = () => {
         <div id='faqs'>
           <FAQ />
         </div>
-        {/* <div>
-          <TaskCompletionGraph />
-        </div> */}
-
-        {/* <div>
-          <Testimonials />
-        </div> */}
         <div>
           <Footer />
         </div>

@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 
 
-const Goals = () => {
+const Goals = ({setActivesection}) => {
   const navigate = useNavigate();
   const [aiResponse, setAiResponse] = useState(null); // AI response
   const [isLoading, setIsLoading] = useState(false);  // Loading state
@@ -81,6 +81,7 @@ const Goals = () => {
         alert('Failed to save Goal Path. Please try again.');
       }
       console.log(res);
+     setActivesection('')
       // const goalId = res.
       // localStorage.setItem('goalId',)
       // navigate('/taskManager')
