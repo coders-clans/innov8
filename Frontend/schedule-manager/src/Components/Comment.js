@@ -3,7 +3,7 @@ import Slider from 'react-slick'; // Import Slider from react-slick
 import "slick-carousel/slick/slick.css"; // Import CSS
 import "slick-carousel/slick/slick-theme.css";
 import axios from 'axios'; // Import axios to make API requests
-
+import { IoIosAddCircle } from "react-icons/io";
 const Testimonials = () => {
   const [comments, setComments] = useState([]); // State to store comments
   const [loading, setLoading] = useState(true); // State to track loading state
@@ -63,10 +63,13 @@ const Testimonials = () => {
         <h2 className="text-3xl font-bold mb-1 flex justify-center items-center text-white">
           What Our Users Say
         </h2>
+
+      
         <Slider {...settings}>
           {comments.map((comment, index) => (
             <div key={index} className="p-4">
-              <div className="bg-customBlue p-6 rounded-lg shadow-md flex flex-col items-center text-center h-[400px]">
+              <div className="bg-customBlue p-6 rounded-lg shadow-md flex flex-col items-center text-center h-[300px] border
+               border-white">
                 <h3 className="text-xl font-semibold text-white">
                   {comment.name}
                 </h3>

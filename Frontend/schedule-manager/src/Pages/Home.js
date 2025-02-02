@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Route, useNavigate } from 'react-router-dom';
 import defaultimg from '../Components/images/profile.png';
 import { FaFire } from "react-icons/fa";
 import img from './logo.jpg';
@@ -17,7 +17,7 @@ import Streaks from '../Components/Streaks';
 import StreakManager from '../Components/Streaks';
 import DonutChart from '../Components/TaskCompeletionTracker';
 import CommentForm from '../Components/CommentForm';
-import Testimonials from '../Components/Comment'
+import Testimonials from '../Components/Comment';
 const Home = () => {
   const [activeSection, setActivesection] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -126,33 +126,21 @@ const Home = () => {
               </a>
 
 
-              <div className="hidden custom:flex space-x-4">
+              <div className="hidden  md:block  space-x-4">
                 {/* after login */}
                 {isLoggedIn ? (
                   <>
                     <button
                       onClick={handleHelp}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
-                  box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
+                  box-border font-medium leading-[1.75] min-w-[64px]  text-[0.8125rem]
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
                     >
                       About
                     </button>
           
-                   
-                  
-                    <button
-                        onClick={() => handleCategoryClick('commentForm')}
-                        className="inline-flex items-center justify-center relative cursor-pointer select-none  
-                  box-border font-medium leading-[1.75] min-w-[64px] bg-[color:var(--variant-textBg)] text-[0.8125rem]
-                  h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
-                  transition-all duration-300"
-                      >
-                        Add Comments
-                        {/* <a href='#testimols'>Highlights</a> */}
-                      </button>
-                   
+            
                     <button
                       onClick={() => handleCategoryClick('task')}
                       className="inline-flex items-center justify-center relative cursor-pointer select-none  
@@ -160,7 +148,8 @@ const Home = () => {
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
                     >
-                      Today's Tasks
+                      <a href='#to'>Today's Tasks </a>
+                      {/* Today's Tasks */}
                     </button>
                   </>
                 ) : (
@@ -184,7 +173,7 @@ const Home = () => {
                   h-9 text-[rgb(245,246,250)] m-0 px-3 py-2 rounded-lg border-0 hover:bg-white/30 
                   transition-all duration-300"
                     >
-                      Today's Tasks
+                    Today's Tasks 
                     </button>
                   </>
                 )}
@@ -242,7 +231,7 @@ const Home = () => {
         </nav>
       </div >
 
-      <div className='w-[100vw] h-[60vh] flex flex-col justify-end items-center' id="home">
+      <div className='w-[100vw] lg:h-[50vh] sm:h-[45vh] h-[50vh] flex flex-col justify-end items-center' id="home">
         <div className='flex flex-col '>
           <h1 className='font-semibold leading-[1.2] tracking-[-0.5px] items-center text-[clamp(3rem,10vw,3.5rem)] 
           text-white mx-auto text-center'>Milestones Master <span className='text-blue-500'>Platform</span> </h1>
@@ -252,21 +241,23 @@ const Home = () => {
         </div>
       </div>
 
+      <div id='to'></div>
+
       {/* Scrollable content wrapper */}
       < div className="" >
-        <div>{renderContent()}</div>
+        <div >{renderContent()}</div>
         <div id="highlights">
           <Highlights />
         </div>
         <div id='Testimonials'>
-          <Testimonials />
+          <Testimonials setActivesection={setActivesection}/>
         </div>
 
         <div id='faqs'>
           <FAQ />
         </div>
         <div>
-          <Footer />
+          <Footer setActivesection={setActivesection}/>
         </div>
       </div >
     </div >

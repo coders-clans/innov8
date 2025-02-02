@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 
 
 
+
 const Goals = ({setActivesection}) => {
   const navigate = useNavigate();
   const [aiResponse, setAiResponse] = useState(null); // AI response
@@ -206,13 +207,20 @@ const Goals = ({setActivesection}) => {
               />
             </div>
   
-            <button
+          <div className='flex gap-2' >
+          <button
               type="submit"
               className="w-full bg-teal-500 text-white py-2 rounded-lg hover:bg-teal-600 transition duration-200"
               disabled={isLoading}
             >
               {isLoading ? "Generating Plan..." : "Submit"}
             </button>
+            <button onClick={ () => {
+              setActivesection('')
+            }} className="w-full bg-gray-500 text-white py-2 rounded-lg hover:bg-gray-700 transition duration-200">
+            go back
+            </button>
+          </div>
           </form>
         </div>
       )}

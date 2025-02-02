@@ -3,7 +3,8 @@ import axios from "axios";
 import { TiTickOutline, TiTimesOutline } from "react-icons/ti";
 import { useNavigate } from "react-router-dom";
 import DonutChart from '../Components/TaskCompeletionTracker';
-
+import { IoClose
+ } from "react-icons/io5";
 const TaskManager = ({ tasks, setTasks,completedTasks, setCompletedTasks,setActivesection, setPendingTasks, pendingTasks }) => {
   const navigate = useNavigate();
   const id = localStorage.getItem("user_id");
@@ -76,7 +77,7 @@ const TaskManager = ({ tasks, setTasks,completedTasks, setCompletedTasks,setActi
 
         // Send DELETE request to delete the goal
         await deleteGoal();
-
+        window.location.reload();
         return;
       }
 
@@ -135,52 +136,76 @@ const TaskManager = ({ tasks, setTasks,completedTasks, setCompletedTasks,setActi
   const allTasksCompleted = tasks.length > 0 && tasks.every((task) => task.completed);
 
   return (
-    <div className="p-6 mt-20 max-w-[900px] mx-auto my-12 mb-20">
-      <h1 className="text-3xl font-bold mb-6 text-center text-white">Tasks for Day {day}</h1>
-
-      {goalCompleted ? (
-        <div className="text-center">
-          <p className="text-2xl text-green-600">🎉 Congratulations! You've completed your entire goal! 🎉</p>
-          <button
-            onClick={() => setActivesection('')}
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
-            Go to Home Page
-          </button>
-        </div>
-      ) : tasks.length === 0 ? (
-        <p className="text-center text-white">No tasks available for this day.</p>
-      ) : (
-        <ul className="space-y-4">
-          {tasks.map((task) => (
-            <li key={task._id} className="flex items-center justify-between p-4 bg-white rounded border shadow-lg hover:translate-y-[-20px] transition duration-500">
-              <span style={{ textDecoration: task.completed ? "line-through" : "none" }} className="text-lg">
-                {task.task} - {task.time} hours
-              </span>
-              <button onClick={() => toggleTaskCompletion(localStorage.getItem("goalId"), task._id, !task.completed)} className="text-2xl">
-                {task.completed ? (
-                  <TiTimesOutline className="text-red-500" />
-                ) : (
-                  <TiTickOutline className="text-green-500" />
-                )}
+    <div className="p-6 mt-20 relative">
+    <h1 className="text-3xl font-bold mb-6 text-center text-white">Today's tasks</h1>
+  
+    {/* Overlapping container with blurred background */}
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black bg-opacity-50">
+      <div className="max-w-[900px] mx-auto my-12 mb-20 flex items-center justify-evenly bg-customBlue p-8 rounded-3xl shadow-xl relative w-full sm:w-[95%] md:w-[80%] lg:w-[60%] xl:w-[50%]">
+  
+        {/* Close Button */}
+        <button
+          onClick={() => setActivesection('')}
+          className="absolute top-4 right-4 text-white text-3xl hover:text-gray-300"
+        >
+          <IoClose />
+        </button>
+  
+        {/* Task Content */}
+        <div className="w-full">
+          {goalCompleted ? (
+            <div className="text-center">
+              <p className="text-2xl text-green-600">🎉 Congratulations! You've completed your entire goal! 🎉</p>
+              <button
+                onClick={() => setActivesection('')}
+                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              >
+                Go to Home Page
               </button>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {allTasksCompleted && !goalCompleted && (
-        <div className="mt-6 text-center">
-          <p className="text-lg text-green-600">Congratulations! All tasks for Day {day} completed!</p>
-          <button onClick={handleNextDayClick} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-            Go to Next Day
-          </button>
+            </div>
+          ) : tasks.length === 0 ? (
+            <p className="text-center text-white">No tasks available for this day.</p>
+          ) : (
+            <ul className="space-y-4">
+              {tasks.map((task) => (
+                <li key={task._id} className="flex w-[80%] items-center justify-between p-4 bg-customBlue rounded border shadow-lg hover:translate-y-[-20px] transition duration-500">
+                  <span style={{ textDecoration: task.completed ? "line-through" : "none" }} className="text-lg text-gray-200">
+                    {task.task} - {task.time} hours
+                  </span>
+                  <button onClick={() => toggleTaskCompletion(localStorage.getItem("goalId"), task._id, !task.completed)} className="text-2xl">
+                    {task.completed ? (
+                      <TiTimesOutline className="text-red-500" />
+                    ) : (
+                      <TiTickOutline className="text-green-500" />
+                    )}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-      )}
-       <div className="w-full lg:w-1/3 flex justify-center lg:justify-end">
-          <DonutChart tasksCompleted={completedTasks} totalTasks={tasks.length}/>
+  
+        {/* All tasks completed message */}
+        {allTasksCompleted && !goalCompleted && (
+          <div className="mt-6">
+            <p className="text-lg text-green-600">Congratulations! All tasks for Day {day} completed!</p>
+            <button onClick={handleNextDayClick} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+              Go to Next Day
+            </button>
+          </div>
+        )}
+  
+        {/* Donut chart */}
+        <div className="w-full lg:w-1/3 lg:justify-end">
+          <DonutChart tasksCompleted={completedTasks} totalTasks={tasks.length} />
         </div>
+  
+      </div>
     </div>
+  </div>
+  
+    
+    
   );
 };
 

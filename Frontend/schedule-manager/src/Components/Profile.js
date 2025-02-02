@@ -3,7 +3,7 @@ import axios from 'axios';
 import defaultimg from './images/profile.png';
 import editimg from './images/edit.png'
 import { CiEdit } from "react-icons/ci"
-
+import { toast } from 'react-toastify';
 function Profile({ isLoggedin, setIsLoggedIn }) {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
@@ -72,7 +72,7 @@ function Profile({ isLoggedin, setIsLoggedIn }) {
         setIsChangeEmail(false);
         setIsEmailChange(true);
       })
-      .catch(error => (alert('Email Already exists')));
+      .catch(error => (toast.error('Email Already exists')));
   };
   const onChangeHandler = (event) => {
     setNewData({
