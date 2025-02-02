@@ -1,5 +1,6 @@
 const axios = require('axios');
-
+require('dotenv').config();
+const api=process.env.Api;
 // Function to handle the goal path request
 const getGoalPath = async (req, res) => {
     const { goal, totalDays, freeHoursPerDay } = req.body;
@@ -62,11 +63,10 @@ const getGoalPath = async (req, res) => {
 const getBotData = async (req, res) => {
     const { question } = req.body;
     const prompt = `${question} return the response in the proper string format of string, do not use any kind of backticksor slash or dash.`;
-
     try {
         // Make sure to use the appropriate structure for the request body as required by the API
         const response = await axios.post(
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyB4FBqXTGcaP_5R2EtWZkLmuF6HdChk43A",
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${api}`,
             {
                 // Structure may vary depending on the API's requirements
                 "contents": [{ "parts": [{ "text": prompt }] }]
